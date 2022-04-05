@@ -1,1 +1,13 @@
-<p>createlunch works!</p>
+<div>
+  <form (ngSubmit)="submitLunch()">
+    <input [(ngModel)]="locality" name="locality" placeholder="Lokal" type="text"/>
+    <br>
+    <input [(ngModel)]="firstname" placeholder="Vorname" name="firstname" type="text"/>
+    <br>
+    <input [(ngModel)]="lastname" placeholder="Nachname" name="lastname" type="text"/>
+    <button name="createlunch" type="submit">Speichern</button>
+  </form>
+</div>
+<script>
+
+</script>

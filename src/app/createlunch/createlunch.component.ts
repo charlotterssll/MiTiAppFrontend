@@ -9,6 +9,15 @@ export class CreatelunchComponent implements OnInit {
 
   constructor() { }
 
+  locality: string = '';
+  firstname: string = '';
+  lastname: string = '';
+
+
+  submitLunch(){
+    console.log(this.locality,this.firstname, this.lastname);
+  }
+
   ngOnInit(): void {
   }
 
