@@ -9,13 +9,26 @@ export class CreatelunchComponent implements OnInit {
 
   constructor() { }
 
-  locality: string = '';
-  firstname: string = '';
-  lastname: string = '';
+  locality!: string;
+  location!: string;
+  firstname!: string;
+  lastname!: string;
+  hour!: number;
+  minute!: number;
 
 
   submitLunch(){
-    console.log(this.locality,this.firstname, this.lastname);
+    if(this.hour > 23) {
+      alert('hours too damn high');
+      this.hour = 0;
+    }
+    else if (this.minute > 59) {
+      alert('minutes too damn high');
+      this.minute = 0;
+    }
+    else {
+      console.log(this.locality, this.locality, this.firstname, this.lastname, this.hour, this.minute);
+    }
   }
 
   ngOnInit(): void {
