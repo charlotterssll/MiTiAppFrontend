@@ -28,8 +28,11 @@ export class ViewlunchComponent implements OnInit {
   constructor() {
   };
 
+  function() {
+    const keyPropertyName = [Object.getOwnPropertyNames(this.mities[0])];
+    return keyPropertyName;
+    }
+
   ngOnInit(): void {
-    const luf = Object.getOwnPropertyNames(this.mities[0]);
-    console.log(luf);
   }
 }
