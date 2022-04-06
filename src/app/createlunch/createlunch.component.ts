@@ -33,5 +33,4 @@ export class CreatelunchComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

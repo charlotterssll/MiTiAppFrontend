@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MiTi} from "../domain/MiTi";
-
-const mitiObject = {
-  locality: 'Schlöfe',
-  location: 'Oldenburg',
-  firstname: 'test1',
-  lastname: 'test2',
-  hour: 1,
-  minute: 2,
-}
+import { MiTi } from "../domain/MiTi";
 
 @Component({
   selector: 'app-viewlunch',
@@ -18,20 +9,28 @@ const mitiObject = {
 
 export class ViewlunchComponent implements OnInit {
 
-  mities: MiTi[] = [];
-
+  mities: MiTi[] = [
+      {
+        locality: "Schlöfe",
+        location: "Oldenburg",
+        firstname: "John",
+        lastname: "Dohe",
+        hour: 12,
+        minute: 30,
+      },
+      {
+        locality: "King Döner",
+        location: "Oldenburg",
+        firstname: "Jane",
+        lastname: "Dörte",
+        hour: 14,
+        minute: 0,
+      }
+  ]
   constructor() {
-    this.mities = [
-      {locality: 'Schlöfe',
-        location: 'Oldenburg',
-        firstname: 'test1',
-        lastname: 'test2',
-        hour: 1,
-        minute: 2,}
-    ]
-  }
+  };
 
   ngOnInit(): void {
-  }
 
+  }
 }
