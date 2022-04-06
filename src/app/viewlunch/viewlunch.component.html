@@ -1,20 +1,16 @@
 <table>
   <tr>
-    <th>locality</th>
-    <th>location</th>
-    <th>firstname</th>
-    <th>lastname</th>
-    <th>time</th>
+    <th>Restaurant</th>
+    <th>Ort</th>
+    <th>Vorname</th>
+    <th>Nachname</th>
+    <th>Uhrzeit</th>
   </tr>
   <tr *ngFor="let miti of mities">
     <td>{{ miti.locality }}</td>
     <td>{{ miti.location }}</td>
     <td>{{ miti.firstname }}</td>
     <td>{{ miti.lastname }}</td>
-    <td>{{ miti.hour }}:{{ miti.minute }}</td>
+    <td>{{ miti.time }}</td>
   </tr>
 </table>
-<br>
-<div *ngFor="let miti of mities">
-  {{ miti | json }}
-</div>

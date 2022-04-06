@@ -3,6 +3,5 @@ export interface MiTi {
   location: string;
   firstname: string;
   lastname: string;
-  hour: number;
-  minute: number;
+  time: string;
 }
