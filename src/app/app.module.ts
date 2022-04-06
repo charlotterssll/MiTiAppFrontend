@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CreatelunchComponent } from './createlunch/createlunch.component';
 import { ViewlunchComponent } from './viewlunch/viewlunch.component';
 import { EditlunchComponent } from './editlunch/editlunch.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { EditlunchComponent } from './editlunch/editlunch.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

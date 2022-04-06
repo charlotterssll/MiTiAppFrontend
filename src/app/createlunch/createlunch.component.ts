@@ -18,6 +18,5 @@ export class CreatelunchComponent implements OnInit {
   submitLunch(){
     console.log(this.locality, this.location, this.firstname, this.lastname, this.time);
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
