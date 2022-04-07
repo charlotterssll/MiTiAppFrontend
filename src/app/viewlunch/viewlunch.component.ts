@@ -9,7 +9,9 @@ import {FetchDataService} from "../fetch-data.service";
 })
 export class ViewlunchComponent implements OnInit {
 
-  data!: string;
+  datas!: Object;
+  users: Object | any;
+  helloworld!: string;
 
   mities: MiTi[] = [
     {
@@ -37,15 +39,20 @@ export class ViewlunchComponent implements OnInit {
   }
 
   fetchData() {
-    return this.fetchDataService.fetchData().subscribe(data => (this.data = data));
+    this.fetchDataService.fetchData().subscribe((data: any) => {
+      this.users = data['results'][0];
+      console.log(this.users);
+    });
   }
 
-  diveData() {
-    return this.fetchDataService.diveData();
+  fetchHelloWorld() {
+    return this.fetchDataService.fetchHelloWorld().subscribe(data => {
+      this.helloworld = data;
+      console.log(this.datas);
+    });
   }
 
   ngOnInit(): void {
-    console.log(this.fetchData());
-    console.log(this.diveData());
+    this.fetchData();
   }
 }
