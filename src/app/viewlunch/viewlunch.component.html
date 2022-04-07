@@ -15,13 +15,4 @@
   </tr>
 </table>
 <br>
-<div>
-  <h1>User list</h1>
-
-  <ul class="userList" *ngIf="users">
-    <li class="userItem" *ngFor="let user of users">
-      <p class="first">{{ user.first }}</p>
-      <p class="last">{{ user.last }}</p>
-    </li>
-  </ul>
-</div>
+<div>{{datas | json}}</div>
