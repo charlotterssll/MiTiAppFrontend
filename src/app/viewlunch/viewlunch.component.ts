@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MiTi } from "../domain/MiTi";
 import {FetchDataService} from "../fetch-data.service";
+import {Data} from "../domain/Data";
 
 @Component({
   selector: 'app-viewlunch',
@@ -38,7 +39,7 @@ export class ViewlunchComponent implements OnInit {
 
   fetchTestData() {
     return this.fetchDataService.fetchTestData().subscribe(data => {
-      this.datas = data;
+      this.datas = JSON.stringify(data);
       console.log(this.datas);
     });
   }
