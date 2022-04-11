@@ -12,33 +12,24 @@ import { NgForm } from "@angular/forms";
 export class ViewlunchComponent implements OnInit {
 
   mities?: MiTi[];
-  employees?: Employee[];
 
   constructor(private fetchDataService: FetchDataService) {};
 
   fetchMitis() {
     return this.fetchDataService.fetchMiTis().subscribe((response: MiTi[]) => {
       this.mities = response;
-      console.log(this.mities[0]);
-    })
-  }
-
-  fetchEmployees() {
-    return this.fetchDataService.fetchEmployees().subscribe((response: Employee[]) => {
-      this.employees = response;
-      console.log(this.employees);
+      console.log(this.mities);
     })
   }
 
   submitEmployee(f: NgForm) {
     return this.fetchDataService.createEmployee(f).subscribe((response: Employee[]) => {
       console.log('Added Employee:', response);
-      this.fetchEmployees();
+      this.fetchMitis();
     })
   }
 
   ngOnInit(): void {
-    //this.fetchMitis();
-    this.fetchEmployees();
+    this.fetchMitis();
   }
 }

@@ -7,7 +7,11 @@
     <th>Uhrzeit</th>
   </tr>
   <tr *ngFor="let miti of mities">
-    <td>{{ mities }}</td>
+    <td>{{ miti.place.locality.locality }}</td>
+    <td>{{ miti.place.location.location }}</td>
+    <td>{{ miti.employee.firstName.firstName }}</td>
+    <td>{{ miti.employee.lastName.lastName }}</td>
+    <td>{{ miti.time }}</td>
   </tr>
 </table>
 <br>
@@ -18,14 +22,3 @@
     <button type="submit">Speichern</button>
   </form>
 </div>
-<br>
-<table>
-  <tr>
-    <th>Vorname</th>
-    <th>Nachname</th>
-  </tr>
-  <!--<tr *ngFor="let employee of employees">
-    <td>{{ employee.firstName.firstName }}</td>
-    <td>{{ employee.lastName.lastName }}</td>
-  </tr>-->
-</table>

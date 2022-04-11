@@ -1,6 +1,5 @@
-import {Place} from "./Place";
-import {Employee} from "./Employee";
-
+import { Place } from "./Place";
+import { Employee } from "./Employee";
 
 export interface MiTi {
   place: Place;

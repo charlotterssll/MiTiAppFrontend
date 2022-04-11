@@ -19,10 +19,6 @@ export class FetchDataService {
     return this.httpClient.get<MiTi[]>(this.urlfetchhw);
   }
 
-  fetchEmployees() {
-    return this.httpClient.get<Employee[]>(this.urlfetchhw);
-  }
-
   createEmployee(f: NgForm) {
     return this.httpClient.post<Employee[]>(this.urlpost, f.value);
   }
