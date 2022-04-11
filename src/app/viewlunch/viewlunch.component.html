@@ -7,12 +7,25 @@
     <th>Uhrzeit</th>
   </tr>
   <tr *ngFor="let miti of mities">
-    <td>{{ miti.locality }}</td>
-    <td>{{ miti.location }}</td>
-    <td>{{ miti.firstname }}</td>
-    <td>{{ miti.lastname }}</td>
-    <td>{{ miti.time }}</td>
+    <td>{{ mities }}</td>
   </tr>
 </table>
 <br>
-<div>{{datas}}</div>
+<div>
+  <form #f="ngForm" (ngSubmit)="submitEmployee(f)">
+    <input id="firstName" placeholder="Vorname" name="firstName" type="text" ngModel/>
+    <input id="lastName" placeholder="Nachname" name="lastName" type="text" ngModel/>
+    <button type="submit">Speichern</button>
+  </form>
+</div>
+<br>
+<table>
+  <tr>
+    <th>Vorname</th>
+    <th>Nachname</th>
+  </tr>
+  <!--<tr *ngFor="let employee of employees">
+    <td>{{ employee.firstName.firstName }}</td>
+    <td>{{ employee.lastName.lastName }}</td>
+  </tr>-->
+</table>

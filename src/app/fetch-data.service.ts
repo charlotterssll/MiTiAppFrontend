@@ -1,17 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { MiTi } from "./domain/entities/MiTi";
+import { Employee } from "./domain/entities/Employee";
+import { NgForm } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetchDataService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  urlfetchdata = 'https://randomapi.com/api/6de6abfedb24f889e0b5f675edc50deb';
   urlfetchhw = 'http://localhost:8080/test';
+  urlpost = 'http://localhost:8080/test/addemployee';
 
-  fetchTestData() {
-    return this.httpClient.get<string>(this.urlfetchhw);
+  fetchMiTis() {
+    return this.httpClient.get<MiTi[]>(this.urlfetchhw);
+  }
+
+  fetchEmployees() {
+    return this.httpClient.get<Employee[]>(this.urlfetchhw);
+  }
+
+  createEmployee(f: NgForm) {
+    return this.httpClient.post<Employee[]>(this.urlpost, f.value);
   }
 }
