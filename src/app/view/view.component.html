@@ -1,0 +1,28 @@
+<div>
+  <form #f="ngForm" (ngSubmit)="submitMiTiNotNested(f)">
+    <input id="locality" placeholder="Lokal" name="locality" type="text" ngModel/>
+    <input id="location" placeholder="Ort" name="location" type="text" ngModel/>
+    <br>
+    <input id="firstName" placeholder="Vorname" name="firstName" type="text" ngModel/>
+    <input id="lastName" placeholder="Nachname" name="lastName" type="text" ngModel/>
+    <br>
+    <input id="time" placeholder="Uhrzeit" name="time" type="time" ngModel/>
+    <button type="submit">Speichern</button>
+  </form>
+</div>
+<table>
+  <tr>
+    <th>Restaurant</th>
+    <th>Ort</th>
+    <th>Vorname</th>
+    <th>Nachname</th>
+    <th>Uhrzeit</th>
+  </tr>
+  <tr *ngFor="let miti of mitiesNotNested">
+    <td>{{ miti.locality.locality }}</td>
+    <td>{{ miti.location.location }}</td>
+    <td>{{ miti.firstName.firstName }}</td>
+    <td>{{ miti.lastName.lastName }}</td>
+    <td>{{ miti.time }}</td>
+  </tr>
+</table>
