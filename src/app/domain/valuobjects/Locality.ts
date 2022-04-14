@@ -1,3 +1,3 @@
 export interface Locality {
-  locality: string,
+  locality: string;
 }

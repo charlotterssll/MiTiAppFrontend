@@ -1,7 +1,7 @@
-import { FirstName } from "../valuobjects/FirstName";
-import { LastName } from "../valuobjects/LastName";
+import { FirstName } from '../valuobjects/FirstName';
+import { LastName } from '../valuobjects/LastName';
 
 export interface Employee {
-  firstName: FirstName,
-  lastName: LastName,
+  firstName: FirstName;
+  lastName: LastName;
 }

@@ -1,12 +1,36 @@
 <div>
   <form #f="ngForm" (ngSubmit)="submitMiTiNotNested(f)">
-    <input id="locality" placeholder="Lokal" name="locality" type="text" ngModel/>
-    <input id="location" placeholder="Ort" name="location" type="text" ngModel/>
-    <br>
-    <input id="firstName" placeholder="Vorname" name="firstName" type="text" ngModel/>
-    <input id="lastName" placeholder="Nachname" name="lastName" type="text" ngModel/>
-    <br>
-    <input id="time" placeholder="Uhrzeit" name="time" type="time" ngModel/>
+    <input
+      id="locality"
+      placeholder="Lokal"
+      name="locality"
+      type="text"
+      ngModel
+    />
+    <input
+      id="location"
+      placeholder="Ort"
+      name="location"
+      type="text"
+      ngModel
+    />
+    <br />
+    <input
+      id="firstName"
+      placeholder="Vorname"
+      name="firstName"
+      type="text"
+      ngModel
+    />
+    <input
+      id="lastName"
+      placeholder="Nachname"
+      name="lastName"
+      type="text"
+      ngModel
+    />
+    <br />
+    <input id="time" placeholder="Uhrzeit" name="time" type="time" ngModel />
     <button type="submit">Speichern</button>
   </form>
 </div>

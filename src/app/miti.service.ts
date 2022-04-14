@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { NgForm } from "@angular/forms";
-import { MiTiNotNested } from "./domain/entities/MiTiNotNested";
+import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { MiTiNotNested } from './domain/entities/MiTiNotNested';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MiTiService {
-
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   urlfetch = 'http://localhost:8080/mities';
   urlpost = 'http://localhost:8080/mities/addmiti';
