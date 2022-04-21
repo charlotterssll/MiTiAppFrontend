@@ -7,12 +7,7 @@
       type="text"
       ngModel
     />
-    <input
-      id="location"
-      placeholder="Ort"
-      ntype="text"
-      ngModel
-    />
+    <input id="location" placeholder="Ort" ntype="text" ngModel />
     <br />
     <input
       id="firstName"
@@ -49,7 +44,7 @@
       {{ placeShow.locality.locality }}
     </td>
     <td *ngFor="let employeeShow of miti.employee">
-      {{ employeeShow.firstName.firstName }}
+      {{ employeeShow.firstName.firstName }}j
     </td>
     <td *ngFor="let employeeShow of miti.employee">
       {{ employeeShow.lastName.lastName }}

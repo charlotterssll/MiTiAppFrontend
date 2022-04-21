@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MiTi } from "../domain/entities/MiTi";
+import { MiTi } from '../domain/entities/MiTi';
 import { MiTiService } from '../miti.service';
 
 @Component({
@@ -9,7 +9,6 @@ import { MiTiService } from '../miti.service';
   styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-
   mities?: MiTi[];
 
   constructor(private miTiService: MiTiService) {}
@@ -18,16 +17,14 @@ export class ViewComponent implements OnInit {
     return this.miTiService.fetchMiTis().subscribe((response: MiTi[]) => {
       this.mities = response;
       console.log(this.mities);
-    })
+    });
   }
 
   submitMiTi(f: NgForm) {
-    return this.miTiService
-      .createMiTi(f)
-      .subscribe((response: MiTi[]) => {
-        console.log('Added MiTi:', response);
-        this.fetchMitis();
-      });
+    return this.miTiService.createMiTi(f).subscribe((response: MiTi[]) => {
+      console.log('Added MiTi:', response);
+      this.fetchMitis();
+    });
   }
 
   ngOnInit(): void {

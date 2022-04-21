@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { MiTi } from "./domain/entities/MiTi";
+import { MiTi } from './domain/entities/MiTi';
 
 @Injectable({
   providedIn: 'root',
