@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MiTi } from "../domain/entities/MiTi";
-import { MiTiNotNested } from '../domain/entities/MiTiNotNested';
 import { MiTiService } from '../miti.service';
 
 @Component({
@@ -10,12 +9,12 @@ import { MiTiService } from '../miti.service';
   styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-  // mities?: MiTi[];
-  mitiesNotNested?: MiTiNotNested[];
+
+  mities?: MiTi[];
 
   constructor(private miTiService: MiTiService) {}
 
-  /*fetchMitis() {
+  fetchMitis() {
     return this.miTiService.fetchMiTis().subscribe((response: MiTi[]) => {
       this.mities = response;
       console.log(this.mities);
@@ -26,31 +25,12 @@ export class ViewComponent implements OnInit {
     return this.miTiService
       .createMiTi(f)
       .subscribe((response: MiTi[]) => {
-        console.log('Added MiTiNotNested:', response);
+        console.log('Added MiTi:', response);
         this.fetchMitis();
-      });
-  }*/
-
-  fetchMitisNotNested() {
-    return this.miTiService
-      .fetchMiTisNotNested()
-      .subscribe((response: MiTiNotNested[]) => {
-        this.mitiesNotNested = response;
-        console.log(this.mitiesNotNested);
-      });
-  }
-
-  submitMiTiNotNested(f: NgForm) {
-    return this.miTiService
-      .createMiTiNotNested(f)
-      .subscribe((response: MiTiNotNested[]) => {
-        console.log('Added MiTiNotNested:', response);
-        this.fetchMitisNotNested();
       });
   }
 
   ngOnInit(): void {
-    // this.fetchMitis();
-    this.fetchMitisNotNested();
+    this.fetchMitis();
   }
 }

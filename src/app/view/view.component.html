@@ -1,5 +1,5 @@
 <div>
-  <form #f="ngForm" (ngSubmit)="submitMiTiNotNested(f)">
+  <form #f="ngForm" (ngSubmit)="submitMiTi(f)">
     <input
       id="locality"
       placeholder="Lokal"
@@ -10,8 +10,7 @@
     <input
       id="location"
       placeholder="Ort"
-      name="location"
-      type="text"
+      ntype="text"
       ngModel
     />
     <br />
@@ -42,11 +41,19 @@
     <th>Nachname</th>
     <th>Uhrzeit</th>
   </tr>
-  <tr *ngFor="let miti of mitiesNotNested">
-    <td>{{ miti.locality.locality }}</td>
-    <td>{{ miti.location.location }}</td>
-    <td>{{ miti.firstName.firstName }}</td>
-    <td>{{ miti.lastName.lastName }}</td>
+  <tr *ngFor="let miti of mities">
+    <td *ngFor="let placeShow of miti.place">
+      {{ placeShow.location.location }}
+    </td>
+    <td *ngFor="let placeShow of miti.place">
+      {{ placeShow.locality.locality }}
+    </td>
+    <td *ngFor="let employeeShow of miti.employee">
+      {{ employeeShow.firstName.firstName }}
+    </td>
+    <td *ngFor="let employeeShow of miti.employee">
+      {{ employeeShow.lastName.lastName }}
+    </td>
     <td>{{ miti.time }}</td>
   </tr>
 </table>
