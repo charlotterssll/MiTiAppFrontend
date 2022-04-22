@@ -7,7 +7,13 @@
       type="text"
       ngModel
     />
-    <input id="location" placeholder="Ort" ntype="text" ngModel />
+    <input
+      id="location"
+      placeholder="Ort"
+      name="location"
+      type="text"
+      ngModel
+    />
     <br />
     <input
       id="firstName"
@@ -24,7 +30,13 @@
       ngModel
     />
     <br />
-    <input id="time" placeholder="Uhrzeit" name="time" type="time" ngModel />
+    <input
+      id="time"
+      placeholder="Uhrzeit"
+      name="time"
+      type="time"
+      ngModel
+    />
     <button type="submit">Speichern</button>
   </form>
 </div>
@@ -37,17 +49,17 @@
     <th>Uhrzeit</th>
   </tr>
   <tr *ngFor="let miti of mities">
-    <td *ngFor="let placeShow of miti.place">
-      {{ placeShow.location.location }}
+    <td>
+      {{ miti.place.location.location }}
     </td>
-    <td *ngFor="let placeShow of miti.place">
-      {{ placeShow.locality.locality }}
+    <td>
+      {{ miti.place.locality.locality }}
     </td>
-    <td *ngFor="let employeeShow of miti.employee">
-      {{ employeeShow.firstName.firstName }}
+    <td>
+      {{ miti.employee.firstName.firstName }}
     </td>
-    <td *ngFor="let employeeShow of miti.employee">
-      {{ employeeShow.lastName.lastName }}
+    <td>
+      {{ miti.employee.lastName.lastName }}
     </td>
     <td>{{ miti.time }}</td>
   </tr>

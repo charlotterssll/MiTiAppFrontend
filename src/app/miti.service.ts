@@ -10,7 +10,7 @@ export class MiTiService {
   constructor(private httpClient: HttpClient) {}
 
   urlfetch = 'http://localhost:8080/mities';
-  urlpost = 'http://localhost:8080/mities/addmiti';
+  urlpost = 'http://localhost:8080/mities';
 
   fetchMiTis() {
     return this.httpClient.get<MiTi[]>(this.urlfetch);
