@@ -1,18 +1,18 @@
 <div>
-  <form #f="ngForm" (ngSubmit)="submitMiTi(f)">
+  <form #f="ngForm" (ngSubmit)="submitMiTi()">
     <input
       id="locality"
       placeholder="Lokal"
       name="locality"
       type="text"
-      ngModel
+      [(ngModel)]="locality"
     />
     <input
       id="location"
       placeholder="Ort"
       name="location"
       type="text"
-      ngModel
+      [(ngModel)]="location"
     />
     <br />
     <input
@@ -20,14 +20,14 @@
       placeholder="Vorname"
       name="firstName"
       type="text"
-      ngModel
+      [(ngModel)]="firstName"
     />
     <input
       id="lastName"
       placeholder="Nachname"
       name="lastName"
       type="text"
-      ngModel
+      [(ngModel)]="lastName"
     />
     <br />
     <input
@@ -35,7 +35,7 @@
       placeholder="Uhrzeit"
       name="time"
       type="time"
-      ngModel
+      [(ngModel)]="time"
     />
     <button type="submit">Speichern</button>
   </form>
