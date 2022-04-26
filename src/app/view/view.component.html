@@ -1,5 +1,5 @@
 <div>
-  <form (ngSubmit)="submitMiTi()">
+  <form (ngSubmit)="youShallNotPass()">
     <input
       id="locality"
       name="locality"
@@ -38,6 +38,8 @@
       [(ngModel)]="time"
     />
     <button type="submit">Speichern</button>
+    <br />
+    <div>{{ nullAlert }}</div>
   </form>
 </div>
 <table>

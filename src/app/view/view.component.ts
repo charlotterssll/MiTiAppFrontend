@@ -14,6 +14,7 @@ export class ViewComponent implements OnInit {
   firstName?: string;
   lastName?: string;
   time?: string;
+  nullAlert?: string;
 
   constructor(private miTiService: MiTiService) {}
 
@@ -22,6 +23,21 @@ export class ViewComponent implements OnInit {
       this.mities = response;
       console.log(this.mities);
     });
+  }
+
+  youShallNotPass() {
+    if (
+      !this.locality ||
+      !this.location ||
+      !this.firstName ||
+      !this.lastName ||
+      !this.time
+    ) {
+      this.nullAlert = 'Null value in any form fields is disallowed';
+      console.log('Null value in any form fields is disallowed');
+    } else {
+      this.submitMiTi();
+    }
   }
 
   submitMiTi() {
@@ -44,7 +60,7 @@ export class ViewComponent implements OnInit {
       },
       time: this.time,
     };
-    console.log("Add MiTi: ", miTiJson);
+    console.log('Add MiTi: ', miTiJson);
     return this.miTiService.createMiTi(miTiJson).subscribe((miTiJson) => {
       this.fetchMitis();
     });
