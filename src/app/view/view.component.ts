@@ -1,33 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { MiTi } from '../domain/entities/MiTi';
+import { MiTi } from '../domain/miti/MiTi';
 import { MiTiService } from '../miti.service';
-
-export const mitiJson = {
-  "place":
-    {
-      "locality":
-        {
-          "locality":"Schloefe"
-        },
-      "location":
-        {
-          "location":"Oldenburg"
-        }
-    },
-  "employee":
-    {
-      "firstName":
-        {
-          "firstName":"Marian"
-        },
-      "lastName":
-        {
-          "lastName":"Heck"
-        }
-    },
-  "time":"12:00"
-};
 
 @Component({
   selector: 'app-view',
@@ -36,29 +9,11 @@ export const mitiJson = {
 })
 export class ViewComponent implements OnInit {
   mities?: MiTi[];
-
-  locality? : string;
-  location? : string;
-  firstName? : string;
-  lastName? : string;
-  time? : string;
-
-  saveInputToVariable()
-  {
-    const localityHolder = this.locality;
-    const locationHolder = this.location;
-    const firstNameHolder = this.firstName;
-    const lastNameHolder = this.lastName;
-    const timeHolder = this.time;
-
-    console.log(
-      "Locality: " + localityHolder + " "
-      + "Location: " + locationHolder + " "
-      + "First Name: " + firstNameHolder + " "
-      + "Last Name: " + lastNameHolder + " "
-      + "Time: " + timeHolder
-    );
-  }
+  locality?: string;
+  location?: string;
+  firstName?: string;
+  lastName?: string;
+  time?: string;
 
   constructor(private miTiService: MiTiService) {}
 
@@ -70,10 +25,27 @@ export class ViewComponent implements OnInit {
   }
 
   submitMiTi() {
-
-    console.log('Added MiTi:', mitiJson)
-    return this.miTiService.createMiTi().subscribe((mitiJson) => {
-      console.log('Added MiTi:', mitiJson);
+    const miTiJson = {
+      place: {
+        locality: {
+          locality: this.locality,
+        },
+        location: {
+          location: this.location,
+        },
+      },
+      employee: {
+        firstName: {
+          firstName: this.firstName,
+        },
+        lastName: {
+          lastName: this.lastName,
+        },
+      },
+      time: this.time,
+    };
+    console.log("Add MiTi: ", miTiJson);
+    return this.miTiService.createMiTi(miTiJson).subscribe((miTiJson) => {
       this.fetchMitis();
     });
   }

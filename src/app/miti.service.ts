@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
-import { MiTi } from './domain/entities/MiTi';
-import {mitiJson} from "./view/view.component";
+import { MiTi } from './domain/miti/MiTi';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +15,7 @@ export class MiTiService {
     return this.httpClient.get<MiTi[]>(this.urlfetch);
   }
 
-  createMiTi() {
-    return this.httpClient.post(this.urlpost, mitiJson);
+  createMiTi(miTiJson: Object) {
+    return this.httpClient.post(this.urlpost, miTiJson);
   }
 }
