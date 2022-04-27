@@ -1,30 +1,25 @@
 /** jest.config.js */
 
 module.exports = {
-
   collectCoverageFrom: [
-    '<rootDir>/src/app/**/*.ts',
-    '!<rootDir>/src/app/**/index.ts',
-    '!<rootDir>/src/app/**/*.module.ts'
+    "<rootDir>/src/app/**/*.ts",
+    "!<rootDir>/src/app/**/index.ts",
+    "!<rootDir>/src/app/**/*.module.ts",
   ],
 
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
 
-  coverageReporters: [
-    'lcov',
-    'text-summary'
-  ],
+  coverageReporters: ["lcov", "text-summary"],
 
   testPathIgnorePatterns: [
-    '<rootDir>/coverage/',
-    '<rootDir>/dist/',
-    '<rootDir>/e2e/',
-    '<rootDir>/node_modules/',
-    '<rootDir>/src/app/*.(js|scss)'
+    "<rootDir>/coverage/",
+    "<rootDir>/dist/",
+    "<rootDir>/e2e/",
+    "<rootDir>/node_modules/",
+    "<rootDir>/src/app/*.(js|scss)",
   ],
 
-  testMatch: [
-    '<rootDir>/src/app/*.spec.ts',
-    '<rootDir>/src/app/**/*.spec.ts'
-  ]
+  testMatch: ["<rootDir>/src/app/*.spec.ts", "<rootDir>/src/app/**/*.spec.ts"],
+
+  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
 };

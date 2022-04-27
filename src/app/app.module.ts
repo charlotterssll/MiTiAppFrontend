@@ -5,9 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
+import { CounterComponent } from './tests/counter.component';
 
 @NgModule({
-  declarations: [AppComponent, ViewComponent],
+  declarations: [AppComponent, ViewComponent, CounterComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
