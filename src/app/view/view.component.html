@@ -1,10 +1,10 @@
 <div>
   <form (ngSubmit)="youShallNotPass()">
     <input
-      data-testid="location"
       id="locality"
       name="locality"
       type="text"
+      data-testid="locality"
       placeholder="Lokal"
       [(ngModel)]="locality"
     />
@@ -12,6 +12,7 @@
       id="location"
       name="location"
       type="text"
+      data-testid="location"
       placeholder="Ort"
       [(ngModel)]="location"
     />
@@ -20,6 +21,7 @@
       id="firstName"
       name="firstName"
       type="text"
+      data-testid="firstName"
       placeholder="Vorname"
       [(ngModel)]="firstName"
     />
@@ -27,6 +29,7 @@
       id="lastName"
       name="lastName"
       type="text"
+      data-testid="lastName"
       placeholder="Nachname"
       [(ngModel)]="lastName"
     />
@@ -35,12 +38,13 @@
       id="time"
       name="time"
       type="time"
+      data-testid="time"
       placeholder="time"
       [(ngModel)]="time"
     />
     <button type="submit">Speichern</button>
     <br />
-    <div>{{ nullAlert }}</div>
+    <div data-testid="nullalerttext">{{ nullAlert }}</div>
   </form>
 </div>
 <table>
