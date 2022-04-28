@@ -5,6 +5,7 @@ import { AppComponent } from '../app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MiTi } from '../domain/miti/MiTi';
 
 const renderComponent = render(ViewComponent, {
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
@@ -16,6 +17,28 @@ describe('MiTi Form Test', () => {
   test('should not allow to submit null values in miti form', async () => {
     await renderComponent;
 
+    const testMiTi: MiTi[] = [
+      {
+        place: {
+          locality: {
+            locality: 'Schloefe',
+          },
+          location: {
+            location: 'Oldenburg',
+          },
+        },
+        employee: {
+          firstName: {
+            firstName: 'Charlotte',
+          },
+          lastName: {
+            lastName: 'Russell',
+          },
+        },
+        time: '12:00',
+      },
+    ];
+
     screen.getByTestId('locality');
     screen.getByTestId('location');
     screen.getByTestId('firstName');
@@ -23,11 +46,12 @@ describe('MiTi Form Test', () => {
     screen.getByTestId('time');
 
     const submitButton = screen.getByText(/Speichern/i);
-    //const nullalerttext = screen.getByText(/nullAlert/i);
+    const nullAlert = screen.getByTestId('alert'); // testet gegen gesamtes div - falsch
+    //const nullAlert = screen.getByRole('paragraph', {name: /alert/i})
     const alertNull = 'Null value in any form fields is disallowed';
 
     fireEvent.click(submitButton);
 
-    //expect(nullalerttext).toEqual(alertNull);
+    expect(nullAlert.textContent).toContain(alertNull);
   });
 });
