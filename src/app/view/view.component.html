@@ -69,5 +69,8 @@
       {{ miti.employee.lastName.lastName }}
     </td>
     <td>{{ miti.time }}</td>
+    <td>
+      <button type="submit" (click)="deleteMiTi(miti.miTiId)">Löschen</button>
+    </td>
   </tr>
 </table>

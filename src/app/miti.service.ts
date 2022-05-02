@@ -10,6 +10,7 @@ export class MiTiService {
 
   urlfetch = 'http://localhost:8080/mities';
   urlpost = 'http://localhost:8080/mities';
+  urldelete = 'http://localhost:8080/mities/';
 
   fetchMiTis() {
     return this.httpClient.get<MiTi[]>(this.urlfetch);
@@ -17,5 +18,9 @@ export class MiTiService {
 
   createMiTi(miTiJson: Object) {
     return this.httpClient.post(this.urlpost, miTiJson);
+  }
+
+  deleteMiTi(miTiId: number) {
+    return this.httpClient.delete(this.urldelete + miTiId);
   }
 }

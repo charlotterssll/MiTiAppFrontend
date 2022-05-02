@@ -22,6 +22,7 @@ describe('MiTi API Test', () => {
 
     const testMiTi: MiTi[] = [
       {
+        miTiId: 1,
         place: {
           locality: {
             locality: 'Schloefe',

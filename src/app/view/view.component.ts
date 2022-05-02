@@ -21,7 +21,7 @@ export class ViewComponent implements OnInit {
   fetchMitis() {
     return this.miTiService.fetchMiTis().subscribe((response: MiTi[]) => {
       this.mities = response;
-      console.log(this.mities);
+      console.log('GET MiTies:', this.mities);
     });
   }
 
@@ -60,8 +60,15 @@ export class ViewComponent implements OnInit {
       },
       time: this.time,
     };
-    console.log('Add MiTi: ', miTiJson);
+    console.log('POST MiTi: ', miTiJson);
     return this.miTiService.createMiTi(miTiJson).subscribe((miTiJson) => {
+      this.fetchMitis();
+    });
+  }
+
+  deleteMiTi(miTiId: number) {
+    return this.miTiService.deleteMiTi(miTiId).subscribe(() => {
+      console.log('DELETE MiTi:', miTiId);
       this.fetchMitis();
     });
   }
