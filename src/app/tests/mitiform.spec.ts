@@ -19,6 +19,7 @@ describe('MiTi Form Test', () => {
 
     const testMiTi: MiTi[] = [
       {
+        miTiId: 1,
         place: {
           locality: {
             locality: 'Schloefe',
