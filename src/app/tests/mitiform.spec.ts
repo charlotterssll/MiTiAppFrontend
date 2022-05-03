@@ -36,7 +36,9 @@ describe('MiTi Form Test', () => {
             value: 'Russell',
           },
         },
-        time: '12:00',
+        time: {
+          value: '12:00',
+        },
       },
     ];
 

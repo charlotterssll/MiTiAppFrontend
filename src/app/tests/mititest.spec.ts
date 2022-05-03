@@ -39,7 +39,9 @@ describe('MiTi API Test', () => {
             value: 'Russell',
           },
         },
-        time: '12:00',
+        time: {
+          value: '12:00',
+        },
       },
     ];
 
