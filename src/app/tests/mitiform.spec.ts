@@ -22,18 +22,18 @@ describe('MiTi Form Test', () => {
         miTiId: 1,
         place: {
           locality: {
-            locality: 'Schloefe',
+            value: 'Schloefe',
           },
           location: {
-            location: 'Oldenburg',
+            value: 'Oldenburg',
           },
         },
         employee: {
           firstName: {
-            firstName: 'Charlotte',
+            value: 'Charlotte',
           },
           lastName: {
-            lastName: 'Russell',
+            value: 'Russell',
           },
         },
         time: '12:00',

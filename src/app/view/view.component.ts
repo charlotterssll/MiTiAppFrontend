@@ -43,20 +43,12 @@ export class ViewComponent implements OnInit {
   submitMiTi() {
     const miTiJson = {
       place: {
-        locality: {
-          locality: this.locality,
-        },
-        location: {
-          location: this.location,
-        },
+        locality: this.locality,
+        location: this.location,
       },
       employee: {
-        firstName: {
-          firstName: this.firstName,
-        },
-        lastName: {
-          lastName: this.lastName,
-        },
+        firstName: this.firstName,
+        lastName: this.lastName,
       },
       time: this.time,
     };

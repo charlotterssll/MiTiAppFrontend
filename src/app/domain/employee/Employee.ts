@@ -1,7 +1,6 @@
-import { FirstName } from './FirstName';
-import { LastName } from './LastName';
+import { Value } from '../abstractsimplevalueobject/Value';
 
 export interface Employee {
-  firstName: FirstName;
-  lastName: LastName;
+  firstName: Value;
+  lastName: Value;
 }

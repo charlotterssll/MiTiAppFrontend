@@ -1,7 +1,6 @@
-import { Locality } from './Locality';
-import { Location } from './Location';
+import { Value } from '../abstractsimplevalueobject/Value';
 
 export interface Place {
-  locality: Locality;
-  location: Location;
+  locality: Value;
+  location: Value;
 }
