@@ -15,6 +15,8 @@ export class ViewComponent implements OnInit {
   lastName?: string;
   time?: string;
   nullAlert?: string;
+  showThis? : boolean = false;
+  index?: number;
 
   constructor(private miTiService: MiTiService) {}
 
@@ -33,8 +35,8 @@ export class ViewComponent implements OnInit {
       !this.lastName ||
       !this.time
     ) {
-      this.nullAlert = 'Null value in any form fields is disallowed';
-      console.log('Null value in any form fields is disallowed');
+      this.nullAlert = 'Null values in any form fields are disallowed';
+      console.log('Null values in any form fields are disallowed');
     } else {
       this.submitMiTi();
     }

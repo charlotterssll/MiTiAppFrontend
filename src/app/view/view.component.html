@@ -47,30 +47,83 @@
     <div data-testid="alert">{{ nullAlert }}</div>
   </form>
 </div>
-<table>
-  <tr>
-    <th>Restaurant</th>
-    <th>Ort</th>
-    <th>Vorname</th>
-    <th>Nachname</th>
-    <th>Uhrzeit</th>
-  </tr>
-  <tr *ngFor="let miti of mities">
-    <td>
-      {{ miti.place.location.value }}
-    </td>
-    <td>
-      {{ miti.place.locality.value }}
-    </td>
-    <td>
-      {{ miti.employee.firstName.value }}
-    </td>
-    <td>
-      {{ miti.employee.lastName.value }}
-    </td>
-    <td>{{ miti.time.value }}</td>
-    <td>
-      <button type="submit" (click)="deleteMiTi(miti.miTiId)">Löschen</button>
-    </td>
-  </tr>
-</table>
+<div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Restaurant</th>
+      <th>Ort</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Uhrzeit</th>
+    </tr>
+    <tr *ngFor="let miti of mities" [attr.id]="'miTiId' + miti.miTiId">
+      <td>
+        {{ miti.miTiId }}
+      </td>
+      <td>
+        {{ miti.place.location.value }}
+      </td>
+      <td>
+        {{ miti.place.locality.value }}
+      </td>
+      <td>
+        {{ miti.employee.firstName.value }}
+      </td>
+      <td>
+        {{ miti.employee.lastName.value }}
+      </td>
+      <td>{{ miti.time.value }}</td>
+      <td>
+        <button type="submit" (click)="deleteMiTi(miti.miTiId)">Löschen</button>
+      </td>
+      <td><button (click)="showThis = !showThis; miti.miTiId">Bearbeiten</button></td>
+    </tr>
+  </table>
+</div>
+<div><!--  [attr.id]="'miTiId' + miti.miTiId -->
+  <div *ngIf="showThis">
+    <form (ngSubmit)="youShallNotPass()">
+      <input
+        id="localityEdit"
+        name="localityEdit"
+        type="text"
+        data-testid="localityEdit"
+        placeholder=""
+      />
+      <input
+        id="locationEdit"
+        name="locationEdit"
+        type="text"
+        data-testid="locationEdit"
+        placeholder="Ort"
+      />
+      <br />
+      <input
+        id="firstNameEdit"
+        name="firstNameEdit"
+        type="text"
+        data-testid="firstNameEdit"
+        placeholder="Vorname"
+      />
+      <input
+        id="lastNameEdit"
+        name="lastNameEdit"
+        type="text"
+        data-testid="lastNameEdit"
+        placeholder="Nachname"
+      />
+      <br />
+      <input
+        id="timeEdit"
+        name="timeEdit"
+        type="time"
+        data-testid="timeEdit"
+        placeholder="Zeit"
+      />
+      <button type="submit">Speichern</button>
+      <br />
+      <div data-testid="alert">{{ nullAlert }}</div>
+    </form>
+  </div>
+</div>
