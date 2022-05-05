@@ -1,5 +1,18 @@
 <div>
-  <h2>MiTi anlegen</h2>
+  <h2>MiTi bearbeiten</h2>
+  <div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Restaurant</th>
+        <th>Ort</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Uhrzeit</th>
+      </tr>
+    </table>
+    {{ mities | json }}
+  </div>
   <form (ngSubmit)="youShallNotPass()">
     <input
       id="locality"
@@ -43,43 +56,11 @@
       placeholder="time"
       [(ngModel)]="time"
     />
-    <button type="submit">Anlegen</button>
+    <button type="submit">Speichern</button>
+    <button type="submit" (click)="cancelEdit()">Abbrechen</button>
     <br />
     <div data-testid="alert">{{ nullAlert }}</div>
+    <br />
+    <button type="submit">Löschen</button>
   </form>
-</div>
-<div>
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Restaurant</th>
-      <th>Ort</th>
-      <th>Vorname</th>
-      <th>Nachname</th>
-      <th>Uhrzeit</th>
-    </tr>
-    <tr *ngFor="let miti of mities">
-      <td>
-        {{ miti.miTiId }}
-      </td>
-      <td>
-        {{ miti.place.location.value }}
-      </td>
-      <td>
-        {{ miti.place.locality.value }}
-      </td>
-      <td>
-        {{ miti.employee.firstName.value }}
-      </td>
-      <td>
-        {{ miti.employee.lastName.value }}
-      </td>
-      <td>{{ miti.time.value }}</td>
-      <td>
-        <button type="submit" routerLink="/edit/{{ miti.miTiId }}">
-          Bearbeiten
-        </button>
-      </td>
-    </tr>
-  </table>
 </div>

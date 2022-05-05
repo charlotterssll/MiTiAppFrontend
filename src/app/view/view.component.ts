@@ -15,13 +15,11 @@ export class ViewComponent implements OnInit {
   lastName?: string;
   time?: string;
   nullAlert?: string;
-  showThis? : boolean = false;
-  index?: number;
 
   constructor(private miTiService: MiTiService) {}
 
-  fetchMitis() {
-    return this.miTiService.fetchMiTis().subscribe((response: MiTi[]) => {
+  getMitis() {
+    return this.miTiService.getMiTis().subscribe((response: MiTi[]) => {
       this.mities = response;
       console.log('GET MiTies:', this.mities);
     });
@@ -55,19 +53,12 @@ export class ViewComponent implements OnInit {
       time: this.time,
     };
     console.log('POST MiTi: ', miTiJson);
-    return this.miTiService.createMiTi(miTiJson).subscribe((miTiJson) => {
-      this.fetchMitis();
-    });
-  }
-
-  deleteMiTi(miTiId: number) {
-    return this.miTiService.deleteMiTi(miTiId).subscribe(() => {
-      console.log('DELETE MiTi:', miTiId);
-      this.fetchMitis();
+    return this.miTiService.createMiTi(miTiJson).subscribe(() => {
+      this.getMitis();
     });
   }
 
   ngOnInit(): void {
-    this.fetchMitis();
+    this.getMitis();
   }
 }

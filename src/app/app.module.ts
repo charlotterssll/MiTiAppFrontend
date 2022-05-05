@@ -6,10 +6,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
 import { CounterComponent } from './tests/counter.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [AppComponent, ViewComponent, CounterComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  declarations: [AppComponent, ViewComponent, CounterComponent, EditComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
