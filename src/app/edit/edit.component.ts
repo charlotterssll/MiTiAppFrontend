@@ -19,6 +19,7 @@ export class EditComponent implements OnInit {
   nullAlert?: string;
   index?: number;
   miTiId?: number;
+  miTiArray: MiTi[] = [];
 
   urlbyid = 'http://localhost:8080/mities/';
 
@@ -54,9 +55,10 @@ export class EditComponent implements OnInit {
   getMiTiByMiTiId() {
     return this.httpClient
       .get<MiTi[]>(this.urlbyid + this.miTiId)
-      .subscribe((response) => {
-        console.log('GET MiTi By MiTiId:', this.miTiId);
+      .subscribe((response: MiTi[]) => {
         this.mities = response;
+        console.log('GET MiTi By MiTiId:', this.miTiId);
+        console.log(this.miTiArray);
       });
   }
 

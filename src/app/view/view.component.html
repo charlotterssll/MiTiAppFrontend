@@ -1,6 +1,6 @@
 <div>
   <h2>MiTi anlegen</h2>
-  <form (ngSubmit)="youShallNotPass()">
+  <form (ngSubmit)="submitMiTi()">
     <input
       id="locality"
       name="locality"
@@ -63,10 +63,10 @@
         {{ miti.miTiId }}
       </td>
       <td>
-        {{ miti.place.location.value }}
+        {{ miti.place.locality.value }}
       </td>
       <td>
-        {{ miti.place.locality.value }}
+        {{ miti.place.location.value }}
       </td>
       <td>
         {{ miti.employee.firstName.value }}
