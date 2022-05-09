@@ -18,10 +18,10 @@ export class ViewComponent implements OnInit {
 
   constructor(private mitiService: MitiService) {}
 
-  getMitis() {
+  getMiti() {
     return this.mitiService.getMiti().subscribe((response: Miti[]) => {
       this.mitis = response;
-      console.log('GET Mitis:', this.mitis);
+      console.log('GET Miti:', this.mitis);
     });
   }
 
@@ -54,11 +54,11 @@ export class ViewComponent implements OnInit {
     };
     console.log('POST Miti: ', mitiJson);
     return this.mitiService.createMiti(mitiJson).subscribe(() => {
-      this.getMitis();
+      this.getMiti();
     });
   }
 
   ngOnInit(): void {
-    this.getMitis();
+    this.getMiti();
   }
 }
