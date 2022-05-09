@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MiTi } from './domain/miti/MiTi';
+import { Miti } from './domain/miti/Miti';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MiTiService {
+export class MitiService {
   constructor(private httpClient: HttpClient) {}
 
-  urlfetch = 'http://localhost:8080/mities';
-  urlpost = 'http://localhost:8080/mities';
-  urlbyid = 'http://localhost:8080/mities/';
+  urlfetch = 'http://localhost:8080/miti';
+  urlpost = 'http://localhost:8080/miti';
+  urlbyid = 'http://localhost:8080/miti/';
 
-  getMiTis() {
-    return this.httpClient.get<MiTi[]>(this.urlfetch);
+  getMiti() {
+    return this.httpClient.get<Miti[]>(this.urlfetch);
   }
 
-  getMiTiByMiTiId(miTiId: number) {
-    return this.httpClient.get<MiTi[]>(this.urlbyid + miTiId);
+  getMitiByMitiId(mitiId: number) {
+    return this.httpClient.get<Miti[]>(this.urlbyid + mitiId);
   }
 
-  createMiTi(miTiJson: Object) {
-    return this.httpClient.post(this.urlpost, miTiJson);
+  createMiti(mitiJson: Object) {
+    return this.httpClient.post(this.urlpost, mitiJson);
   }
 
-  deleteMiTi(miTiId: number) {
-    return this.httpClient.delete(this.urlbyid + miTiId);
+  deleteMiti(mitiId: number) {
+    return this.httpClient.delete(this.urlbyid + mitiId);
   }
 }

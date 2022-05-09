@@ -1,6 +1,6 @@
 <div>
-  <h2>MiTi anlegen</h2>
-  <form (ngSubmit)="submitMiTi()">
+  <h2>Miti anlegen</h2>
+  <form (ngSubmit)="submitMiti()">
     <input
       id="locality"
       name="locality"
@@ -58,9 +58,9 @@
       <th>Nachname</th>
       <th>Uhrzeit</th>
     </tr>
-    <tr *ngFor="let miti of mities">
+    <tr *ngFor="let miti of mitis">
       <td>
-        {{ miti.miTiId }}
+        {{ miti.mitiId }}
       </td>
       <td>
         {{ miti.place.locality.value }}
@@ -76,7 +76,7 @@
       </td>
       <td>{{ miti.time.value }}</td>
       <td>
-        <button type="submit" routerLink="/edit/{{ miti.miTiId }}">
+        <button type="submit" routerLink="/edit/{{ miti.mitiId }}">
           Bearbeiten
         </button>
       </td>

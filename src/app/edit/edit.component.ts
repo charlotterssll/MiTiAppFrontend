@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MiTi } from '../domain/miti/MiTi';
-import { MiTiService } from '../miti.service';
+import { Miti } from '../domain/miti/Miti';
+import { MitiService } from '../miti.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit {
-  mities?: MiTi[];
+  miti?: Miti[];
   locality?: string;
   location?: string;
   firstName?: string;
@@ -18,15 +18,15 @@ export class EditComponent implements OnInit {
   time?: string;
   nullAlert?: string;
   index?: number;
-  miTiId?: number;
-  miTiArray: MiTi[] = [];
+  mitiId?: number;
+  mitiArray: Miti[] = [];
 
-  urlbyid = 'http://localhost:8080/mities/';
+  urlbyid = 'http://localhost:8080/miti/';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private miTiService: MiTiService,
+    private mitiService: MitiService,
     private httpClient: HttpClient
   ) {}
 
@@ -41,24 +41,24 @@ export class EditComponent implements OnInit {
       this.nullAlert = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
     } else {
-      this.editMiTi();
+      this.editMiti();
     }
   }
 
-  getMitis() {
-    return this.miTiService.getMiTis().subscribe((response: MiTi[]) => {
-      this.mities = response;
-      console.log('GET MiTies:', this.mities);
+  getMiti() {
+    return this.mitiService.getMiti().subscribe((response: Miti[]) => {
+      this.miti = response;
+      console.log('GET Miti:', this.miti);
     });
   }
 
-  getMiTiByMiTiId() {
+  getMitiByMitiId() {
     return this.httpClient
-      .get<MiTi[]>(this.urlbyid + this.miTiId)
-      .subscribe((response: MiTi[]) => {
-        this.mities = response;
-        console.log('GET MiTi By MiTiId:', this.miTiId);
-        console.log(this.miTiArray);
+      .get<Miti[]>(this.urlbyid + this.mitiId)
+      .subscribe((response: Miti[]) => {
+        this.miti = response;
+        console.log('GET Miti By MitiId:', this.mitiId);
+        console.log(this.mitiArray);
       });
   }
 
@@ -68,15 +68,15 @@ export class EditComponent implements OnInit {
     });
   }
 
-  deleteMiTi(miTiId: number) {
-    return this.miTiService.deleteMiTi(miTiId).subscribe(() => {
-      console.log('DELETE MiTi:', miTiId);
-      this.getMitis();
+  deleteMiti(mitiId: number) {
+    return this.mitiService.deleteMiti(mitiId).subscribe(() => {
+      console.log('DELETE Miti:', mitiId);
+      this.getMiti();
     });
   }
 
-  editMiTi() {
-    const miTiJson = {
+  editMiti() {
+    const mitiJson = {
       place: {
         locality: this.locality,
         location: this.location,
@@ -87,14 +87,14 @@ export class EditComponent implements OnInit {
       },
       time: this.time,
     };
-    console.log('EDIT MiTi: ', miTiJson);
-    return this.miTiService.createMiTi(miTiJson).subscribe(() => {
-      this.getMitis();
+    console.log('EDIT Miti: ', mitiJson);
+    return this.mitiService.createMiti(mitiJson).subscribe(() => {
+      this.getMiti();
     });
   }
 
   ngOnInit(): void {
-    this.miTiId = this.route.snapshot.params['id'];
-    this.getMiTiByMiTiId();
+    this.mitiId = this.route.snapshot.params['id'];
+    this.getMitiByMitiId();
   }
 }

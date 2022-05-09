@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MiTi } from '../domain/miti/MiTi';
-import { MiTiService } from '../miti.service';
+import { Miti } from '../domain/miti/Miti';
+import { MitiService } from '../miti.service';
 
 @Component({
   selector: 'app-view',
@@ -8,7 +8,7 @@ import { MiTiService } from '../miti.service';
   styleUrls: ['./view.component.css'],
 })
 export class ViewComponent implements OnInit {
-  mities?: MiTi[];
+  mitis?: Miti[];
   locality?: string;
   location?: string;
   firstName?: string;
@@ -16,12 +16,12 @@ export class ViewComponent implements OnInit {
   time?: string;
   nullAlert?: string;
 
-  constructor(private miTiService: MiTiService) {}
+  constructor(private mitiService: MitiService) {}
 
   getMitis() {
-    return this.miTiService.getMiTis().subscribe((response: MiTi[]) => {
-      this.mities = response;
-      console.log('GET MiTies:', this.mities);
+    return this.mitiService.getMiti().subscribe((response: Miti[]) => {
+      this.mitis = response;
+      console.log('GET Mitis:', this.mitis);
     });
   }
 
@@ -36,12 +36,12 @@ export class ViewComponent implements OnInit {
       this.nullAlert = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
     } else {
-      this.submitMiTi();
+      this.submitMiti();
     }
   }
 
-  submitMiTi() {
-    const miTiJson = {
+  submitMiti() {
+    const mitiJson = {
       place: {
         locality: this.locality,
         location: this.location,
@@ -52,8 +52,8 @@ export class ViewComponent implements OnInit {
       },
       time: this.time,
     };
-    console.log('POST MiTi: ', miTiJson);
-    return this.miTiService.createMiTi(miTiJson).subscribe(() => {
+    console.log('POST Miti: ', mitiJson);
+    return this.mitiService.createMiti(mitiJson).subscribe(() => {
       this.getMitis();
     });
   }

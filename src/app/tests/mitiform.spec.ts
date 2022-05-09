@@ -5,7 +5,7 @@ import { AppComponent } from '../app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MiTi } from '../domain/miti/MiTi';
+import { Miti } from '../domain/miti/Miti';
 
 const renderComponent = render(ViewComponent, {
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
@@ -13,13 +13,13 @@ const renderComponent = render(ViewComponent, {
   imports: [BrowserModule, FormsModule, HttpClientModule],
 });
 
-describe('MiTi Form Test', () => {
+describe('Miti Form Test', () => {
   test('should not allow to submit null values in miti form', async () => {
     await renderComponent;
 
-    const testMiTi: MiTi[] = [
+    const testMiti: Miti[] = [
       {
-        miTiId: 1,
+        mitiId: 1,
         place: {
           locality: {
             value: 'Schloefe',

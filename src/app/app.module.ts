@@ -5,13 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
-import { CounterComponent } from './tests/counter.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [AppComponent, ViewComponent, CounterComponent, EditComponent],
+  declarations: [AppComponent, ViewComponent, EditComponent],
   imports: [
     BrowserModule,
     FormsModule,
