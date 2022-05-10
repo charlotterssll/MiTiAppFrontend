@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Miti } from '../domain/miti/Miti';
 import { MitiService } from '../miti.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit',
@@ -10,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit {
-  miti?: Miti[];
+  mitis?: Miti;
   locality?: string;
   location?: string;
   firstName?: string;
@@ -18,17 +17,15 @@ export class EditComponent implements OnInit {
   time?: string;
   nullAlert?: string;
   index?: number;
-  mitiId?: number;
-  mitiArray: Miti[] = [];
-
-  urlbyid = 'http://localhost:8080/miti/';
+  mitiId: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mitiService: MitiService,
-    private httpClient: HttpClient
+    private mitiService: MitiService
   ) {}
+
+  objectKeys = Object.keys;
 
   youShallNotPass() {
     if (
@@ -45,20 +42,12 @@ export class EditComponent implements OnInit {
     }
   }
 
-  getMiti() {
-    return this.mitiService.getMiti().subscribe((response: Miti[]) => {
-      this.miti = response;
-      console.log('GET Miti:', this.miti);
-    });
-  }
-
-  getMitiByMitiId() {
-    return this.httpClient
-      .get<Miti[]>(this.urlbyid + this.mitiId)
-      .subscribe((response: Miti[]) => {
-        this.miti = response;
+  getMitiByMitiId(mitiId: string) {
+    return this.mitiService
+      .getMitiByMitiId(mitiId)
+      .subscribe((response: Miti) => {
+        this.mitis = response;
         console.log('GET Miti By MitiId:', this.mitiId);
-        console.log(this.mitiArray);
       });
   }
 
@@ -68,10 +57,9 @@ export class EditComponent implements OnInit {
     });
   }
 
-  deleteMiti(mitiId: number) {
+  deleteMiti(mitiId: string) {
     return this.mitiService.deleteMiti(mitiId).subscribe(() => {
       console.log('DELETE Miti:', mitiId);
-      this.getMiti();
     });
   }
 
@@ -88,13 +76,13 @@ export class EditComponent implements OnInit {
       time: this.time,
     };
     console.log('EDIT Miti: ', mitiJson);
-    return this.mitiService.createMiti(mitiJson).subscribe(() => {
-      this.getMiti();
-    });
+    //return this.mitiService.createMiti(mitiJson).subscribe(() => {
+    //  this.getMiti();
+    //});
   }
 
   ngOnInit(): void {
     this.mitiId = this.route.snapshot.params['id'];
-    this.getMitiByMitiId();
+    this.getMitiByMitiId(this.mitiId);
   }
 }

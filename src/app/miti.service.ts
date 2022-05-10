@@ -8,23 +8,21 @@ import { Miti } from './domain/miti/Miti';
 export class MitiService {
   constructor(private httpClient: HttpClient) {}
 
-  urlfetch = 'http://localhost:8080/miti';
-  urlpost = 'http://localhost:8080/miti';
-  urlbyid = 'http://localhost:8080/miti/';
+  urlFetchMiti = 'http://localhost:8080/miti';
 
   getMiti() {
-    return this.httpClient.get<Miti[]>(this.urlfetch);
+    return this.httpClient.get<Miti[]>(this.urlFetchMiti);
   }
 
-  getMitiByMitiId(mitiId: number) {
-    return this.httpClient.get<Miti[]>(this.urlbyid + mitiId);
+  getMitiByMitiId(mitiId: string) {
+    return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId);
   }
 
   createMiti(mitiJson: Object) {
-    return this.httpClient.post(this.urlpost, mitiJson);
+    return this.httpClient.post(this.urlFetchMiti, mitiJson);
   }
 
-  deleteMiti(mitiId: number) {
-    return this.httpClient.delete(this.urlbyid + mitiId);
+  deleteMiti(mitiId: string) {
+    return this.httpClient.delete(this.urlFetchMiti + '/' + mitiId);
   }
 }

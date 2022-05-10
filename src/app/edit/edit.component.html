@@ -11,7 +11,9 @@
         <th>Uhrzeit</th>
       </tr>
     </table>
-    <div>{{ miti | json }}</div>
+    <div>
+      {{ mitis | json }}
+    </div>
   </div>
   <form (ngSubmit)="youShallNotPass()">
     <input
@@ -60,7 +62,9 @@
     <button type="submit" (click)="cancelEdit()">Abbrechen</button>
     <br />
     <div data-testid="alert">{{ nullAlert }}</div>
-    <br />
-    <button type="submit">Löschen</button>
   </form>
+  <br />
+  <button type="submit" (click)="deleteMiti(mitiId); cancelEdit()">
+    Löschen
+  </button>
 </div>
