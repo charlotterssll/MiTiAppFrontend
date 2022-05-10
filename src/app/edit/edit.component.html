@@ -58,13 +58,13 @@
       placeholder="time"
       [(ngModel)]="time"
     />
-    <button type="submit">Speichern</button>
-    <button type="submit" (click)="cancelEdit()">Abbrechen</button>
+    <button type="submit" (click)="editMiti()">Speichern</button>
+    <button type="submit" (click)="returnToView()">Abbrechen</button>
     <br />
     <div data-testid="alert">{{ nullAlert }}</div>
   </form>
   <br />
-  <button type="submit" (click)="deleteMiti(mitiId); cancelEdit()">
+  <button type="submit" (click)="deleteMiti(mitiId); returnToView()">
     Löschen
   </button>
 </div>

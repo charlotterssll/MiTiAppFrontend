@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
       });
   }
 
-  cancelEdit() {
+  returnToView() {
     this.router.navigateByUrl('edit/:id').then(() => {
       this.router.navigate(['']);
     });
@@ -76,9 +76,9 @@ export class EditComponent implements OnInit {
       time: this.time,
     };
     console.log('EDIT Miti: ', mitiJson);
-    //return this.mitiService.createMiti(mitiJson).subscribe(() => {
-    //  this.getMiti();
-    //});
+    return this.mitiService.updateMiti(this.mitiId, mitiJson).subscribe(() => {
+      this.returnToView();
+    });
   }
 
   ngOnInit(): void {

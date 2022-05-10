@@ -22,6 +22,10 @@ export class MitiService {
     return this.httpClient.post(this.urlFetchMiti, mitiJson);
   }
 
+  updateMiti(mitiId: string, mitiJson: Object) {
+    return this.httpClient.put(this.urlFetchMiti + '/' + mitiId, mitiJson);
+  }
+
   deleteMiti(mitiId: string) {
     return this.httpClient.delete(this.urlFetchMiti + '/' + mitiId);
   }
