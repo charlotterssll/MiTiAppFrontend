@@ -1,9 +1,10 @@
 <div>
   <h2>Miti anlegen</h2>
-  <form (ngSubmit)="submitMiti()">
+  <form (ngSubmit)="youShallNotPass()">
     <input
       id="locality"
       name="locality"
+      aria-label="locality"
       type="text"
       data-testid="locality"
       placeholder="Lokal"
@@ -12,6 +13,7 @@
     <input
       id="location"
       name="location"
+      aria-label="location"
       type="text"
       data-testid="location"
       placeholder="Ort"
@@ -21,6 +23,7 @@
     <input
       id="firstName"
       name="firstName"
+      aria-label="firstName"
       type="text"
       data-testid="firstName"
       placeholder="Vorname"
@@ -29,6 +32,7 @@
     <input
       id="lastName"
       name="lastName"
+      aria-label="lastName"
       type="text"
       data-testid="lastName"
       placeholder="Nachname"
@@ -38,17 +42,18 @@
     <input
       id="time"
       name="time"
+      aria-label="time"
       type="time"
       data-testid="time"
       placeholder="time"
       [(ngModel)]="time"
     />
-    <button type="submit">Anlegen</button>
+    <button data-testid="anlegen" aria-label="anlegen" type="submit">Anlegen</button>
     <br />
     <div data-testid="alert">{{ nullAlert }}</div>
   </form>
 </div>
-<div>
+<div data-testid="mitiList" aria-label="mitiList">
   <table>
     <tr>
       <th>ID</th>

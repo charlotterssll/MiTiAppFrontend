@@ -25,8 +25,6 @@ export class EditComponent implements OnInit {
     private mitiService: MitiService
   ) {}
 
-  objectKeys = Object.keys;
-
   youShallNotPass() {
     if (
       !this.locality ||
