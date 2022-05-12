@@ -14,12 +14,12 @@ export class ViewComponent implements OnInit {
   firstName?: string;
   lastName?: string;
   time?: string;
-  nullAlert?: string;
+  alertNull?: string;
 
   constructor(private mitiService: MitiService) {}
 
-  getMiti() {
-    return this.mitiService.getMiti().subscribe((response: Miti[]) => {
+  readMiti() {
+    return this.mitiService.readMiti().subscribe((response: Miti[]) => {
       this.mitis = response;
       console.log('GET Miti:', this.mitis);
     });
@@ -33,14 +33,14 @@ export class ViewComponent implements OnInit {
       !this.lastName ||
       !this.time
     ) {
-      this.nullAlert = 'Null values in any form fields are disallowed';
+      this.alertNull = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
     } else {
-      this.submitMiti();
+      this.createMiti();
     }
   }
 
-  submitMiti() {
+  createMiti() {
     const mitiJson = {
       place: {
         locality: this.locality,
@@ -54,11 +54,11 @@ export class ViewComponent implements OnInit {
     };
     console.log('POST Miti: ', mitiJson);
     return this.mitiService.createMiti(mitiJson).subscribe(() => {
-      this.getMiti();
+      this.readMiti();
     });
   }
 
   ngOnInit(): void {
-    this.getMiti();
+    this.readMiti();
   }
 }

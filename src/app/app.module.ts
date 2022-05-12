@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { ViewComponent } from './view/view.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { EditComponent } from './edit/edit.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
-  declarations: [AppComponent, ViewComponent, EditComponent],
+  declarations: [AppComponent, ViewComponent, UpdateComponent],
   imports: [
     BrowserModule,
     FormsModule,

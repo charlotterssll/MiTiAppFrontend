@@ -1,6 +1,6 @@
 <div>
-  <h2>Miti bearbeiten</h2>
-  <div>
+  <h2 aria-label="lunch-table-update">Miti bearbeiten</h2>
+  <div aria-label="lunch-table-list">
     <table>
       <tr>
         <th>ID</th>
@@ -12,20 +12,20 @@
       </tr>
     </table>
   </div>
-  <form (ngSubmit)="youShallNotPass()">
+  <form aria-label="form-input-update" (ngSubmit)="youShallNotPass()">
     <input
       id="locality"
       name="locality"
+      aria-label="input-locality"
       type="text"
-      data-testid="locality"
       placeholder="Lokal"
       [(ngModel)]="locality"
     />
     <input
       id="location"
       name="location"
+      aria-label="input-location"
       type="text"
-      data-testid="location"
       placeholder="Ort"
       [(ngModel)]="location"
     />
@@ -33,16 +33,16 @@
     <input
       id="firstName"
       name="firstName"
+      aria-label="input-firstName"
       type="text"
-      data-testid="firstName"
       placeholder="Vorname"
       [(ngModel)]="firstName"
     />
     <input
       id="lastName"
       name="lastName"
+      aria-label="input-lastName"
       type="text"
-      data-testid="lastName"
       placeholder="Nachname"
       [(ngModel)]="lastName"
     />
@@ -50,18 +50,26 @@
     <input
       id="time"
       name="time"
+      aria-label="input-time"
       type="time"
-      data-testid="time"
       placeholder="time"
       [(ngModel)]="time"
     />
-    <button type="submit" (click)="editMiti()">Speichern</button>
-    <button type="submit" (click)="returnToView()">Abbrechen</button>
+    <button aria-label="button-update" type="submit" (click)="updateMiti()">
+      Speichern
+    </button>
+    <button aria-label="button-cancel" type="submit" (click)="returnToView()">
+      Abbrechen
+    </button>
     <br />
-    <div data-testid="alert">{{ nullAlert }}</div>
+    <div aria-label="alert-null">{{ alertNull }}</div>
   </form>
   <br />
-  <button type="submit" (click)="deleteMiti(mitiId); returnToView()">
+  <button
+    aria-label="button-delete"
+    type="submit"
+    (click)="deleteMiti(mitiId); returnToView()"
+  >
     Löschen
   </button>
 </div>

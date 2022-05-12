@@ -4,19 +4,18 @@ import { Miti } from '../domain/miti/Miti';
 import { MitiService } from '../miti.service';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css'],
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css'],
 })
-export class EditComponent implements OnInit {
+export class UpdateComponent implements OnInit {
   mitis?: Miti;
   locality?: string;
   location?: string;
   firstName?: string;
   lastName?: string;
   time?: string;
-  nullAlert?: string;
-  index?: number;
+  alertNull?: string;
   mitiId: string = '';
 
   constructor(
@@ -33,16 +32,16 @@ export class EditComponent implements OnInit {
       !this.lastName ||
       !this.time
     ) {
-      this.nullAlert = 'Null values in any form fields are disallowed';
+      this.alertNull = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
     } else {
-      this.editMiti();
+      this.updateMiti();
     }
   }
 
-  getMitiByMitiId(mitiId: string) {
+  readMitiByMitiId(mitiId: string) {
     return this.mitiService
-      .getMitiByMitiId(mitiId)
+      .readMitiByMitiId(mitiId)
       .subscribe((response: Miti) => {
         this.mitis = response;
         console.log('GET Miti By MitiId:', this.mitiId);
@@ -50,7 +49,7 @@ export class EditComponent implements OnInit {
   }
 
   returnToView() {
-    this.router.navigateByUrl('edit/:id').then(() => {
+    this.router.navigateByUrl('update/:id').then(() => {
       this.router.navigate(['']);
     });
   }
@@ -61,7 +60,7 @@ export class EditComponent implements OnInit {
     });
   }
 
-  editMiti() {
+  updateMiti() {
     const mitiJson = {
       place: {
         locality: this.locality,
@@ -73,7 +72,7 @@ export class EditComponent implements OnInit {
       },
       time: this.time,
     };
-    console.log('EDIT Miti: ', mitiJson);
+    console.log('PUT Miti: ', mitiJson);
     return this.mitiService.updateMiti(this.mitiId, mitiJson).subscribe(() => {
       this.returnToView();
     });
@@ -81,6 +80,6 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     this.mitiId = this.route.snapshot.params['id'];
-    this.getMitiByMitiId(this.mitiId);
+    this.readMitiByMitiId(this.mitiId);
   }
 }

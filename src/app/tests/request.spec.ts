@@ -46,7 +46,7 @@ describe('Miti API Test', () => {
     ];
 
     const mitiService = createMock(MitiService);
-    mitiService.getMiti = jest.fn(() => of(testMiti));
+    mitiService.readMiti = jest.fn(() => of(testMiti));
 
     const mitiServer = setupServer(
       rest.get('http://localhost:8080/miti', (req, res, ctx) => {

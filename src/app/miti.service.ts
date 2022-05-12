@@ -10,11 +10,11 @@ export class MitiService {
 
   urlFetchMiti = 'http://localhost:8080/miti';
 
-  getMiti() {
+  readMiti() {
     return this.httpClient.get<Miti[]>(this.urlFetchMiti);
   }
 
-  getMitiByMitiId(mitiId: string) {
+  readMitiByMitiId(mitiId: string) {
     return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId);
   }
 
