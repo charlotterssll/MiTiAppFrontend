@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Miti } from './domain/miti/Miti';
+import { Miti } from '../domain/miti/Miti';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class MitiService {
   }
 
   readMitiByMitiId(mitiId: string) {
-    return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId);
+    return this.httpClient.get<Miti[]>(this.urlFetchMiti + '/' + mitiId);
   }
 
   createMiti(mitiJson: Object) {

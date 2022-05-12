@@ -48,6 +48,7 @@
     <div aria-label="alert-null">{{ alertNull }}</div>
   </form>
 </div>
+<br />
 <div aria-label="lunch-table-list">
   <table>
     <tr>
@@ -77,7 +78,7 @@
       <td>{{ miti.time.value }}</td>
       <td>
         <button
-          aria-label="button-update"
+          aria-label="button-edit"
           type="submit"
           routerLink="/update/{{ miti.mitiId }}"
         >
@@ -86,4 +87,7 @@
       </td>
     </tr>
   </table>
+  <button aria-label="button-dummy" type="submit" routerLink="/update/1">
+    Bearbeiten
+  </button>
 </div>

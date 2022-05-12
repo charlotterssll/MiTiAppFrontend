@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Miti } from '../domain/miti/Miti';
-import { MitiService } from '../miti.service';
+import { MitiService } from '../service/miti.service';
 
 @Component({
   selector: 'app-update',
@@ -9,7 +9,7 @@ import { MitiService } from '../miti.service';
   styleUrls: ['./update.component.css'],
 })
 export class UpdateComponent implements OnInit {
-  mitis?: Miti;
+  mitis?: Miti[];
   locality?: string;
   location?: string;
   firstName?: string;
@@ -42,7 +42,7 @@ export class UpdateComponent implements OnInit {
   readMitiByMitiId(mitiId: string) {
     return this.mitiService
       .readMitiByMitiId(mitiId)
-      .subscribe((response: Miti) => {
+      .subscribe((response: Miti[]) => {
         this.mitis = response;
         console.log('GET Miti By MitiId:', this.mitiId);
       });

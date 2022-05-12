@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/angular';
-import { ViewComponent } from '../view/view.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
+import { UpdateComponent } from './update.component';
 
-describe('View Test', () => {
+describe('Update Test', () => {
   beforeEach(async () => {
-    await render(ViewComponent, {
-      declarations: [ViewComponent],
+    await render(UpdateComponent, {
+      declarations: [UpdateComponent],
       imports: [FormsModule, HttpClientModule],
     });
   });
@@ -41,11 +41,11 @@ describe('View Test', () => {
   });
 
   test('should not allow to submit null values in miti form', async () => {
-    const buttonCreate = screen.getByLabelText('button-create');
+    const buttonUpdate = screen.getByLabelText('button-update');
     const alertNull = screen.getByLabelText('alert-null');
     const alertNullMessage = 'Null values in any form fields are disallowed';
 
-    await fireEvent.click(buttonCreate);
+    await fireEvent.click(buttonUpdate);
 
     expect(alertNull.textContent).toContain(alertNullMessage);
   });

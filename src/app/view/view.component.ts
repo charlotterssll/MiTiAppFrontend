@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Miti } from '../domain/miti/Miti';
-import { MitiService } from '../miti.service';
+import { MitiService } from '../service/miti.service';
 
 @Component({
   selector: 'app-view',
