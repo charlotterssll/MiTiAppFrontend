@@ -6,6 +6,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { createMock } from '@testing-library/angular/jest-utils';
 
 describe('Miti Request Test', () => {
   let httpClient: HttpClient;
@@ -84,6 +85,15 @@ describe('Miti Request Test', () => {
     const req = httpTestingController.expectOne('http://localhost:8080/miti/1');
     expect(req.request.method).toEqual('DELETE');
     expect(req.request.body).toEqual(null);
+  });
+
+  test('perform a get request and should return null', () => {
+    mitiService.readMiti().subscribe((response: Miti[]) => {
+      [dummyMiti] = response;
+      console.log('GET Miti:', [dummyMiti]);
+    });
+    const req = httpTestingController.expectOne('http://localhost:8080/miti');
+    expect(req.request.body).toBe(null);
   });
 
   /*test('should get one miti', async () => {
