@@ -56,15 +56,17 @@
   <div aria-label="lunch-table-list">
     <table>
       <tr>
-        <th>ID</th>
-        <th>Restaurant</th>
-        <th>Ort</th>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>Uhrzeit</th>
+        <th aria-label="lunch-table-id-title">ID</th>
+        <th aria-label="lunch-table-locality-title">Restaurant</th>
+        <th aria-label="lunch-table-location-title">Ort</th>
+        <th aria-label="lunch-table-firstName-title">Vorname</th>
+        <th aria-label="lunch-table-lastName-title">Nachname</th>
+        <th aria-label="lunch-table-time-title">Uhrzeit</th>
       </tr>
     </table>
-    <div *ngFor="let miti of mitis">{{ miti.mitiId }}</div>
+    <div *ngFor="let miti of mitis" aria-label="lunch-table-row">
+      {{ miti.mitiId }}
+    </div>
   </div>
   <br />
   <button

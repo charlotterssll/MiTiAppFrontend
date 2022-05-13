@@ -59,6 +59,44 @@ describe('View Test', () => {
 
     expect(alertNull.textContent).toContain(alertNullMessage);
   });
+
+  test('should display titles in miti table', async () => {
+    expect(screen.getByLabelText('lunch-table-id-title')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-location-title')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-locality-title')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-firstName-title')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-lastName-title')
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText('lunch-table-time-title')).toBeInTheDocument();
+  });
+
+  test('should not display empty miti values in miti table after button click', async () => {
+    const buttonCreate = screen.getByLabelText('button-create');
+
+    await fireEvent.click(buttonCreate);
+
+    expect(screen.queryByLabelText('lunch-table-id')).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('lunch-table-location')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('lunch-table-locality')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('lunch-table-firstName')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText('lunch-table-lastName')
+    ).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('lunch-table-time')).not.toBeInTheDocument();
+  });
 });
 
 describe('Routing to Update Component and back to View Component Test', () => {
