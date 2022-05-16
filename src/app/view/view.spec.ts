@@ -61,20 +61,24 @@ describe('View Test', () => {
   });
 
   test('should display titles in miti table', async () => {
-    expect(screen.getByLabelText('lunch-table-id-title')).toBeInTheDocument();
     expect(
-      screen.getByLabelText('lunch-table-location-title')
+      screen.getByLabelText('lunch-table-id-table-header')
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText('lunch-table-locality-title')
+      screen.getByLabelText('lunch-table-location-table-header')
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText('lunch-table-firstName-title')
+      screen.getByLabelText('lunch-table-locality-table-header')
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText('lunch-table-lastName-title')
+      screen.getByLabelText('lunch-table-firstName-table-header')
     ).toBeInTheDocument();
-    expect(screen.getByLabelText('lunch-table-time-title')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-lastName-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-time-table-header')
+    ).toBeInTheDocument();
   });
 
   test('should not display empty miti values in miti table after button click', async () => {

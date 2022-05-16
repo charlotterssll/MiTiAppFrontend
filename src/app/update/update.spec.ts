@@ -50,4 +50,25 @@ describe('Update Test', () => {
 
     expect(alertNull.textContent).toContain(alertNullMessage);
   });
+
+  test('should display titles in miti table', async () => {
+    expect(
+      screen.getByLabelText('lunch-table-id-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-location-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-locality-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-firstName-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-lastName-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-time-table-header')
+    ).toBeInTheDocument();
+  });
 });
