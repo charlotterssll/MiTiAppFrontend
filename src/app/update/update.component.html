@@ -43,6 +43,14 @@
       placeholder="time"
       [(ngModel)]="time"
     />
+    <input
+      id="input-date"
+      name="input-date"
+      aria-label="input-date"
+      type="date"
+      placeholder="date"
+      [(ngModel)]="date"
+    />
     <button aria-label="button-update" type="submit" (click)="updateMiti()">
       Speichern
     </button>
@@ -62,6 +70,7 @@
         <th aria-label="lunch-table-firstName-table-header">Vorname</th>
         <th aria-label="lunch-table-lastName-table-header">Nachname</th>
         <th aria-label="lunch-table-time-table-header">Uhrzeit</th>
+        <th aria-label="lunch-table-date-table-header">Datum</th>
       </tr>
     </table>
     {{ mitis | json }}

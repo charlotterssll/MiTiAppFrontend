@@ -7,4 +7,5 @@ export interface Miti {
   place: Place;
   employee: Employee;
   time: Value;
+  date: Value;
 }

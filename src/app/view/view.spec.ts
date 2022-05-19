@@ -50,6 +50,11 @@ describe('View Test', () => {
     expect(screen.getByLabelText(/input-time/i)).toHaveValue('14:30');
   });
 
+  test('put a date value into a miti input field', async () => {
+    await userEvent.type(screen.getByLabelText(/input-date/i), '2022-04-01');
+    expect(screen.getByLabelText(/input-date/i)).toHaveValue('2022-04-01');
+  });
+
   test('should not allow to submit null values in miti form', async () => {
     const buttonCreate = screen.getByLabelText('button-create');
     const alertNull = screen.getByLabelText('alert-null');
@@ -79,6 +84,9 @@ describe('View Test', () => {
     expect(
       screen.getByLabelText('lunch-table-time-table-header')
     ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-date-table-header')
+    ).toBeInTheDocument();
   });
 
   test('should not display empty miti values in miti table after button click', async () => {
@@ -100,6 +108,7 @@ describe('View Test', () => {
       screen.queryByLabelText('lunch-table-lastName')
     ).not.toBeInTheDocument();
     expect(screen.queryByLabelText('lunch-table-time')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('lunch-table-date')).not.toBeInTheDocument();
   });
 });
 

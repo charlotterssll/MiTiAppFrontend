@@ -15,6 +15,7 @@ export class UpdateComponent implements OnInit {
   firstName?: string;
   lastName?: string;
   time?: string;
+  date?: string;
   alertNull?: string;
   mitiId: string = '';
 
@@ -30,7 +31,8 @@ export class UpdateComponent implements OnInit {
       !this.location ||
       !this.firstName ||
       !this.lastName ||
-      !this.time
+      !this.time ||
+      !this.date
     ) {
       this.alertNull = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
@@ -71,6 +73,7 @@ export class UpdateComponent implements OnInit {
         lastName: this.lastName,
       },
       time: this.time,
+      date: this.date,
     };
     console.log('PUT Miti: ', mitiJson);
     return this.mitiService.updateMiti(this.mitiId, mitiJson).subscribe(() => {

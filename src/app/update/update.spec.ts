@@ -41,6 +41,11 @@ describe('Update Test', () => {
     expect(screen.getByLabelText(/input-time/i)).toHaveValue('14:30');
   });
 
+  test('put a date value into a miti input field', async () => {
+    await userEvent.type(screen.getByLabelText(/input-date/i), '2022-04-01');
+    expect(screen.getByLabelText(/input-date/i)).toHaveValue('2022-04-01');
+  });
+
   test('should not allow to submit null values in miti form', async () => {
     const buttonUpdate = screen.getByLabelText('button-update');
     const alertNull = screen.getByLabelText('alert-null');
@@ -69,6 +74,9 @@ describe('Update Test', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByLabelText('lunch-table-time-table-header')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('lunch-table-date-table-header')
     ).toBeInTheDocument();
   });
 });

@@ -33,6 +33,9 @@ describe('Miti Request Test', () => {
     time: {
       value: '12:00',
     },
+    date: {
+      value: '2022-04-01',
+    },
     mitiId: '1',
   };
 
