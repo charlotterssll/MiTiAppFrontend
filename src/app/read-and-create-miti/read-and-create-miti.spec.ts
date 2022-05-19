@@ -4,20 +4,20 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/angular';
-import { ViewComponent } from './view.component';
+import { ReadAndCreateMitiComponent } from './read-and-create-miti.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
 import { AppComponent } from '../app.component';
-import { UpdateComponent } from '../update/update.component';
+import { UpdateAndDeleteMitiComponent } from '../update-and-delete-miti/update-and-delete-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { createMock } from '@testing-library/angular/jest-utils';
 
 describe('View Test', () => {
   beforeEach(async () => {
-    await render(ViewComponent, {
-      declarations: [ViewComponent],
+    await render(ReadAndCreateMitiComponent, {
+      declarations: [ReadAndCreateMitiComponent],
       imports: [FormsModule, HttpClientModule],
     });
   });
@@ -115,11 +115,11 @@ describe('View Test', () => {
 describe('Routing to Update Component and back to View Component Test', () => {
   beforeEach(async () => {
     await render(AppComponent, {
-      declarations: [ViewComponent, UpdateComponent],
+      declarations: [ReadAndCreateMitiComponent, UpdateAndDeleteMitiComponent],
       imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
       routes: [
-        { path: 'update/:id', component: UpdateComponent },
-        { path: '', component: ViewComponent, pathMatch: 'full' },
+        { path: 'update/:id', component: UpdateAndDeleteMitiComponent },
+        { path: '', component: ReadAndCreateMitiComponent, pathMatch: 'full' },
       ],
     });
   });

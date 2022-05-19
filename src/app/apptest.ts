@@ -1,6 +1,6 @@
 import { AppComponent } from './app.component';
 import { TestBed } from '@angular/core/testing';
-import { ViewComponent } from './view/view.component';
+import { ReadAndCreateMitiComponent } from './read-and-create-miti/read-and-create-miti.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 /*describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent, ViewComponent],
+      declarations: [AppComponent, ReadAndCreateMitiComponent],
       imports: [BrowserModule, FormsModule, HttpClientModule],
       providers: [],
     }).compileComponents();

@@ -2,13 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
-import { UpdateComponent } from './update.component';
+import { UpdateAndDeleteMitiComponent } from './update-and-delete-miti.component';
 import { createMock } from '@testing-library/angular/jest-utils';
 
 describe('Update Test', () => {
   beforeEach(async () => {
-    await render(UpdateComponent, {
-      declarations: [UpdateComponent],
+    await render(UpdateAndDeleteMitiComponent, {
+      declarations: [UpdateAndDeleteMitiComponent],
       imports: [FormsModule, HttpClientModule],
     });
   });

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { UpdateComponent } from './update/update.component';
+import { UpdateAndDeleteMitiComponent } from './update-and-delete-miti/update-and-delete-miti.component';
 import { RouterModule } from '@angular/router';
-import { ViewComponent } from './view/view.component';
+import { ReadAndCreateMitiComponent } from './read-and-create-miti/read-and-create-miti.component';
 
 const routes = [
-  { path: 'update/:id', component: UpdateComponent },
-  { path: '', component: ViewComponent, pathMatch: 'full' },
+  { path: 'update/:id', component: UpdateAndDeleteMitiComponent },
+  { path: '', component: ReadAndCreateMitiComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

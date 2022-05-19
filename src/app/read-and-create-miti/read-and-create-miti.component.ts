@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Miti } from '../domain/miti/Miti';
-import { MitiService } from '../service/miti.service';
+import { MitiService } from '../miti-service/miti.service';
 
 @Component({
   selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css'],
+  templateUrl: './read-and-create-miti.component.html',
+  styleUrls: ['./read-and-create-miti.component.css'],
 })
-export class ViewComponent implements OnInit {
+export class ReadAndCreateMitiComponent implements OnInit {
   mitis?: Miti[];
   locality?: string;
   location?: string;

@@ -91,8 +91,8 @@ describe('Miti Request Test', () => {
   });
 
   /*test('should get one miti', async () => {
-    await render(ViewComponent, {
-      declarations: [AppComponent, ViewComponent, UpdateComponent],
+    await render(ReadAndCreateMitiComponent, {
+      declarations: [AppComponent, ReadAndCreateMitiComponent, UpdateAndDeleteMitiComponent],
       imports: [
         BrowserModule,
         FormsModule,

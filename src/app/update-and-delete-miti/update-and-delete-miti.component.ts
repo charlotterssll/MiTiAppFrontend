@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Miti } from '../domain/miti/Miti';
-import { MitiService } from '../service/miti.service';
+import { MitiService } from '../miti-service/miti.service';
 
 @Component({
   selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: ['./update.component.css'],
+  templateUrl: './update-and-delete-miti.component.html',
+  styleUrls: ['./update-and-delete-miti.component.css'],
 })
-export class UpdateComponent implements OnInit {
+export class UpdateAndDeleteMitiComponent implements OnInit {
   mitis?: Miti[];
   locality?: string;
   location?: string;
