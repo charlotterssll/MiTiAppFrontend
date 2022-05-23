@@ -4,20 +4,21 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '@testing-library/angular';
-import { ReadAndCreateMitiComponent } from './read-and-create-miti.component';
+import { ReadMitiComponent } from './read-miti.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
 import { AppComponent } from '../app.component';
-import { UpdateAndDeleteMitiComponent } from '../update-and-delete-miti/update-and-delete-miti.component';
+import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
-import { createMock } from '@testing-library/angular/jest-utils';
+import { CreateMitiComponent } from '../create-miti/create-miti.component';
+import { UpdateMitiComponent } from '../update-miti/update-miti.component';
 
-describe('View Test', () => {
+describe('Employee wants to read...', () => {
   beforeEach(async () => {
-    await render(ReadAndCreateMitiComponent, {
-      declarations: [ReadAndCreateMitiComponent],
+    await render(ReadMitiComponent, {
+      declarations: [ReadMitiComponent, CreateMitiComponent],
       imports: [FormsModule, HttpClientModule],
     });
   });
@@ -115,11 +116,16 @@ describe('View Test', () => {
 describe('Routing to Update Component and back to View Component Test', () => {
   beforeEach(async () => {
     await render(AppComponent, {
-      declarations: [ReadAndCreateMitiComponent, UpdateAndDeleteMitiComponent],
+      declarations: [
+        CreateMitiComponent,
+        ReadMitiComponent,
+        UpdateMitiComponent,
+        DeleteMitiComponent,
+      ],
       imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
       routes: [
-        { path: 'update/:id', component: UpdateAndDeleteMitiComponent },
-        { path: '', component: ReadAndCreateMitiComponent, pathMatch: 'full' },
+        { path: 'update/:id', component: UpdateMitiComponent },
+        { path: '', component: ReadMitiComponent, pathMatch: 'full' },
       ],
     });
   });
@@ -154,4 +160,6 @@ describe('Routing to Update Component and back to View Component Test', () => {
       await screen.queryByText(/Mittagstisch anlegen/i)
     ).toBeInTheDocument();
   });
+
+  test('...all already existing lunch tables', async () => {});
 });

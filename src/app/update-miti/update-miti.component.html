@@ -76,12 +76,4 @@
     {{ mitis | json }}
     <div aria-label="lunch-table-row" *ngFor="let miti of mitis"></div>
   </div>
-  <br />
-  <button
-    aria-label="button-delete"
-    type="submit"
-    (click)="deleteMiti(mitiId); returnToView()"
-  >
-    Löschen
-  </button>
 </div>

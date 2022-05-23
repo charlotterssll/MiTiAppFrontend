@@ -1,10 +1,11 @@
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import { getByText, render, screen } from '@testing-library/angular';
-import { ReadAndCreateMitiComponent } from './read-and-create-miti.component';
+import { ReadMitiComponent } from '../read-miti/read-miti.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Miti } from '../domain/miti/Miti';
+import { CreateMitiComponent } from './create-miti.component';
 
 describe('Employee wants to create...', () => {
   const server = setupServer(
@@ -75,8 +76,8 @@ describe('Employee wants to create...', () => {
   afterAll(() => server.close());
 
   test('...a lunch table', async () => {
-    const rendered = await render(ReadAndCreateMitiComponent, {
-      declarations: [ReadAndCreateMitiComponent],
+    const rendered = await render(ReadMitiComponent, {
+      declarations: [ReadMitiComponent, CreateMitiComponent],
       imports: [FormsModule, HttpClientModule],
     });
     await rendered.fixture.detectChanges();

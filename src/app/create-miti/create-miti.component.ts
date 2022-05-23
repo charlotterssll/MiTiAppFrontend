@@ -3,11 +3,11 @@ import { Miti } from '../domain/miti/Miti';
 import { MitiService } from '../miti-service/miti.service';
 
 @Component({
-  selector: 'app-view',
-  templateUrl: './read-and-create-miti.component.html',
-  styleUrls: ['./read-and-create-miti.component.css'],
+  selector: 'app-createmiti',
+  templateUrl: './create-miti.component.html',
+  styleUrls: ['./create-miti.component.css'],
 })
-export class ReadAndCreateMitiComponent implements OnInit {
+export class CreateMitiComponent {
   mitis?: Miti[];
   locality?: string;
   location?: string;
@@ -18,13 +18,6 @@ export class ReadAndCreateMitiComponent implements OnInit {
   alertNull?: string;
 
   constructor(private mitiService: MitiService) {}
-
-  readMiti() {
-    return this.mitiService.readMiti().subscribe((response: Miti[]) => {
-      this.mitis = response;
-      console.log('GET Miti:', this.mitis);
-    });
-  }
 
   youShallNotPass() {
     if (
@@ -61,7 +54,10 @@ export class ReadAndCreateMitiComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.readMiti();
+  readMiti() {
+    return this.mitiService.readMiti().subscribe((response: Miti[]) => {
+      this.mitis = response;
+      console.log('GET Miti:', this.mitis);
+    });
   }
 }

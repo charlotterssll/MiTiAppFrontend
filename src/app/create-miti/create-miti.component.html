@@ -1,0 +1,58 @@
+<div>
+  <h2 aria-label="lunch-table-create">Mittagstisch anlegen</h2>
+  <form aria-label="form-input-create" (ngSubmit)="youShallNotPass()">
+    <input
+      id="input-locality"
+      name="input-locality"
+      aria-label="input-locality"
+      type="text"
+      placeholder="Lokal"
+      [(ngModel)]="locality"
+    />
+    <input
+      id="input-location"
+      name="input-location"
+      aria-label="input-location"
+      type="text"
+      placeholder="Ort"
+      [(ngModel)]="location"
+    />
+    <br />
+    <input
+      id="input-firstName"
+      name="input-firstName"
+      aria-label="input-firstName"
+      type="text"
+      placeholder="Vorname"
+      [(ngModel)]="firstName"
+    />
+    <input
+      id="input-lastName"
+      name="input-lastName"
+      aria-label="input-lastName"
+      type="text"
+      placeholder="Nachname"
+      [(ngModel)]="lastName"
+    />
+    <br />
+    <input
+      id="input-time"
+      name="input-time"
+      aria-label="input-time"
+      type="time"
+      placeholder="time"
+      [(ngModel)]="time"
+    />
+    <input
+      id="input-date"
+      name="input-date"
+      aria-label="input-date"
+      type="date"
+      placeholder="date"
+      [(ngModel)]="date"
+    />
+    <button aria-label="button-create" type="submit">Anlegen</button>
+    <br />
+    <div aria-label="alert-null">{{ alertNull }}</div>
+  </form>
+</div>

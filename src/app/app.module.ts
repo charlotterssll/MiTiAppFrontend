@@ -4,16 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { ReadAndCreateMitiComponent } from './read-and-create-miti/read-and-create-miti.component';
-import { RouterModule } from '@angular/router';
+import { CreateMitiComponent } from './create-miti/create-miti.component';
+import { DeleteMitiComponent } from './delete-miti/delete-miti.component';
+import { ReadMitiComponent } from './read-miti/read-miti.component';
+import { UpdateMitiComponent } from './update-miti/update-miti.component';
+
 import { AppRoutingModule } from './app-routing.module';
-import { UpdateAndDeleteMitiComponent } from './update-and-delete-miti/update-and-delete-miti.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReadAndCreateMitiComponent,
-    UpdateAndDeleteMitiComponent,
+    CreateMitiComponent,
+    ReadMitiComponent,
+    DeleteMitiComponent,
+    UpdateMitiComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Miti } from '../domain/miti/Miti';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MitiService } from '../miti-service/miti.service';
 
 @Component({
-  selector: 'app-update',
-  templateUrl: './update-and-delete-miti.component.html',
-  styleUrls: ['./update-and-delete-miti.component.css'],
+  selector: 'app-updatemiti',
+  templateUrl: './update-miti.component.html',
+  styleUrls: ['./update-miti.component.css'],
 })
-export class UpdateAndDeleteMitiComponent implements OnInit {
+export class UpdateMitiComponent implements OnInit {
   mitis?: Miti[];
   locality?: string;
   location?: string;
@@ -53,12 +53,6 @@ export class UpdateAndDeleteMitiComponent implements OnInit {
   returnToView() {
     this.router.navigateByUrl('update/:id').then(() => {
       this.router.navigate(['']);
-    });
-  }
-
-  deleteMiti(mitiId: string) {
-    return this.mitiService.deleteMiti(mitiId).subscribe(() => {
-      console.log('DELETE Miti:', mitiId);
     });
   }
 
