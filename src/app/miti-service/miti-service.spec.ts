@@ -16,7 +16,7 @@ describe('Miti Request Test', () => {
   let dummyMiti: Miti = {
     place: {
       locality: {
-        value: 'Schloefe',
+        value: 'Immergrün',
       },
       location: {
         value: 'Oldenburg',
@@ -24,10 +24,10 @@ describe('Miti Request Test', () => {
     },
     employee: {
       firstName: {
-        value: 'Charlotte',
+        value: 'Hannelore',
       },
       lastName: {
-        value: 'Russell',
+        value: 'Kranz',
       },
     },
     time: {
@@ -89,26 +89,4 @@ describe('Miti Request Test', () => {
     expect(req.request.method).toEqual('DELETE');
     expect(req.request.body).toEqual(null);
   });
-
-  /*test('should get one miti', async () => {
-    await render(ReadAndCreateMitiComponent, {
-      declarations: [AppComponent, ReadAndCreateMitiComponent, UpdateAndDeleteMitiComponent],
-      imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        HttpClientTestingModule,
-        RouterModule,
-        AppRoutingModule,
-      ],
-      componentProviders: [
-        {
-          provide: MitiService,
-        },
-      ],
-    });
-
-    const mitiService = createMock(MitiService);
-    mitiService.readMiti = jest.fn(() => of([dummyMiti]));
-  });*/
 });
