@@ -3,27 +3,22 @@ import {
   render,
   RenderResult,
   screen,
-  waitForElementToBeRemoved,
 } from '@testing-library/angular';
-import { ReadMitiComponent } from './read-miti.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
-import { AppComponent } from '../app.component';
-import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
 import { CreateMitiComponent } from '../create-miti/create-miti.component';
-import { UpdateMitiComponent } from '../update-miti/update-miti.component';
-import { setupServer } from 'msw/node';
-import { MockedRequest, rest } from 'msw';
-import { Miti } from '../domain/miti/Miti';
 
 describe('An employee wants to read...', () => {
+  let rendered: RenderResult<CreateMitiComponent>;
+
   beforeEach(async () => {
-    await render(CreateMitiComponent, {
+    rendered = await render(CreateMitiComponent, {
       imports: [FormsModule, HttpClientModule],
     });
+  });
+  afterEach(() => {
+    rendered.fixture.destroy();
   });
   test('put a locality into a miti input field', async () => {
     await userEvent.type(screen.getByLabelText(/input-locality/i), 'Immergrün');

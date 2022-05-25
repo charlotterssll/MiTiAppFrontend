@@ -93,6 +93,7 @@ describe('An employee wants to route...', () => {
     server.events.on('request:end', listener);
   });
 
+  beforeAll(() => server.listen());
   beforeEach(async () => {
     rendered = await render(AppComponent, {
       declarations: [
@@ -108,8 +109,10 @@ describe('An employee wants to route...', () => {
       ],
     });
   });
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    rendered.fixture.destroy();
+    server.resetHandlers();
+  });
   afterAll(() => server.close());
 
   test('...to the Update Lunch Table View to update an existing lunch table meeting', async () => {
@@ -205,6 +208,7 @@ describe('An employee wants to navigate...', () => {
     server.events.on('request:end', listener);
   });
 
+  beforeAll(() => server.listen());
   beforeEach(async () => {
     rendered = await render(AppComponent, {
       declarations: [
@@ -221,8 +225,10 @@ describe('An employee wants to navigate...', () => {
       ],
     });
   });
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    rendered.fixture.destroy();
+    server.resetHandlers();
+  });
   afterAll(() => server.close());
 
   test('...from the Update Lunch Table View back to the Read Lunch Table View', async () => {
@@ -238,7 +244,7 @@ describe('An employee wants to navigate...', () => {
 
     await userEvent.click(screen.getByLabelText('button-edit'));
 
-    /*expect(
+    expect(
       await screen.queryByText(/Mittagstisch bearbeiten/i)
     ).toBeInTheDocument();
 
@@ -249,6 +255,6 @@ describe('An employee wants to navigate...', () => {
 
     expect(
       await screen.queryByText(/Mittagstisch anlegen/i)
-    ).toBeInTheDocument();*/
+    ).toBeInTheDocument();
   });
 });

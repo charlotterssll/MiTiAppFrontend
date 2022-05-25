@@ -6,14 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Miti } from '../domain/miti/Miti';
 import { CreateMitiComponent } from './create-miti.component';
-import { AppComponent } from '../app.component';
-import { UpdateMitiComponent } from '../update-miti/update-miti.component';
-import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
 
 describe('An employee wants to create...', () => {
-  let rendered: RenderResult<AppComponent>;
+  let rendered: RenderResult<ReadMitiComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -87,23 +82,17 @@ describe('An employee wants to create...', () => {
     server.events.on('request:end', listener);
   });
 
+  beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(AppComponent, {
-      declarations: [
-        CreateMitiComponent,
-        ReadMitiComponent,
-        UpdateMitiComponent,
-        DeleteMitiComponent,
-      ],
-      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
-      routes: [
-        { path: 'update/:id', component: UpdateMitiComponent },
-        { path: '', component: ReadMitiComponent, pathMatch: 'full' },
-      ],
+    rendered = await render(ReadMitiComponent, {
+      declarations: [CreateMitiComponent, ReadMitiComponent],
+      imports: [FormsModule, HttpClientModule],
     });
   });
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    rendered.fixture.destroy();
+    server.resetHandlers();
+  });
   afterAll(() => server.close());
 
   test('...a lunch table meeting', async () => {
@@ -111,11 +100,11 @@ describe('An employee wants to create...', () => {
     await testUtilityFunction;
     await rendered.fixture.detectChanges(); // ensure template is rendered after request
 
-    expect(screen.getByText('Immergrün')).toBeInTheDocument();
-    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
-    expect(screen.getByText('Hannelore')).toBeInTheDocument();
-    expect(screen.getByText('Kranz')).toBeInTheDocument();
-    expect(screen.getByText('12:00')).toBeInTheDocument();
-    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
+    expect(screen.queryByText('Immergrün')).toBeInTheDocument();
+    expect(screen.queryByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.queryByText('Hannelore')).toBeInTheDocument();
+    expect(screen.queryByText('Kranz')).toBeInTheDocument();
+    expect(screen.queryByText('12:00')).toBeInTheDocument();
+    expect(screen.queryByText('2022-04-01')).toBeInTheDocument();
   });
 });

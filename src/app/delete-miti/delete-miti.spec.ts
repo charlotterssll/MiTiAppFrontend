@@ -1,13 +1,7 @@
-import {
-  render,
-  RenderResult,
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/angular';
+import { render, RenderResult, screen } from '@testing-library/angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteMitiComponent } from './delete-miti.component';
-import { createMock } from '@testing-library/angular/jest-utils';
 import { UpdateMitiComponent } from '../update-miti/update-miti.component';
 import { setupServer } from 'msw/node';
 import { MockedRequest, rest } from 'msw';
@@ -110,6 +104,7 @@ describe('An employee wants to delete...', () => {
     server.events.on('request:end', listener);
   });
 
+  beforeAll(() => server.listen());
   beforeEach(async () => {
     rendered = await render(AppComponent, {
       declarations: [
@@ -125,8 +120,10 @@ describe('An employee wants to delete...', () => {
       ],
     });
   });
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
+  afterEach(() => {
+    rendered.fixture.destroy();
+    server.resetHandlers();
+  });
   afterAll(() => server.close());
 
   test('...an existing lunch table meeting', async () => {

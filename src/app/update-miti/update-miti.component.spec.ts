@@ -1,16 +1,26 @@
 import { UpdateMitiComponent } from './update-miti.component';
-import { fireEvent, render, screen } from '@testing-library/angular';
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
 import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 
 describe('An employee wants to update...', () => {
+  let rendered: RenderResult<UpdateMitiComponent>;
+
   beforeEach(async () => {
-    await render(UpdateMitiComponent, {
+    rendered = await render(UpdateMitiComponent, {
       declarations: [UpdateMitiComponent, DeleteMitiComponent],
       imports: [FormsModule, HttpClientModule],
     });
+  });
+  afterEach(() => {
+    rendered.fixture.destroy();
   });
 
   test('...put a locality into a miti input field', async () => {
