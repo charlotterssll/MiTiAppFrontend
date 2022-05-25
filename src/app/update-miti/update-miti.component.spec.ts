@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import userEvent from '@testing-library/user-event';
 import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 
-describe('Employee wants to update...', () => {
+describe('An employee wants to update...', () => {
   beforeEach(async () => {
     await render(UpdateMitiComponent, {
       declarations: [UpdateMitiComponent, DeleteMitiComponent],

@@ -19,7 +19,7 @@ import { setupServer } from 'msw/node';
 import { MockedRequest, rest } from 'msw';
 import { Miti } from '../domain/miti/Miti';
 
-describe('Employee wants to read...', () => {
+describe('An employee wants to read...', () => {
   beforeEach(async () => {
     await render(CreateMitiComponent, {
       imports: [FormsModule, HttpClientModule],

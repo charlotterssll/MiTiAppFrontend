@@ -12,7 +12,7 @@ import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 
-describe('Employee wants to create...', () => {
+describe('An employee wants to create...', () => {
   let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
@@ -106,7 +106,7 @@ describe('Employee wants to create...', () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  test('...a lunch table', async () => {
+  test('...a lunch table meeting', async () => {
     await rendered.fixture.detectChanges(); // ensure ngOnInit is executed
     await testUtilityFunction;
     await rendered.fixture.detectChanges(); // ensure template is rendered after request

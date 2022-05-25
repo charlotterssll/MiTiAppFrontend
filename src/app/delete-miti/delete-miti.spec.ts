@@ -19,7 +19,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { AppComponent } from '../app.component';
 import { CreateMitiComponent } from '../create-miti/create-miti.component';
 
-describe('Employee wants to delete...', () => {
+describe('An employee wants to delete...', () => {
   let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
@@ -129,7 +129,7 @@ describe('Employee wants to delete...', () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  test('...an existing lunch table', async () => {
+  test('...an existing lunch table meeting', async () => {
     expect(
       screen.queryByText('Mittagstisch bearbeiten')
     ).not.toBeInTheDocument();

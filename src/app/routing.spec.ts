@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import userEvent from '@testing-library/user-event';
 
-describe('Employee wants to route...', () => {
+describe('An employee wants to route...', () => {
   let rendered: RenderResult<AppComponent, AppComponent>;
 
   const server = setupServer(
@@ -112,7 +112,7 @@ describe('Employee wants to route...', () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  test('...to the Update Lunch Table View to update an existing lunch table', async () => {
+  test('...to the Update Lunch Table View to update an existing lunch table meeting', async () => {
     expect(
       screen.queryByText(/Mittagstisch bearbeiten/i)
     ).not.toBeInTheDocument();
@@ -130,7 +130,7 @@ describe('Employee wants to route...', () => {
 });
 
 // TODO testUtilityFunction funktioniert nicht, nur Promise resolve
-describe('Employee wants to navigate...', () => {
+describe('An employee wants to navigate...', () => {
   let rendered: RenderResult<AppComponent, AppComponent>;
 
   const server = setupServer(
