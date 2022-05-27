@@ -119,7 +119,7 @@ describe('An employee wants to create...', () => {
     expect(screen.getByLabelText(/input-locality/i)).toHaveValue('Immergrün');
   });
 
-  test('...should not allow to submit null values in miti form', async () => {
+  test('...a lunch table meeting but not without all values filled in', async () => {
     const buttonCreate = screen.getByLabelText('button-create');
     const alertNull = screen.getByLabelText('alert-null');
     const alertNullMessage = 'Null values in any form fields are disallowed';

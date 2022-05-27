@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Miti } from '../domain/miti/Miti';
 import { MitiService } from '../miti-service/miti.service';
 
