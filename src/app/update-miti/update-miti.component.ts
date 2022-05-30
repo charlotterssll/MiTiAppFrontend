@@ -10,6 +10,7 @@ import { MitiService } from '../miti-service/miti.service';
 })
 export class UpdateMitiComponent implements OnInit {
   mitis?: Miti[];
+  mities?: Miti[];
   locality?: string;
   location?: string;
   firstName?: string;
