@@ -72,9 +72,16 @@
         <th aria-label="lunch-table-time-table-header">Uhrzeit</th>
         <th aria-label="lunch-table-date-table-header">Datum</th>
       </tr>
+      <tr>
+        <td>{{ mitis.mitiId }}</td>
+        <td>{{ mitis.place.locality.value }}</td>
+        <td>{{ mitis.place.location.value }}</td>
+        <td>{{ mitis.employee.firstName.value }}</td>
+        <td>{{ mitis.employee.lastName.value }}</td>
+        <td>{{ mitis.time.value }}</td>
+        <td>{{ mitis.date.value }}</td>
+      </tr>
     </table>
-    {{ mitis | json }}
-    <div aria-label="lunch-table-row" *ngFor="let miti of mitis"></div>
   </div>
 </div>
 <br />

@@ -9,8 +9,31 @@ import { MitiService } from '../miti-service/miti.service';
   styleUrls: ['./update-miti.component.css'],
 })
 export class UpdateMitiComponent implements OnInit {
-  mitis?: Miti[];
-  mities?: Miti[];
+  mitis: Miti = {
+    place: {
+      locality: {
+        value: '',
+      },
+      location: {
+        value: '',
+      },
+    },
+    employee: {
+      firstName: {
+        value: '',
+      },
+      lastName: {
+        value: '',
+      },
+    },
+    time: {
+      value: '',
+    },
+    date: {
+      value: '',
+    },
+    mitiId: '',
+  };
   locality?: string;
   location?: string;
   firstName?: string;
@@ -45,8 +68,20 @@ export class UpdateMitiComponent implements OnInit {
   readMitiByMitiId(mitiId: string) {
     return this.mitiService
       .readMitiByMitiId(mitiId)
-      .subscribe((response: Miti[]) => {
-        this.mitis = response;
+      .subscribe((response: Miti) => {
+        this.mitis = {
+          place: {
+            locality: response.place.locality,
+            location: response.place.location,
+          },
+          employee: {
+            firstName: response.employee.firstName,
+            lastName: response.employee.lastName,
+          },
+          time: response.time,
+          date: response.date,
+          mitiId: response.mitiId,
+        };
         console.log('GET Miti By MitiId:', this.mitiId);
       });
   }

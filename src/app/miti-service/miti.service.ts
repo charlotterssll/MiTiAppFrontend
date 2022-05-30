@@ -15,7 +15,7 @@ export class MitiService {
   }
 
   readMitiByMitiId(mitiId: string) {
-    return this.httpClient.get<Miti[]>(this.urlFetchMiti + '/' + mitiId);
+    return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId);
   }
 
   createMiti(mitiJson: Object) {
