@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Miti } from '../domain/miti/Miti';
+import { Component } from '@angular/core';
 import { MitiService } from '../miti-service/miti.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createmiti',
@@ -8,7 +8,6 @@ import { MitiService } from '../miti-service/miti.service';
   styleUrls: ['./create-miti.component.css'],
 })
 export class CreateMitiComponent {
-  mitis?: Miti[];
   locality?: string;
   location?: string;
   firstName?: string;
@@ -17,7 +16,7 @@ export class CreateMitiComponent {
   date?: string;
   alertNull?: string;
 
-  constructor(private mitiService: MitiService) {}
+  constructor(private mitiService: MitiService, private router: Router) {}
 
   youShallNotPass() {
     if (
@@ -50,14 +49,10 @@ export class CreateMitiComponent {
     };
     console.log('POST Miti: ', mitiJson);
     return this.mitiService.createMiti(mitiJson).subscribe(() => {
-      this.readMiti();
-    });
-  }
-
-  readMiti() {
-    return this.mitiService.readMiti().subscribe((response: Miti[]) => {
-      this.mitis = response;
-      console.log('GET Miti:', this.mitis);
+      let currentUrl = this.router.url;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([currentUrl]);
     });
   }
 }

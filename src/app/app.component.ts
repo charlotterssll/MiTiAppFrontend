@@ -1,6 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { MitiService } from './miti-service/miti.service';
-import { Miti } from './domain/miti/Miti';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +7,4 @@ import { Miti } from './domain/miti/Miti';
 })
 export class AppComponent {
   title = 'MitiAppFrontend';
-
-  constructor(private mitiService: MitiService) {}
-  mitis?: Miti[];
-
-  readMiti() {
-    return this.mitiService.readMiti().subscribe((response: Miti[]) => {
-      this.mitis = response;
-      console.log('GET Miti:', this.mitis);
-    });
-  }
 }
