@@ -7,7 +7,7 @@
       aria-label="input-locality"
       type="text"
       placeholder="Lokal"
-      [(ngModel)]="locality"
+      [(ngModel)]="mitis.place.locality.value"
     />
     <input
       id="location"
@@ -15,7 +15,7 @@
       aria-label="input-location"
       type="text"
       placeholder="Ort"
-      [(ngModel)]="location"
+      [(ngModel)]="mitis.place.location.value"
     />
     <br />
     <input
@@ -24,7 +24,7 @@
       aria-label="input-firstName"
       type="text"
       placeholder="Vorname"
-      [(ngModel)]="firstName"
+      [(ngModel)]="mitis.employee.firstName.value"
     />
     <input
       id="lastName"
@@ -32,7 +32,7 @@
       aria-label="input-lastName"
       type="text"
       placeholder="Nachname"
-      [(ngModel)]="lastName"
+      [(ngModel)]="mitis.employee.lastName.value"
     />
     <br />
     <input
@@ -41,7 +41,7 @@
       aria-label="input-time"
       type="time"
       placeholder="time"
-      [(ngModel)]="time"
+      [(ngModel)]="mitis.time.value"
     />
     <input
       id="input-date"
@@ -49,11 +49,9 @@
       aria-label="input-date"
       type="date"
       placeholder="date"
-      [(ngModel)]="date"
+      [(ngModel)]="mitis.date.value"
     />
-    <button aria-label="button-update" type="submit" (click)="updateMiti()">
-      Speichern
-    </button>
+    <button aria-label="button-update" type="submit">Speichern</button>
     <button aria-label="button-cancel" type="submit" (click)="returnToView()">
       Abbrechen
     </button>

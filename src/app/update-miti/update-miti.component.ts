@@ -51,12 +51,12 @@ export class UpdateMitiComponent implements OnInit {
 
   youShallNotPass() {
     if (
-      !this.locality ||
-      !this.location ||
-      !this.firstName ||
-      !this.lastName ||
-      !this.time ||
-      !this.date
+      !this.mitis.place.locality.value ||
+      !this.mitis.place.location.value ||
+      !this.mitis.employee.firstName.value ||
+      !this.mitis.employee.lastName.value ||
+      !this.mitis.time.value ||
+      !this.mitis.date.value
     ) {
       this.alertNull = 'Null values in any form fields are disallowed';
       console.log('Null values in any form fields are disallowed');
@@ -95,15 +95,15 @@ export class UpdateMitiComponent implements OnInit {
   updateMiti() {
     const mitiJson = {
       place: {
-        locality: this.locality,
-        location: this.location,
+        locality: this.mitis.place.locality.value,
+        location: this.mitis.place.location.value,
       },
       employee: {
-        firstName: this.firstName,
-        lastName: this.lastName,
+        firstName: this.mitis.employee.firstName.value,
+        lastName: this.mitis.employee.lastName.value,
       },
-      time: this.time,
-      date: this.date,
+      time: this.mitis.time.value,
+      date: this.mitis.date.value,
     };
     console.log('PUT Miti: ', mitiJson);
     return this.mitiService.updateMiti(this.mitiId, mitiJson).subscribe(() => {
