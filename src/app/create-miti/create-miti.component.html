@@ -6,6 +6,7 @@
       name="input-locality"
       aria-label="input-locality"
       type="text"
+      pattern="[A-ZÄÖU][a-zäöüß-]+(\s[A-ZÄÖÜ][a-zäöüß-]+)*"
       placeholder="Lokal"
       [(ngModel)]="locality"
     />
@@ -53,6 +54,17 @@
     />
     <button aria-label="button-create" type="submit">Anlegen</button>
     <br />
-    <div aria-label="alert-null">{{ alertNull }}</div>
+    <div id="alerts" aria-label="alerts">
+      <div aria-label="alert-null">{{ alertNull }}</div>
+      <div aria-label="alert-miti-already-exists">
+        {{ alertMitiAlreadyExists }}
+      </div>
+      <div aria-label="alert-locality">{{ alertLocality }}</div>
+      <div aria-label="alert-location">{{ alertLocation }}</div>
+      <div aria-label="alert-firstName">{{ alertFirstName }}</div>
+      <div aria-label="alert-lastName">{{ alertLastName }}</div>
+      <div aria-label="alert-time">{{ alertTime }}</div>
+      <div aria-label="alert-date">{{ alertDate }}</div>
+    </div>
   </form>
 </div>

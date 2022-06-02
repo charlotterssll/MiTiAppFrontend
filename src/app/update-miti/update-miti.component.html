@@ -52,9 +52,6 @@
       [(ngModel)]="mitis.date.value"
     />
     <button aria-label="button-update" type="submit">Speichern</button>
-    <button aria-label="button-cancel" type="submit" (click)="returnToView()">
-      Abbrechen
-    </button>
     <br />
     <div aria-label="alert-null">{{ alertNull }}</div>
   </form>
@@ -78,6 +75,15 @@
         <td>{{ mitis.employee.lastName.value }}</td>
         <td>{{ mitis.time.value }}</td>
         <td>{{ mitis.date.value }}</td>
+        <td>
+          <button
+            aria-label="button-cancel"
+            type="submit"
+            (click)="returnToView()"
+          >
+            Abbrechen
+          </button>
+        </td>
       </tr>
     </table>
   </div>
