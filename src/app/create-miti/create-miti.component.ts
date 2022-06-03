@@ -45,9 +45,9 @@ export class CreateMitiComponent {
     const placeEmployeePattern = new RegExp(
       '[A-ZÄÖU][a-zäöüß-]+(\\s[A-ZÄÖÜ][a-zäöüß-]+)*'
     );
-    const timePattern = new RegExp('^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$');
+    const timePattern = new RegExp('^(2[0-3]|[01]?\d):([0-5]?\d)$');
     const datePattern = new RegExp(
-      '^\\s*((?:19|20)\\d{2})\\-(1[012]|0?[1-9])\\-(3[01]|[12][0-9]|0?[1-9])\\s*$'
+      '^\\s*((?:19|20)\\d{2})\-(1[012]|0?[1-9])\-(3[01]|[12]\d|0?[1-9])\\s*$'
     );
     if (!placeEmployeePattern.test(<string>this.locality)) {
       this.alertLocality =
