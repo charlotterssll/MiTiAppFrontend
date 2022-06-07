@@ -27,6 +27,9 @@ describe('An employee wants to create...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -34,6 +37,9 @@ describe('An employee wants to create...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -55,6 +61,9 @@ describe('An employee wants to create...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -63,6 +72,9 @@ describe('An employee wants to create...', () => {
           lastName: {
             value: 'Kranz',
           },
+          abbreviation: {
+            value: 'HKR',
+          },
         },
         time: {
           value: '12:00',
@@ -70,7 +82,7 @@ describe('An employee wants to create...', () => {
         date: {
           value: '2022-04-01',
         },
-        mitiId: '2',
+        mitiId: '1',
       };
       return res(ctx.status(500), ctx.json(dummyMiti));
     }),
@@ -85,6 +97,9 @@ describe('An employee wants to create...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -92,6 +107,9 @@ describe('An employee wants to create...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {
@@ -137,8 +155,10 @@ describe('An employee wants to create...', () => {
 
     expect(screen.getByText('Immergrün')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
     expect(screen.getByText('Hannelore')).toBeInTheDocument();
     expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
   });
@@ -158,38 +178,52 @@ describe('An employee wants to create...', () => {
 
     const alertLocality = screen.getByLabelText('alert-locality');
     const alertLocation = screen.getByLabelText('alert-location');
+    const alertStreet = screen.getByLabelText('alert-street');
     const alertFirstName = screen.getByLabelText('alert-firstName');
     const alertLastName = screen.getByLabelText('alert-lastName');
+    const alertAbbreviation = screen.getByLabelText('alert-abbreviation');
 
     const alertRegexMessageLocality =
       'Locality must only contain letters and begin with upper case';
     const alertRegexMessageLocation =
       'Location must only contain letters and begin with upper case';
+    const alertRegexMessageStreet =
+      'Street must only contain letters and begin with upper case';
     const alertRegexMessageFirstName =
       'FirstName must only contain letters and begin with upper case';
     const alertRegexMessageLastName =
       'LastName must only contain letters and begin with upper case';
+    const alertRegexMessageAbbreviation =
+      'Abbreviation must only contain capital letters and only three characters';
 
     await userEvent.type(screen.getByLabelText('input-locality'), 'immergrün');
     await userEvent.type(screen.getByLabelText('input-location'), 'oldenburg');
-    await userEvent.type(screen.getByLabelText('input-firstName'), 'karl');
-    await userEvent.type(screen.getByLabelText('input-lastName'), 'heinz');
-    await userEvent.type(screen.getByLabelText('input-time'), '12:59');
-    await userEvent.type(screen.getByLabelText('input-date'), '2022-04-30');
+    await userEvent.type(screen.getByLabelText('input-street'), 'poststraße');
+    await userEvent.type(screen.getByLabelText('input-firstName'), 'hannelore');
+    await userEvent.type(screen.getByLabelText('input-lastName'), 'kranz');
+    await userEvent.type(screen.getByLabelText('input-abbreviation'), 'hkra');
+    await userEvent.type(screen.getByLabelText('input-time'), '12:00');
+    await userEvent.type(screen.getByLabelText('input-date'), '2022-04-01');
 
     expect(screen.getByLabelText('input-locality')).toHaveValue('immergrün');
     expect(screen.getByLabelText('input-location')).toHaveValue('oldenburg');
-    expect(screen.getByLabelText('input-firstName')).toHaveValue('karl');
-    expect(screen.getByLabelText('input-lastName')).toHaveValue('heinz');
-    expect(screen.getByLabelText('input-time')).toHaveValue('12:59');
-    expect(screen.getByLabelText('input-date')).toHaveValue('2022-04-30');
+    expect(screen.getByLabelText('input-street')).toHaveValue('poststraße');
+    expect(screen.getByLabelText('input-firstName')).toHaveValue('hannelore');
+    expect(screen.getByLabelText('input-lastName')).toHaveValue('kranz');
+    expect(screen.getByLabelText('input-abbreviation')).toHaveValue('hkra');
+    expect(screen.getByLabelText('input-time')).toHaveValue('12:00');
+    expect(screen.getByLabelText('input-date')).toHaveValue('2022-04-01');
 
     await fireEvent.click(buttonCreate);
 
     expect(alertLocality.textContent).toContain(alertRegexMessageLocality);
     expect(alertLocation.textContent).toContain(alertRegexMessageLocation);
+    expect(alertStreet.textContent).toContain(alertRegexMessageStreet);
     expect(alertFirstName.textContent).toContain(alertRegexMessageFirstName);
     expect(alertLastName.textContent).toContain(alertRegexMessageLastName);
+    expect(alertAbbreviation.textContent).toContain(
+      alertRegexMessageAbbreviation
+    );
   });
 
   /*test('...a lunch table meeting, but not twice the same', async () => {

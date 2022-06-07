@@ -6,8 +6,10 @@
       <th aria-label="lunch-table-id-table-header">ID</th>
       <th aria-label="lunch-table-locality-table-header">Restaurant</th>
       <th aria-label="lunch-table-location-table-header">Ort</th>
+      <th aria-label="lunch-table-street-table-header">Straße</th>
       <th aria-label="lunch-table-firstName-table-header">Vorname</th>
       <th aria-label="lunch-table-lastName-table-header">Nachname</th>
+      <th aria-label="lunch-table-abbreviation-table-header">Kürzel</th>
       <th aria-label="lunch-table-time-table-header">Uhrzeit</th>
       <th aria-label="lunch-table-date-table-header">Datum</th>
     </tr>
@@ -21,11 +23,17 @@
       <td aria-label="lunch-table-location">
         {{ miti.place.location.value }}
       </td>
+      <td aria-label="lunch-table-street">
+        {{ miti.place.street.value }}
+      </td>
       <td aria-label="lunch-table-firstName">
         {{ miti.employee.firstName.value }}
       </td>
       <td aria-label="lunch-table-lastName">
         {{ miti.employee.lastName.value }}
+      </td>
+      <td aria-label="lunch-table-abbreviation">
+        {{ miti.employee.abbreviation.value }}
       </td>
       <td aria-label="lunch-table-time">
         {{ miti.time.value }}

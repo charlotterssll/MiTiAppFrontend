@@ -31,6 +31,9 @@ describe('An employee wants to route...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -38,6 +41,9 @@ describe('An employee wants to route...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -61,6 +67,9 @@ describe('An employee wants to route...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -68,6 +77,9 @@ describe('An employee wants to route...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {
@@ -146,6 +158,9 @@ describe('An employee wants to navigate...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -153,6 +168,9 @@ describe('An employee wants to navigate...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -176,6 +194,9 @@ describe('An employee wants to navigate...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -183,6 +204,9 @@ describe('An employee wants to navigate...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {

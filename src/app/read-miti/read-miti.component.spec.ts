@@ -20,6 +20,9 @@ describe('An employee wants to read...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -27,6 +30,9 @@ describe('An employee wants to read...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -46,7 +52,10 @@ describe('An employee wants to read...', () => {
             value: 'Metzger',
           },
           location: {
-            value: 'Hannover',
+            value: 'Essen',
+          },
+          street: {
+            value: 'Buchstraße',
           },
         },
         employee: {
@@ -55,6 +64,9 @@ describe('An employee wants to read...', () => {
           },
           lastName: {
             value: 'Heinz',
+          },
+          abbreviation: {
+            value: 'KHE',
           },
         },
         time: {
@@ -78,6 +90,9 @@ describe('An employee wants to read...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -85,6 +100,9 @@ describe('An employee wants to read...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {
@@ -101,7 +119,10 @@ describe('An employee wants to read...', () => {
                 value: 'Metzger',
               },
               location: {
-                value: 'Hannover',
+                value: 'Essen',
+              },
+              street: {
+                value: 'Buchstraße',
               },
             },
             employee: {
@@ -110,6 +131,9 @@ describe('An employee wants to read...', () => {
               },
               lastName: {
                 value: 'Heinz',
+              },
+              abbreviation: {
+                value: 'KHE',
               },
             },
             time: {
@@ -155,15 +179,19 @@ describe('An employee wants to read...', () => {
 
     expect(screen.getByText('Immergrün')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
     expect(screen.getByText('Hannelore')).toBeInTheDocument();
     expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
     expect(screen.getByText('Metzger')).toBeInTheDocument();
-    expect(screen.getByText('Hannover')).toBeInTheDocument();
+    expect(screen.getByText('Essen')).toBeInTheDocument();
+    expect(screen.getByText('Buchstraße')).toBeInTheDocument();
     expect(screen.getByText('Karl')).toBeInTheDocument();
     expect(screen.getByText('Heinz')).toBeInTheDocument();
+    expect(screen.getByText('KHE')).toBeInTheDocument();
     expect(screen.getByText('14:30')).toBeInTheDocument();
     expect(screen.getByText('2022-05-01')).toBeInTheDocument();
   });

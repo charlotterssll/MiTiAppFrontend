@@ -26,6 +26,9 @@ describe('An employee wants to delete...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -33,6 +36,9 @@ describe('An employee wants to delete...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -56,6 +62,9 @@ describe('An employee wants to delete...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -63,6 +72,9 @@ describe('An employee wants to delete...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {

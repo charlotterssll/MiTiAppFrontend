@@ -21,6 +21,9 @@ describe('Unit Miti Request Test,', () => {
       location: {
         value: 'Oldenburg',
       },
+      street: {
+        value: 'Poststraße',
+      },
     },
     employee: {
       firstName: {
@@ -28,6 +31,9 @@ describe('Unit Miti Request Test,', () => {
       },
       lastName: {
         value: 'Kranz',
+      },
+      abbreviation: {
+        value: 'HKR',
       },
     },
     time: {

@@ -258,6 +258,9 @@ describe('An employee wants to update a...', () => {
           location: {
             value: 'Oldenburg',
           },
+          street: {
+            value: 'Poststraße',
+          },
         },
         employee: {
           firstName: {
@@ -265,6 +268,9 @@ describe('An employee wants to update a...', () => {
           },
           lastName: {
             value: 'Kranz',
+          },
+          abbreviation: {
+            value: 'HKR',
           },
         },
         time: {
@@ -288,6 +294,9 @@ describe('An employee wants to update a...', () => {
               location: {
                 value: 'Oldenburg',
               },
+              street: {
+                value: 'Poststraße',
+              },
             },
             employee: {
               firstName: {
@@ -295,6 +304,9 @@ describe('An employee wants to update a...', () => {
               },
               lastName: {
                 value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
               },
             },
             time: {
@@ -315,7 +327,10 @@ describe('An employee wants to update a...', () => {
             value: 'Metzger',
           },
           location: {
-            value: 'Hannover',
+            value: 'Essen',
+          },
+          street: {
+            value: 'Buchstraße',
           },
         },
         employee: {
@@ -324,6 +339,9 @@ describe('An employee wants to update a...', () => {
           },
           lastName: {
             value: 'Heinz',
+          },
+          abbreviation: {
+            value: 'KHE',
           },
         },
         time: {
@@ -367,11 +385,6 @@ describe('An employee wants to update a...', () => {
   afterEach(() => {
     rendered.fixture.destroy();
     server.resetHandlers();
-  });
-
-  test('...locality into a miti input field', async () => {
-    await userEvent.type(screen.getByLabelText(/input-locality/i), 'Immergrün');
-    expect(screen.getByLabelText(/input-locality/i)).toHaveValue('Immergrün');
   });
 
   test('...should not allow to submit null values in miti form', async () => {

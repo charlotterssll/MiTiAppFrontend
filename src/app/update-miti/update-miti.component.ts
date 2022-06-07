@@ -17,12 +17,18 @@ export class UpdateMitiComponent implements OnInit {
       location: {
         value: '',
       },
+      street: {
+        value: '',
+      },
     },
     employee: {
       firstName: {
         value: '',
       },
       lastName: {
+        value: '',
+      },
+      abbreviation: {
         value: '',
       },
     },
@@ -36,8 +42,10 @@ export class UpdateMitiComponent implements OnInit {
   };
   locality?: string;
   location?: string;
+  street?: string;
   firstName?: string;
   lastName?: string;
+  abbreviation?: string;
   time?: string;
   date?: string;
   alertNull?: string;
@@ -53,8 +61,10 @@ export class UpdateMitiComponent implements OnInit {
     if (
       !this.mitis.place.locality.value ||
       !this.mitis.place.location.value ||
+      !this.mitis.place.street.value ||
       !this.mitis.employee.firstName.value ||
       !this.mitis.employee.lastName.value ||
+      !this.mitis.employee.abbreviation.value ||
       !this.mitis.time.value ||
       !this.mitis.date.value
     ) {
@@ -73,10 +83,12 @@ export class UpdateMitiComponent implements OnInit {
           place: {
             locality: response.place.locality,
             location: response.place.location,
+            street: response.place.street,
           },
           employee: {
             firstName: response.employee.firstName,
             lastName: response.employee.lastName,
+            abbreviation: response.employee.abbreviation,
           },
           time: response.time,
           date: response.date,
@@ -97,10 +109,12 @@ export class UpdateMitiComponent implements OnInit {
       place: {
         locality: this.mitis.place.locality.value,
         location: this.mitis.place.location.value,
+        street: this.mitis.place.street.value,
       },
       employee: {
         firstName: this.mitis.employee.firstName.value,
         lastName: this.mitis.employee.lastName.value,
+        abbreviation: this.mitis.employee.abbreviation.value,
       },
       time: this.mitis.time.value,
       date: this.mitis.date.value,

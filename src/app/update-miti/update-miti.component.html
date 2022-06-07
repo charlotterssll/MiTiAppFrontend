@@ -17,6 +17,14 @@
       placeholder="Ort"
       [(ngModel)]="mitis.place.location.value"
     />
+    <input
+      id="input-street"
+      name="input-street"
+      aria-label="input-street"
+      type="text"
+      placeholder="Straße"
+      [(ngModel)]="street"
+    />
     <br />
     <input
       id="firstName"
@@ -33,6 +41,14 @@
       type="text"
       placeholder="Nachname"
       [(ngModel)]="mitis.employee.lastName.value"
+    />
+    <input
+      id="input-abbreviation"
+      name="input-abbreviation"
+      aria-label="input-abbreviation"
+      type="text"
+      placeholder="Kürzel"
+      [(ngModel)]="abbreviation"
     />
     <br />
     <input
@@ -62,8 +78,10 @@
         <th aria-label="lunch-table-id-table-header">ID</th>
         <th aria-label="lunch-table-locality-table-header">Restaurant</th>
         <th aria-label="lunch-table-location-table-header">Ort</th>
+        <th aria-label="lunch-table-street-table-header">Straße</th>
         <th aria-label="lunch-table-firstName-table-header">Vorname</th>
         <th aria-label="lunch-table-lastName-table-header">Nachname</th>
+        <th aria-label="lunch-table-abbreviation-table-header">Kürzel</th>
         <th aria-label="lunch-table-time-table-header">Uhrzeit</th>
         <th aria-label="lunch-table-date-table-header">Datum</th>
       </tr>
@@ -71,8 +89,10 @@
         <td>{{ mitis.mitiId }}</td>
         <td>{{ mitis.place.locality.value }}</td>
         <td>{{ mitis.place.location.value }}</td>
+        <td>{{ mitis.place.street.value }}</td>
         <td>{{ mitis.employee.firstName.value }}</td>
         <td>{{ mitis.employee.lastName.value }}</td>
+        <td>{{ mitis.employee.abbreviation.value }}</td>
         <td>{{ mitis.time.value }}</td>
         <td>{{ mitis.date.value }}</td>
         <td>
