@@ -5,6 +5,7 @@ import {
   render,
   RenderResult,
   screen,
+  waitFor,
 } from '@testing-library/angular';
 import { ReadMitiComponent } from '../read-miti/read-miti.component';
 import { FormsModule } from '@angular/forms';
@@ -69,12 +70,9 @@ describe('An employee wants to create...', () => {
         date: {
           value: '2022-04-01',
         },
-        mitiId: '1',
+        mitiId: '2',
       };
-      return res(
-        ctx.status(500),
-        ctx.text('Employee already has a lunch table meeting on this day!')
-      );
+      return res(ctx.status(500), ctx.json(dummyMiti));
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -137,12 +135,12 @@ describe('An employee wants to create...', () => {
     await testUtilityFunction;
     await rendered.fixture.detectChanges(); // ensure template is rendered after request
 
-    expect(screen.queryByText('Immergrün')).toBeInTheDocument();
-    expect(screen.queryByText('Oldenburg')).toBeInTheDocument();
-    expect(screen.queryByText('Hannelore')).toBeInTheDocument();
-    expect(screen.queryByText('Kranz')).toBeInTheDocument();
-    expect(screen.queryByText('12:00')).toBeInTheDocument();
-    expect(screen.queryByText('2022-04-01')).toBeInTheDocument();
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
   });
 
   test('...a lunch table meeting but not without all values filled in', async () => {
@@ -199,12 +197,12 @@ describe('An employee wants to create...', () => {
     await testUtilityFunction;
     await rendered.fixture.detectChanges(); // ensure template is rendered after request
 
-    expect(screen.queryByText('Immergrün')).toBeInTheDocument();
-    expect(screen.queryByText('Oldenburg')).toBeInTheDocument();
-    expect(screen.queryByText('Hannelore')).toBeInTheDocument();
-    expect(screen.queryByText('Kranz')).toBeInTheDocument();
-    expect(screen.queryByText('12:00')).toBeInTheDocument();
-    expect(screen.queryByText('2022-04-01')).toBeInTheDocument();
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
     const alertMitiAlreadyExists = screen.getByLabelText('alert-miti-already-exists');
     const alertMessageMitiAlreadyExists = 'Employee already has a lunch table meeting on this day!';
@@ -212,6 +210,8 @@ describe('An employee wants to create...', () => {
     await rendered.fixture.detectChanges(); // ensure ngOnInit is executed
     await testUtilityFunction;
     await rendered.fixture.detectChanges(); // ensure template is rendered after request
+
+    await waitFor(() => alertMitiAlreadyExists)
 
     expect(alertMitiAlreadyExists.textContent).toContain(alertMessageMitiAlreadyExists);
   });*/
