@@ -54,7 +54,7 @@ export class CreateMitiComponent {
     const regexPatternAbbreviation = new RegExp('[A-ZÄÖU]+(s[A-ZÄÖÜ]+)*');
     const regexPatternTime = new RegExp('^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$');
     const regexPatternDate = new RegExp(
-      '^\\s*((?:19|20)\\[0-9]{2})-(1[012]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])\\s*$'
+      '^\\s*((?:19|20)\\d{2})-(1[012]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])\\s*$'
     );
     if (!regexPatternPlaceName.test(<string>this.locality)) {
       this.alertLocality =
