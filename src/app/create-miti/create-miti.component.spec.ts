@@ -173,7 +173,7 @@ describe('An employee wants to create...', () => {
     expect(alertNull.textContent).toContain(alertNullMessage);
   });
 
-  test('...a lunch table meeting but not without proper capitalization', async () => {
+  test('...a lunch table meeting but not without proper capitalization of the first letter', async () => {
     const buttonCreate = screen.getByLabelText('button-create');
 
     const alertLocality = screen.getByLabelText('alert-locality');
@@ -201,7 +201,7 @@ describe('An employee wants to create...', () => {
     await userEvent.type(screen.getByLabelText('input-street'), 'poststraße');
     await userEvent.type(screen.getByLabelText('input-firstName'), 'hannelore');
     await userEvent.type(screen.getByLabelText('input-lastName'), 'kranz');
-    await userEvent.type(screen.getByLabelText('input-abbreviation'), 'hkra');
+    await userEvent.type(screen.getByLabelText('input-abbreviation'), 'hkr');
     await userEvent.type(screen.getByLabelText('input-time'), '12:00');
     await userEvent.type(screen.getByLabelText('input-date'), '2022-04-01');
 
@@ -210,7 +210,7 @@ describe('An employee wants to create...', () => {
     expect(screen.getByLabelText('input-street')).toHaveValue('poststraße');
     expect(screen.getByLabelText('input-firstName')).toHaveValue('hannelore');
     expect(screen.getByLabelText('input-lastName')).toHaveValue('kranz');
-    expect(screen.getByLabelText('input-abbreviation')).toHaveValue('hkra');
+    expect(screen.getByLabelText('input-abbreviation')).toHaveValue('hkr');
     expect(screen.getByLabelText('input-time')).toHaveValue('12:00');
     expect(screen.getByLabelText('input-date')).toHaveValue('2022-04-01');
 
