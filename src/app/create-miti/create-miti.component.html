@@ -1,87 +1,177 @@
 <div>
-  <h2 aria-label="lunch-table-create">Mittagstisch anlegen</h2>
-  <form aria-label="form-input-create" (ngSubmit)="youShallNotPass()">
-    <input
-      id="input-locality"
-      name="input-locality"
-      aria-label="input-locality"
-      type="text"
-      placeholder="Lokal"
-      [(ngModel)]="locality"
-    />
-    <input
-      id="input-location"
-      name="input-location"
-      aria-label="input-location"
-      type="text"
-      placeholder="Ort"
-      [(ngModel)]="location"
-    />
-    <input
-      id="input-street"
-      name="input-street"
-      aria-label="input-street"
-      type="text"
-      placeholder="Straße"
-      [(ngModel)]="street"
-    />
-    <br />
-    <input
-      id="input-firstName"
-      name="input-firstName"
-      aria-label="input-firstName"
-      type="text"
-      placeholder="Vorname"
-      [(ngModel)]="firstName"
-    />
-    <input
-      id="input-lastName"
-      name="input-lastName"
-      aria-label="input-lastName"
-      type="text"
-      placeholder="Nachname"
-      [(ngModel)]="lastName"
-    />
-    <input
-      id="input-abbreviation"
-      name="input-abbreviation"
-      aria-label="input-abbreviation"
-      type="text"
-      placeholder="Kürzel"
-      [(ngModel)]="abbreviation"
-    />
-    <br />
-    <input
-      id="input-time"
-      name="input-time"
-      aria-label="input-time"
-      type="time"
-      placeholder="time"
-      [(ngModel)]="time"
-    />
-    <input
-      id="input-date"
-      name="input-date"
-      aria-label="input-date"
-      type="date"
-      placeholder="date"
-      [(ngModel)]="date"
-    />
-    <button aria-label="button-create" type="submit">Anlegen</button>
-    <br />
-    <div id="alerts" aria-label="alerts">
-      <div aria-label="alert-null">{{ alertNull }}</div>
-      <div aria-label="alert-miti-already-exists">
-        {{ alertMitiAlreadyExists }}
-      </div>
-      <div aria-label="alert-locality">{{ alertLocality }}</div>
-      <div aria-label="alert-location">{{ alertLocation }}</div>
-      <div aria-label="alert-street">{{ alertStreet }}</div>
-      <div aria-label="alert-firstName">{{ alertFirstName }}</div>
-      <div aria-label="alert-lastName">{{ alertLastName }}</div>
-      <div aria-label="alert-abbreviation">{{ alertAbbreviation }}</div>
-      <div aria-label="alert-time">{{ alertTime }}</div>
-      <div aria-label="alert-date">{{ alertDate }}</div>
+  <div>
+    <h2 aria-label="lunch-table-create">Mittagstisch anlegen</h2>
+    <form aria-label="form-input-create" (ngSubmit)="youShallNotPass()">
+      <table class="tableStyle">
+        <tr>
+          <th>
+            <label
+              id="label-locality"
+              name="label-locality"
+              aria-label="label-locality"
+              >Lokal</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-location"
+              name="label-location"
+              aria-label="label-location"
+              >Ort</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-street"
+              name="label-street"
+              aria-label="label-street"
+              >Straße</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-locality"
+              name="input-locality"
+              aria-label="input-locality"
+              type="text"
+              placeholder="Lokal"
+              [(ngModel)]="locality"
+            />
+          </td>
+          <td>
+            <input
+              id="input-location"
+              name="input-location"
+              aria-label="input-location"
+              type="text"
+              placeholder="Ort"
+              [(ngModel)]="location"
+            />
+          </td>
+          <td>
+            <input
+              id="input-street"
+              name="input-street"
+              aria-label="input-street"
+              type="text"
+              placeholder="Straße"
+              [(ngModel)]="street"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label
+              id="label-firstName"
+              name="label-firstName"
+              aria-label="label-firstName"
+              >Vorname</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-lastName"
+              name="label-lastName"
+              aria-label="label-lastName"
+              >Nachname</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-abbreviation"
+              name="label-abbreviation"
+              aria-label="label-abbreviation"
+              >Kürzel</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-firstName"
+              name="input-firstName"
+              aria-label="input-firstName"
+              type="text"
+              placeholder="Vorname"
+              [(ngModel)]="firstName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-lastName"
+              name="input-lastName"
+              aria-label="input-lastName"
+              type="text"
+              placeholder="Nachname"
+              [(ngModel)]="lastName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-abbreviation"
+              name="input-abbreviation"
+              aria-label="input-abbreviation"
+              type="text"
+              placeholder="Kürzel"
+              [(ngModel)]="abbreviation"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label id="label-time" name="label-time" aria-label="label-time"
+              >Uhrzeit</label
+            >
+          </th>
+          <th>
+            <label id="label-date" name="label-date" aria-label="label-date"
+              >Datum</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-time"
+              name="input-time"
+              aria-label="input-time"
+              type="time"
+              placeholder="time"
+              [(ngModel)]="time"
+            />
+          </td>
+          <td>
+            <input
+              id="input-date"
+              name="input-date"
+              aria-label="input-date"
+              type="date"
+              placeholder="date"
+              [(ngModel)]="date"
+            />
+          </td>
+          <td>
+            <button aria-label="button-create" type="submit">Anlegen</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <br />
+  <div id="alerts" aria-label="alerts">
+    <div aria-label="alert-null">{{ alertNull }}</div>
+    <div aria-label="alert-miti-already-exists">
+      {{ alertMitiAlreadyExists }}
     </div>
-  </form>
+    <div aria-label="alert-locality">{{ alertLocality }}</div>
+    <div aria-label="alert-location">{{ alertLocation }}</div>
+    <div aria-label="alert-street">{{ alertStreet }}</div>
+    <div aria-label="alert-firstName">{{ alertFirstName }}</div>
+    <div aria-label="alert-lastName">{{ alertLastName }}</div>
+    <div aria-label="alert-abbreviation">{{ alertAbbreviation }}</div>
+    <div aria-label="alert-time">{{ alertTime }}</div>
+    <div aria-label="alert-date">{{ alertDate }}</div>
+  </div>
 </div>
