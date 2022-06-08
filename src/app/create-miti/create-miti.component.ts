@@ -48,6 +48,14 @@ export class CreateMitiComponent {
   }
 
   youShallMeetRegexPattern() {
+    let flag1;
+    let flag2;
+    let flag3;
+    let flag4;
+    let flag5;
+    let flag6;
+    let flag7;
+    let flag8;
     const regexPatternPlaceName = new RegExp(
       '[A-ZÄÖÜ][a-zäöüß-]+(\\s[A-ZÄÖÜ][a-zäöüß-]+)*'
     );
@@ -56,55 +64,80 @@ export class CreateMitiComponent {
     const regexPatternDate = new RegExp(
       '^\\s*((?:19|20)\\d{2})\\-(1[012]|0?[1-9])\\-(3[01]|[12][0-9]|0?[1-9])\\s*$'
     );
-    if (!regexPatternPlaceName.test(<string>this.locality)) {
-      this.alertLocality =
-        'Locality must only contain letters and begin with upper case';
-      console.log(
-        'Locality must only contain letters and begin with upper case'
-      );
+    switch (regexPatternPlaceName.test(<string>this.locality)) {
+      case false:
+        this.alertLocality =
+          'Locality must only contain letters and begin with upper case';
+        break;
+      case true:
+        flag1 = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.location)) {
-      this.alertLocation =
-        'Location must only contain letters and begin with upper case';
-      console.log(
-        'Location must only contain letters and begin with upper case'
-      );
+    switch (regexPatternPlaceName.test(<string>this.location)) {
+      case false:
+        this.alertLocation =
+          'Location must only contain letters and begin with upper case';
+        break;
+      case true:
+        flag2 = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.street)) {
-      this.alertStreet =
-        'Street must only contain letters and begin with upper case';
-      console.log('Street must only contain letters and begin with upper case');
+    switch (regexPatternPlaceName.test(<string>this.street)) {
+      case false:
+        this.alertStreet =
+          'Street must only contain letters and begin with upper case';
+        break;
+      case true:
+        flag3 = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.firstName)) {
-      this.alertFirstName =
-        'FirstName must only contain letters and begin with upper case';
-      console.log(
-        'FirstName must only contain letters and begin with upper case'
-      );
+    switch (regexPatternPlaceName.test(<string>this.firstName)) {
+      case false:
+        this.alertFirstName =
+          'FirstName must only contain letters and begin with upper case';
+        break;
+      case true:
+        flag4 = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.lastName)) {
-      this.alertLastName =
-        'LastName must only contain letters and begin with upper case';
-      console.log(
-        'LastName must only contain letters and begin with upper case'
-      );
+    switch (regexPatternPlaceName.test(<string>this.lastName)) {
+      case false:
+        this.alertLastName =
+          'LastName must only contain letters and begin with upper case';
+        break;
+      case true:
+        flag5 = true;
     }
-    if (!regexPatternAbbreviation.test(<string>this.abbreviation)) {
-      this.alertAbbreviation =
-        'Abbreviation must only contain capital letters and only three characters';
-      console.log(
-        'Abbreviation must only contain capital letters and only three characters'
-      );
+    switch (regexPatternAbbreviation.test(<string>this.abbreviation)) {
+      case false:
+        this.alertAbbreviation =
+          'Abbreviation must only contain capital letters and only three characters';
+        break;
+      case true:
+        flag6 = true;
     }
-    if (!regexPatternTime.test(<string>this.time)) {
-      this.alertTime = 'Time must only contain numbers in 24h time format';
-      console.log('Time must only contain numbers in 24h time format');
+    switch (regexPatternTime.test(<string>this.time)) {
+      case false:
+        this.alertTime = 'Time must only contain numbers in 24h time format';
+        break;
+      case true:
+        flag7 = true;
     }
-    if (!regexPatternDate.test(<string>this.date)) {
-      this.alertDate = 'Date must only contain numbers YYYY-MM-DD format';
-      console.log('Date must only contain numbers YYYY-MM-DD format');
-    } else {
-      this.createMiti();
+    switch (regexPatternDate.test(<string>this.date)) {
+      case false:
+        this.alertDate = 'Date must only contain numbers YYYY-MM-DD format';
+        break;
+      case true:
+        flag8 = true;
+    }
+    switch (
+      flag1 === true &&
+      flag2 === true &&
+      flag3 === true &&
+      flag4 === true &&
+      flag5 === true &&
+      flag6 === true &&
+      flag7 === true &&
+      flag8 === true
+    ) {
+      case true:
+        this.createMiti();
     }
   }
   createMiti() {
