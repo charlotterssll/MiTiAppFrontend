@@ -1,7 +1,11 @@
-<div>
-  <div>
-    <h2 aria-label="lunch-table-create">Mittagstisch anlegen</h2>
-    <form aria-label="form-input-create" (ngSubmit)="youShallNotPass()">
+<div aria-label="create-lunch-table-component">
+  <h2 aria-label="title-create-lunch-table-component">Mittagstisch anlegen</h2>
+  <br />
+  <div aria-label="create-lunch-table-input-form">
+    <form
+      aria-label="form-create-lunch-table"
+      (ngSubmit)="youShallNotPassNullValues()"
+    >
       <table class="tableStyle">
         <tr>
           <th>
@@ -161,17 +165,27 @@
   </div>
   <br />
   <div id="alerts" aria-label="alerts">
-    <div aria-label="alert-null">{{ alertNull }}</div>
-    <div aria-label="alert-miti-already-exists">
+    <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+    <div aria-label="alert-message-invalid-input-locality">
+      {{ alertLocality }}
+    </div>
+    <div aria-label="alert-message-invalid-input-location">
+      {{ alertLocation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
+    <div aria-label="alert-message-invalid-input-firstName">
+      {{ alertFirstName }}
+    </div>
+    <div aria-label="alert-message-invalid-input-lastName">
+      {{ alertLastName }}
+    </div>
+    <div aria-label="alert-message-invalid-input-abbreviation">
+      {{ alertAbbreviation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-time">{{ alertTime }}</div>
+    <div aria-label="alert-message-invalid-input-date">{{ alertDate }}</div>
+    <div aria-label="alert-message-invalid-input-miti-already-exists">
       {{ alertMitiAlreadyExists }}
     </div>
-    <div aria-label="alert-locality">{{ alertLocality }}</div>
-    <div aria-label="alert-location">{{ alertLocation }}</div>
-    <div aria-label="alert-street">{{ alertStreet }}</div>
-    <div aria-label="alert-firstName">{{ alertFirstName }}</div>
-    <div aria-label="alert-lastName">{{ alertLastName }}</div>
-    <div aria-label="alert-abbreviation">{{ alertAbbreviation }}</div>
-    <div aria-label="alert-time">{{ alertTime }}</div>
-    <div aria-label="alert-date">{{ alertDate }}</div>
   </div>
 </div>

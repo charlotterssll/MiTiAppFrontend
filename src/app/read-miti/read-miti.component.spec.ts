@@ -6,6 +6,10 @@ import { ReadMitiComponent } from './read-miti.component';
 import { setupServer } from 'msw/node';
 import { MockedRequest, rest } from 'msw';
 import { Miti } from '../domain/miti/Miti';
+import { UpdateMitiComponent } from '../update-miti/update-miti.component';
+import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
 
 describe('An employee wants to read...', () => {
   let rendered: RenderResult<ReadMitiComponent>;
@@ -159,11 +163,30 @@ describe('An employee wants to read...', () => {
     server.events.on('request:end', listener);
   });
 
+  const testUtilityFunctionWithId = new Promise<void>(async (resolve) => {
+    const listener = async (request: MockedRequest) => {
+      if (request.url.href === 'http://localhost:8080/miti/1') {
+        setTimeout(resolve, 0);
+        server.events.removeListener('request:end', listener);
+      }
+    };
+    server.events.on('request:end', listener);
+  });
+
   beforeAll(() => server.listen());
   beforeEach(async () => {
     rendered = await render(ReadMitiComponent, {
-      declarations: [CreateMitiComponent, ReadMitiComponent],
-      imports: [FormsModule, HttpClientModule],
+      declarations: [
+        CreateMitiComponent,
+        ReadMitiComponent,
+        UpdateMitiComponent,
+        DeleteMitiComponent,
+      ],
+      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
+      routes: [
+        { path: '', component: ReadMitiComponent, pathMatch: 'full' },
+        { path: 'update/:id', component: UpdateMitiComponent },
+      ],
     });
   });
   afterEach(() => {

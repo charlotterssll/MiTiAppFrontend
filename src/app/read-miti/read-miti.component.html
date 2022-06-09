@@ -1,73 +1,61 @@
-<app-createmiti></app-createmiti>
-<br />
-<div aria-label="lunch-table-list">
-  <table class="tableStyle">
-    <tr>
-      <th class="tableDataStyle" aria-label="lunch-table-locality-table-header">
-        Restaurant
-      </th>
-      <th class="tableDataStyle" aria-label="lunch-table-location-table-header">
-        Ort
-      </th>
-      <th class="tableDataStyle" aria-label="lunch-table-street-table-header">
-        Straße
-      </th>
-      <th
-        class="tableDataStyle"
-        aria-label="lunch-table-firstName-table-header"
-      >
-        Vorname
-      </th>
-      <th class="tableDataStyle" aria-label="lunch-table-lastName-table-header">
-        Nachname
-      </th>
-      <th
-        class="tableDataStyle"
-        aria-label="lunch-table-abbreviation-table-header"
-      >
-        Kürzel
-      </th>
-      <th class="tableDataStyle" aria-label="lunch-table-time-table-header">
-        Uhrzeit
-      </th>
-      <th class="tableDataStyle" aria-label="lunch-table-date-table-header">
-        Datum
-      </th>
-    </tr>
-    <tr aria-label="lunch-table-row" *ngFor="let miti of mitis">
-      <td class="tableDataStyle" aria-label="lunch-table-locality">
-        {{ miti.place.locality.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-location">
-        {{ miti.place.location.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-street">
-        {{ miti.place.street.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-firstName">
-        {{ miti.employee.firstName.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-lastName">
-        {{ miti.employee.lastName.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-abbreviation">
-        {{ miti.employee.abbreviation.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-time">
-        {{ miti.time.value }}
-      </td>
-      <td class="tableDataStyle" aria-label="lunch-table-date">
-        {{ miti.date.value }}
-      </td>
-      <td class="tableDataStyle">
-        <button
-          aria-label="button-edit"
-          type="submit"
-          routerLink="/update/{{ miti.mitiId }}"
-        >
-          Bearbeiten
-        </button>
-      </td>
-    </tr>
-  </table>
+<div aria-label="read-lunch-table-component">
+  <app-createmiti></app-createmiti>
+  <br />
+  <div aria-label="lunch-table-list">
+    <table class="tableStyle" aria-label="table-lunch-table-list">
+      <tr>
+        <th class="tableDataStyle" aria-label="table-header-locality">
+          Restaurant
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
+        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
+        <th class="tableDataStyle" aria-label="table-header-firstName">
+          Vorname
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-lastName">
+          Nachname
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-abbreviation">
+          Kürzel
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
+        <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
+      </tr>
+      <tr *ngFor="let miti of mitis">
+        <td class="tableDataStyle" aria-label="table-item-locality">
+          {{ miti.place.locality.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-location">
+          {{ miti.place.location.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-street">
+          {{ miti.place.street.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-firstName">
+          {{ miti.employee.firstName.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-lastName">
+          {{ miti.employee.lastName.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-abbreviation">
+          {{ miti.employee.abbreviation.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-time">
+          {{ miti.time.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-date">
+          {{ miti.date.value }}
+        </td>
+        <td class="tableDataStyle">
+          <button
+            aria-label="button-edit"
+            type="submit"
+            routerLink="/update/{{ miti.mitiId }}"
+          >
+            Bearbeiten
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>

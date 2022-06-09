@@ -14,8 +14,8 @@ export class ReadMitiComponent implements OnInit {
 
   readMiti() {
     return this.mitiService.readMiti().subscribe((response: Miti[]) => {
-      this.mitis = response;
       console.log('GET Miti:', this.mitis);
+      this.mitis = response;
     });
   }
 

@@ -5,7 +5,6 @@ import {
   render,
   RenderResult,
   screen,
-  waitFor,
 } from '@testing-library/angular';
 import { ReadMitiComponent } from '../read-miti/read-miti.component';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Miti } from '../domain/miti/Miti';
 import { CreateMitiComponent } from './create-miti.component';
 import userEvent from '@testing-library/user-event';
+import { UpdateMitiComponent } from '../update-miti/update-miti.component';
+import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
 
 describe('An employee wants to create...', () => {
   let rendered: RenderResult<ReadMitiComponent>;
@@ -135,11 +138,30 @@ describe('An employee wants to create...', () => {
     server.events.on('request:end', listener);
   });
 
+  const testUtilityFunctionWithId = new Promise<void>(async (resolve) => {
+    const listener = async (request: MockedRequest) => {
+      if (request.url.href === 'http://localhost:8080/miti/1') {
+        setTimeout(resolve, 0);
+        server.events.removeListener('request:end', listener);
+      }
+    };
+    server.events.on('request:end', listener);
+  });
+
   beforeAll(() => server.listen());
   beforeEach(async () => {
     rendered = await render(ReadMitiComponent, {
-      declarations: [CreateMitiComponent, ReadMitiComponent],
-      imports: [FormsModule, HttpClientModule],
+      declarations: [
+        CreateMitiComponent,
+        ReadMitiComponent,
+        UpdateMitiComponent,
+        DeleteMitiComponent,
+      ],
+      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
+      routes: [
+        { path: '', component: ReadMitiComponent, pathMatch: 'full' },
+        { path: 'update/:id', component: UpdateMitiComponent },
+      ],
     });
   });
   afterEach(() => {
@@ -165,8 +187,8 @@ describe('An employee wants to create...', () => {
 
   test('...a lunch table meeting but not without all values filled in', async () => {
     const buttonCreate = screen.getByLabelText('button-create');
-    const alertNull = screen.getByLabelText('alert-null');
-    const alertNullMessage = 'Null values in any form fields are disallowed';
+    const alertNull = screen.getByLabelText('alert-message-null-values');
+    const alertNullMessage = 'Null values in any input fields are disallowed';
 
     await fireEvent.click(buttonCreate);
 
@@ -174,14 +196,24 @@ describe('An employee wants to create...', () => {
   });
 
   test('...a lunch table meeting but not without proper capitalization of the first letter', async () => {
-    const buttonCreate = screen.getByLabelText('button-create');
-
-    const alertLocality = screen.getByLabelText('alert-locality');
-    const alertLocation = screen.getByLabelText('alert-location');
-    const alertStreet = screen.getByLabelText('alert-street');
-    const alertFirstName = screen.getByLabelText('alert-firstName');
-    const alertLastName = screen.getByLabelText('alert-lastName');
-    const alertAbbreviation = screen.getByLabelText('alert-abbreviation');
+    const alertLocality = screen.getByLabelText(
+      'alert-message-invalid-input-locality'
+    );
+    const alertLocation = screen.getByLabelText(
+      'alert-message-invalid-input-location'
+    );
+    const alertStreet = screen.getByLabelText(
+      'alert-message-invalid-input-street'
+    );
+    const alertFirstName = screen.getByLabelText(
+      'alert-message-invalid-input-firstName'
+    );
+    const alertLastName = screen.getByLabelText(
+      'alert-message-invalid-input-lastName'
+    );
+    const alertAbbreviation = screen.getByLabelText(
+      'alert-message-invalid-input-abbreviation'
+    );
 
     const alertRegexMessageLocality =
       'Locality must only contain letters and begin with upper case';
@@ -214,7 +246,7 @@ describe('An employee wants to create...', () => {
     expect(screen.getByLabelText('input-time')).toHaveValue('12:00');
     expect(screen.getByLabelText('input-date')).toHaveValue('2022-04-01');
 
-    await fireEvent.click(buttonCreate);
+    fireEvent.click(screen.getByLabelText('button-create'));
 
     expect(alertLocality.textContent).toContain(alertRegexMessageLocality);
     expect(alertLocation.textContent).toContain(alertRegexMessageLocation);

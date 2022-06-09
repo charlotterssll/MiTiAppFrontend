@@ -1,228 +1,241 @@
-<div>
-  <h2 aria-label="lunch-table-update">Mittagstisch bearbeiten</h2>
-  <form aria-label="form-input-update" (ngSubmit)="youShallNotPass()">
-    <table class="tableStyle">
-      <tr>
-        <th>
-          <label
-            id="label-locality"
-            name="label-locality"
-            aria-label="label-locality"
-            >Lokal</label
-          >
-        </th>
-        <th>
-          <label
-            id="label-location"
-            name="label-location"
-            aria-label="label-location"
-            >Ort</label
-          >
-        </th>
-        <th>
-          <label id="label-street" name="label-street" aria-label="label-street"
-            >Straße</label
-          >
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <input
-            id="input-locality"
-            name="input-locality"
-            aria-label="input-locality"
-            type="text"
-            placeholder="Lokal"
-            [(ngModel)]="mitis.place.locality.value"
-          />
-        </td>
-        <td>
-          <input
-            id="input-location"
-            name="input-location"
-            aria-label="input-location"
-            type="text"
-            placeholder="Ort"
-            [(ngModel)]="mitis.place.location.value"
-          />
-        </td>
-        <td>
-          <input
-            id="input-street"
-            name="input-street"
-            aria-label="input-street"
-            type="text"
-            placeholder="Straße"
-            [(ngModel)]="mitis.place.street.value"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label
-            id="label-firstName"
-            name="label-firstName"
-            aria-label="label-firstName"
-            >Vorname</label
-          >
-        </th>
-        <th>
-          <label
-            id="label-lastName"
-            name="label-lastName"
-            aria-label="label-lastName"
-            >Nachname</label
-          >
-        </th>
-        <th>
-          <label
-            id="label-abbreviation"
-            name="label-abbreviation"
-            aria-label="label-abbreviation"
-            >Kürzel</label
-          >
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <input
-            id="input-firstName"
-            name="input-firstName"
-            aria-label="input-firstName"
-            type="text"
-            placeholder="Vorname"
-            [(ngModel)]="mitis.employee.firstName.value"
-          />
-        </td>
-        <td>
-          <input
-            id="input-lastName"
-            name="input-lastName"
-            aria-label="input-lastName"
-            type="text"
-            placeholder="Nachname"
-            [(ngModel)]="mitis.employee.lastName.value"
-          />
-        </td>
-        <td>
-          <input
-            id="input-abbreviation"
-            name="input-abbreviation"
-            aria-label="input-abbreviation"
-            type="text"
-            placeholder="Kürzel"
-            [(ngModel)]="mitis.employee.abbreviation.value"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label id="label-time" name="label-time" aria-label="label-time"
-            >Uhrzeit</label
-          >
-        </th>
-        <th>
-          <label id="label-date" name="label-date" aria-label="label-date"
-            >Datum</label
-          >
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <input
-            id="input-time"
-            name="input-time"
-            aria-label="input-time"
-            type="time"
-            placeholder="time"
-            [(ngModel)]="mitis.time.value"
-          />
-        </td>
-        <td>
-          <input
-            id="input-date"
-            name="input-date"
-            aria-label="input-date"
-            type="date"
-            placeholder="date"
-            [(ngModel)]="mitis.date.value"
-          />
-        </td>
-        <td>
-          <button aria-label="button-update" type="submit">Speichern</button>
-        </td>
-      </tr>
-    </table>
-  </form>
-</div>
-<br />
-<div id="alerts" aria-label="alerts">
-  <div aria-label="alert-null">{{ alertNull }}</div>
-  <!--  <div aria-label="alert-miti-already-exists">
+<div aria-label="update-lunch-table-component">
+  <h2 aria-label="title-update-lunch-table-component">
+    Mittagstisch bearbeiten
+  </h2>
+  <br />
+  <div aria-label="update-lunch-table-input-form">
+    <form
+      aria-label="form-update-lunch-table"
+      (ngSubmit)="youShallNotPassNullValues()"
+    >
+      <table class="tableStyle">
+        <tr>
+          <th>
+            <label
+              id="label-locality"
+              name="label-locality"
+              aria-label="label-locality"
+              >Lokal</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-location"
+              name="label-location"
+              aria-label="label-location"
+              >Ort</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-street"
+              name="label-street"
+              aria-label="label-street"
+              >Straße</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-locality"
+              name="input-locality"
+              aria-label="input-locality"
+              type="text"
+              placeholder="Lokal"
+              [(ngModel)]="mitis.place.locality.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-location"
+              name="input-location"
+              aria-label="input-location"
+              type="text"
+              placeholder="Ort"
+              [(ngModel)]="mitis.place.location.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-street"
+              name="input-street"
+              aria-label="input-street"
+              type="text"
+              placeholder="Straße"
+              [(ngModel)]="mitis.place.street.value"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label
+              id="label-firstName"
+              name="label-firstName"
+              aria-label="label-firstName"
+              >Vorname</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-lastName"
+              name="label-lastName"
+              aria-label="label-lastName"
+              >Nachname</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-abbreviation"
+              name="label-abbreviation"
+              aria-label="label-abbreviation"
+              >Kürzel</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-firstName"
+              name="input-firstName"
+              aria-label="input-firstName"
+              type="text"
+              placeholder="Vorname"
+              [(ngModel)]="mitis.employee.firstName.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-lastName"
+              name="input-lastName"
+              aria-label="input-lastName"
+              type="text"
+              placeholder="Nachname"
+              [(ngModel)]="mitis.employee.lastName.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-abbreviation"
+              name="input-abbreviation"
+              aria-label="input-abbreviation"
+              type="text"
+              placeholder="Kürzel"
+              [(ngModel)]="mitis.employee.abbreviation.value"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label id="label-time" name="label-time" aria-label="label-time"
+              >Uhrzeit</label
+            >
+          </th>
+          <th>
+            <label id="label-date" name="label-date" aria-label="label-date"
+              >Datum</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-time"
+              name="input-time"
+              aria-label="input-time"
+              type="time"
+              placeholder="time"
+              [(ngModel)]="mitis.time.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-date"
+              name="input-date"
+              aria-label="input-date"
+              type="date"
+              placeholder="date"
+              [(ngModel)]="mitis.date.value"
+            />
+          </td>
+          <td>
+            <button aria-label="button-update" type="submit">Speichern</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <br />
+  <div id="alerts" aria-label="alerts">
+    <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+    <div aria-label="alert-message-invalid-input-locality">
+      {{ alertLocality }}
+    </div>
+    <div aria-label="alert-message-invalid-input-location">
+      {{ alertLocation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
+    <div aria-label="alert-message-invalid-input-firstName">
+      {{ alertFirstName }}
+    </div>
+    <div aria-label="alert-message-invalid-input-lastName">
+      {{ alertLastName }}
+    </div>
+    <div aria-label="alert-message-invalid-input-abbreviation">
+      {{ alertAbbreviation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-time">{{ alertTime }}</div>
+    <div aria-label="alert-message-invalid-input-date">{{ alertDate }}</div>
+    <div aria-label="alert-message-invalid-input-miti-already-exists">
       {{ alertMitiAlreadyExists }}
     </div>
-    <div aria-label="alert-locality">{{ alertLocality }}</div>
-    <div aria-label="alert-location">{{ alertLocation }}</div>
-    <div aria-label="alert-street">{{ alertStreet }}</div>
-    <div aria-label="alert-firstName">{{ alertFirstName }}</div>
-    <div aria-label="alert-lastName">{{ alertLastName }}</div>
-    <div aria-label="alert-abbreviation">{{ alertAbbreviation }}</div>
-    <div aria-label="alert-time">{{ alertTime }}</div>
-    <div aria-label="alert-date">{{ alertDate }}</div>
-  </div>-->
+  </div>
   <br />
   <div aria-label="lunch-table-list">
     <table class="tableStyle">
       <tr>
-        <th
-          class="tableDataStyle"
-          aria-label="lunch-table-locality-table-header"
-        >
+        <th class="tableDataStyle" aria-label="table-header-locality">
           Restaurant
         </th>
-        <th
-          class="tableDataStyle"
-          aria-label="lunch-table-location-table-header"
-        >
-          Ort
-        </th>
-        <th class="tableDataStyle" aria-label="lunch-table-street-table-header">
-          Straße
-        </th>
-        <th
-          class="tableDataStyle"
-          aria-label="lunch-table-firstName-table-header"
-        >
+        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
+        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
+        <th class="tableDataStyle" aria-label="table-header-firstName">
           Vorname
         </th>
-        <th
-          class="tableDataStyle"
-          aria-label="lunch-table-lastName-table-header"
-        >
+        <th class="tableDataStyle" aria-label="table-header-lastName">
           Nachname
         </th>
-        <th
-          class="tableDataStyle"
-          aria-label="lunch-table-abbreviation-table-header"
-        >
+        <th class="tableDataStyle" aria-label="table-header-abbreviation">
           Kürzel
         </th>
-        <th class="tableDataStyle" aria-label="lunch-table-time-table-header">
-          Uhrzeit
-        </th>
-        <th class="tableDataStyle" aria-label="lunch-table-date-table-header">
-          Datum
-        </th>
+        <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
+        <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
       <tr>
-        <td class="tableDataStyle">{{ mitis.place.locality.value }}</td>
-        <td class="tableDataStyle">{{ mitis.place.location.value }}</td>
-        <td class="tableDataStyle">{{ mitis.place.street.value }}</td>
-        <td class="tableDataStyle">{{ mitis.employee.firstName.value }}</td>
-        <td class="tableDataStyle">{{ mitis.employee.lastName.value }}</td>
-        <td class="tableDataStyle">{{ mitis.employee.abbreviation.value }}</td>
-        <td class="tableDataStyle">{{ mitis.time.value }}</td>
-        <td class="tableDataStyle">{{ mitis.date.value }}</td>
+        <td class="tableDataStyle" aria-label="table-item-locality">
+          {{ mitis.place.locality.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-location">
+          {{ mitis.place.location.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-street">
+          {{ mitis.place.street.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-firstName">
+          {{ mitis.employee.firstName.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-lastName">
+          {{ mitis.employee.lastName.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-abbreviation">
+          {{ mitis.employee.abbreviation.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-time">
+          {{ mitis.time.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-date">
+          {{ mitis.date.value }}
+        </td>
         <td>
           <button
             aria-label="button-cancel"
