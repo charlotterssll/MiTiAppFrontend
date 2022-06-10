@@ -15,9 +15,10 @@ import { ReadMitiComponent } from '../read-miti/read-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { CreateMitiComponent } from '../create-miti/create-miti.component';
+import { AppComponent } from '../app.component';
 
 describe('An employee wants to delete...', () => {
-  let rendered: RenderResult<UpdateMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -121,7 +122,7 @@ describe('An employee wants to delete...', () => {
 
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(UpdateMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
         CreateMitiComponent,
         ReadMitiComponent,
@@ -141,21 +142,11 @@ describe('An employee wants to delete...', () => {
   });
   afterAll(() => server.close());
 
-  test('...dummy test to stop jest from yelling', async () => {
-    const alertNull = screen.getByLabelText('alert-message-null-values');
-    const alertNullMessage = 'Null values in any input fields are disallowed';
-
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByLabelText('button-update'));
-
-    expect(alertNull.textContent).toContain(alertNullMessage);
-  });
-
-  /*test('...an existing lunch table meeting', async () => {
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
+  test('...an existing lunch table meeting', async () => {
+    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Mittagstisch bearbeiten')
+    ).not.toBeInTheDocument();
 
     await rendered.fixture.detectChanges();
     await testUtilityFunction;
@@ -170,6 +161,24 @@ describe('An employee wants to delete...', () => {
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
+    fireEvent.click(screen.getByLabelText('button-edit'));
+    /*
+    await rendered.fixture.detectChanges();
+    await testUtilityFunctionWithId;
+    await rendered.fixture.detectChanges();
+
+    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
+    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
+
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
+/*
     fireEvent.click(screen.getByLabelText('button-delete'));
 
     await rendered.fixture.detectChanges();
@@ -188,6 +197,6 @@ describe('An employee wants to delete...', () => {
     expect(screen.queryByText('Kranz')).not.toBeInTheDocument();
     expect(screen.queryByText('HKR')).toBeInTheDocument();
     expect(screen.queryByText('12:00')).not.toBeInTheDocument();
-    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();
-  });*/
+    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();*/
+  });
 });

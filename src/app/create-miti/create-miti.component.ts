@@ -146,10 +146,10 @@ export class CreateMitiComponent {
     };
     return this.mitiService.createMiti(mitiJson).subscribe(
       () => {
-        console.log('POST Miti: ', mitiJson);
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate([this.router.url]);
+        console.log('POST Miti: ', mitiJson);
       },
       (error) => {
         if (

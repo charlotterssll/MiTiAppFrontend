@@ -91,14 +91,14 @@ export class UpdateMitiComponent implements OnInit {
 
   youShallNotPassNullValues() {
     if (
-      !this.locality ||
-      !this.location ||
-      !this.street ||
-      !this.firstName ||
-      !this.lastName ||
-      !this.abbreviation ||
-      !this.time ||
-      !this.date
+      !this.mitis.place.locality.value ||
+      !this.mitis.place.location.value ||
+      !this.mitis.place.street.value ||
+      !this.mitis.employee.firstName.value ||
+      !this.mitis.employee.lastName.value ||
+      !this.mitis.employee.abbreviation.value ||
+      !this.mitis.time.value ||
+      !this.mitis.date.value
     ) {
       this.alertNull = 'Null values in any input fields are disallowed';
       console.log('Null values in any input fields are disallowed');
@@ -125,48 +125,56 @@ export class UpdateMitiComponent implements OnInit {
     let flagTime!: boolean;
     let flagDate!: boolean;
 
-    if (!regexPatternPlaceName.test(<string>this.locality)) {
+    if (!regexPatternPlaceName.test(<string>this.mitis.place.locality.value)) {
       this.alertLocality =
         'Locality must only contain letters and begin with upper case';
     } else {
       flagLocality = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.location)) {
+    if (!regexPatternPlaceName.test(<string>this.mitis.place.location.value)) {
       this.alertLocation =
         'Location must only contain letters and begin with upper case';
     } else {
       flagLocation = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.street)) {
+    if (!regexPatternPlaceName.test(<string>this.mitis.place.street.value)) {
       this.alertStreet =
         'Street must only contain letters and begin with upper case';
     } else {
       flagStreet = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.firstName)) {
+    if (
+      !regexPatternPlaceName.test(<string>this.mitis.employee.firstName.value)
+    ) {
       this.alertFirstName =
         'FirstName must only contain letters and begin with upper case';
     } else {
       flagFirstName = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.lastName)) {
+    if (
+      !regexPatternPlaceName.test(<string>this.mitis.employee.lastName.value)
+    ) {
       this.alertLastName =
         'LastName must only contain letters and begin with upper case';
     } else {
       flagLastName = true;
     }
-    if (!regexPatternAbbreviation.test(<string>this.abbreviation)) {
+    if (
+      !regexPatternAbbreviation.test(
+        <string>this.mitis.employee.abbreviation.value
+      )
+    ) {
       this.alertAbbreviation =
         'Abbreviation must only contain capital letters and only three characters';
     } else {
       flagAbbreviation = true;
     }
-    if (!regexPatternTime.test(<string>this.time)) {
+    if (!regexPatternTime.test(<string>this.mitis.time.value)) {
       this.alertTime = 'Time must only contain numbers in 24h time format';
     } else {
       flagTime = true;
     }
-    if (!regexPatternDate.test(<string>this.date)) {
+    if (!regexPatternDate.test(<string>this.mitis.date.value)) {
       this.alertDate = 'Date must only contain numbers YYYY-MM-DD format';
     } else {
       flagDate = true;
@@ -202,10 +210,10 @@ export class UpdateMitiComponent implements OnInit {
     };
     return this.mitiService.updateMiti(this.mitiId, mitiJson).subscribe(
       () => {
-        console.log('UPDATE Miti: ', this.mitiId);
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['']);
+        console.log('UPDATE Miti: ', this.mitiId);
       },
       (error) => {
         if (
