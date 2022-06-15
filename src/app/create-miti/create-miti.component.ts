@@ -76,7 +76,9 @@ export class CreateMitiComponent {
     if (!regexPatternLocality.test(<string>this.locality)) {
       this.alertLocality =
         'Lokal darf verschiedene Zeichen haben, sowie Groß- und Kleinschreibung beinhalten';
-      console.log('Locality can contain different characters and cases');
+      console.log(
+        'Locality can contain different characters, upper cases and lower cases'
+      );
     } else {
       flagLocality = true;
     }

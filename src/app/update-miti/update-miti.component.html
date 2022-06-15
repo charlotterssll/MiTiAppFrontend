@@ -1,6 +1,6 @@
 <div aria-label="update-lunch-table-component">
   <h2 aria-label="title-update-lunch-table-component">
-    Mittagstisch bearbeiten
+    Lunch-Verabredung bearbeiten
   </h2>
   <br />
   <div aria-label="update-lunch-table-input-form">
@@ -159,6 +159,13 @@
             />
           </td>
           <td>
+            <button
+              aria-label="button-cancel"
+              type="submit"
+              (click)="returnToView()"
+            >
+              Abbrechen
+            </button>
             <button aria-label="button-update" type="submit">Speichern</button>
           </td>
         </tr>
@@ -203,6 +210,7 @@
         <th class="tableDataStyle" aria-label="table-header-abbreviation">
           Kürzel
         </th>
+        <th class="tableDataStyle" aria-label="table-header-removeButton"></th>
         <th class="tableDataStyle" aria-label="table-header-locality">
           Restaurant
         </th>
@@ -221,6 +229,9 @@
         <td class="tableDataStyle" aria-label="table-item-abbreviation">
           {{ mitis.employee.abbreviation.value }}
         </td>
+        <td>
+          <button aria-label="button-remove" type="submit">Entfernen</button>
+        </td>
         <td class="tableDataStyle" aria-label="table-item-locality">
           {{ mitis.place.locality.value }}
         </td>
@@ -235,15 +246,6 @@
         </td>
         <td class="tableDataStyle" aria-label="table-item-date">
           {{ mitis.date.value }}
-        </td>
-        <td>
-          <button
-            aria-label="button-cancel"
-            type="submit"
-            (click)="returnToView()"
-          >
-            Abbrechen
-          </button>
         </td>
       </tr>
     </table>
