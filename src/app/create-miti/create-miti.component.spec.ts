@@ -188,7 +188,7 @@ describe('An employee wants to create...', () => {
   test('...a lunch table meeting but not without all values filled in', async () => {
     const buttonCreate = screen.getByLabelText('button-create');
     const alertNull = screen.getByLabelText('alert-message-null-values');
-    const alertNullMessage = 'Null values in any input fields are disallowed';
+    const alertNullMessage = 'Bitte keine Felder leer lassen';
 
     await fireEvent.click(buttonCreate);
 
@@ -216,19 +216,19 @@ describe('An employee wants to create...', () => {
     );
 
     const alertRegexMessageLocality =
-      'Locality must only contain letters and begin with upper case';
+      'Lokal darf verschiedene Zeichen haben, sowie Groß- und Kleinschreibung beinhalten';
     const alertRegexMessageLocation =
-      'Location must only contain letters and begin with upper case';
+      'Ort darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
     const alertRegexMessageStreet =
-      'Street must only contain letters and begin with upper case';
+      'Straßename darf nur Buchstaben beinhalten und/oder Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen getrennt darf eine Hausnummer angegeben werden';
     const alertRegexMessageFirstName =
-      'FirstName must only contain letters and begin with upper case';
+      'Vorname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
     const alertRegexMessageLastName =
-      'LastName must only contain letters and begin with upper case';
+      'Nachname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
     const alertRegexMessageAbbreviation =
-      'Abbreviation must only contain capital letters and only three characters';
+      'Kürzel muss aus genau drei Großbuchstaben bestehen';
 
-    await userEvent.type(screen.getByLabelText('input-locality'), 'immergrün');
+    await userEvent.type(screen.getByLabelText('input-locality'), ' ');
     await userEvent.type(screen.getByLabelText('input-location'), 'oldenburg');
     await userEvent.type(screen.getByLabelText('input-street'), 'poststraße');
     await userEvent.type(screen.getByLabelText('input-firstName'), 'hannelore');
@@ -237,7 +237,7 @@ describe('An employee wants to create...', () => {
     await userEvent.type(screen.getByLabelText('input-time'), '12:00');
     await userEvent.type(screen.getByLabelText('input-date'), '2022-04-01');
 
-    expect(screen.getByLabelText('input-locality')).toHaveValue('immergrün');
+    expect(screen.getByLabelText('input-locality')).toHaveValue(' ');
     expect(screen.getByLabelText('input-location')).toHaveValue('oldenburg');
     expect(screen.getByLabelText('input-street')).toHaveValue('poststraße');
     expect(screen.getByLabelText('input-firstName')).toHaveValue('hannelore');

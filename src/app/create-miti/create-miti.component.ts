@@ -44,7 +44,7 @@ export class CreateMitiComponent {
       !this.time ||
       !this.date
     ) {
-      this.alertNull = 'Null values in any input fields are disallowed';
+      this.alertNull = 'Bitte keine Felder leer lassen';
       console.log('Null values in any input fields are disallowed');
     } else {
       this.youShallMeetRegexPattern();
@@ -52,8 +52,12 @@ export class CreateMitiComponent {
   }
 
   youShallMeetRegexPattern() {
-    const regexPatternPlaceName = new RegExp(
+    const regexPatternLocality = new RegExp('^(?!\\s*$).+');
+    const regexPatternLocationFirstAndLastName = new RegExp(
       '[A-ZÄÖÜ][a-zäöüß-]+(\\s[A-ZÄÖÜ][a-zäöüß-]+)*'
+    );
+    const regexPatternStreetAndNumber = new RegExp(
+      '^([A-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ][a-zäöüßáàâéèêíìîóòôúùû\\s-]*)+?(\\s[1-9]\\d*(?:[ -]?(?:[a-zäöüßáàâéèêíìîóòôúùûA-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ]+|[1-9]\\d*))?)?$'
     );
     const regexPatternAbbreviation = new RegExp('^[A-ZÄÖÜ]{3}$');
     const regexPatternTime = new RegExp('^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$');
@@ -69,49 +73,70 @@ export class CreateMitiComponent {
     let flagTime!: boolean;
     let flagDate!: boolean;
 
-    if (!regexPatternPlaceName.test(<string>this.locality)) {
+    if (!regexPatternLocality.test(<string>this.locality)) {
       this.alertLocality =
-        'Locality must only contain letters and begin with upper case';
+        'Lokal darf verschiedene Zeichen haben, sowie Groß- und Kleinschreibung beinhalten';
+      console.log('Locality can contain different characters and cases');
     } else {
       flagLocality = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.location)) {
+    if (!regexPatternLocationFirstAndLastName.test(<string>this.location)) {
       this.alertLocation =
-        'Location must only contain letters and begin with upper case';
+        'Ort darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
+      console.log(
+        'Location must only contain letters and/or dashes and begin with upper case'
+      );
     } else {
       flagLocation = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.street)) {
+    if (!regexPatternStreetAndNumber.test(<string>this.street)) {
       this.alertStreet =
-        'Street must only contain letters and begin with upper case';
+        'Straßename darf nur Buchstaben beinhalten und/oder Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen getrennt darf eine Hausnummer angegeben werden';
+      console.log(
+        'Street must only contain letters and/or dashes and begin with upper case, it may also number'
+      );
     } else {
       flagStreet = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.firstName)) {
+    if (!regexPatternLocationFirstAndLastName.test(<string>this.firstName)) {
       this.alertFirstName =
-        'FirstName must only contain letters and begin with upper case';
+        'Vorname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
+      console.log(
+        'FirstName must only contain letters and/or dashes and begin with upper case'
+      );
     } else {
       flagFirstName = true;
     }
-    if (!regexPatternPlaceName.test(<string>this.lastName)) {
+    if (!regexPatternLocationFirstAndLastName.test(<string>this.lastName)) {
       this.alertLastName =
-        'LastName must only contain letters and begin with upper case';
+        'Nachname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
+      console.log(
+        'LastName must only contain letters and/or dashes and begin with upper case'
+      );
     } else {
       flagLastName = true;
     }
     if (!regexPatternAbbreviation.test(<string>this.abbreviation)) {
       this.alertAbbreviation =
-        'Abbreviation must only contain capital letters and only three characters';
+        'Kürzel muss aus genau drei Großbuchstaben bestehen';
+      console.log(
+        'Abbreviation must only contain capital letters and only three characters'
+      );
     } else {
       flagAbbreviation = true;
     }
     if (!regexPatternTime.test(<string>this.time)) {
-      this.alertTime = 'Time must only contain numbers in 24h time format';
+      this.alertTime =
+        'Uhrzeit darf nur Zahlen im 24 Stunden Format enthalten. Bei einer einstelligen Zahl bitte eine führende Null angeben, Minuten 00-59, Stunden 00-23';
+      console.log(
+        'Time must only contain numbers in 24h time format, if its a single digit number please add a leading zero, minutes 00-59, hours 00-23'
+      );
     } else {
       flagTime = true;
     }
     if (!regexPatternDate.test(<string>this.date)) {
-      this.alertDate = 'Date must only contain numbers YYYY-MM-DD format';
+      this.alertDate = 'Datum darf nur Zahlen im JJJJ-MM-TT Format enthalten';
+      console.log('Date must only contain numbers YYYY-MM-DD format');
     } else {
       flagDate = true;
     }

@@ -10,64 +10,6 @@
         <tr>
           <th>
             <label
-              id="label-locality"
-              name="label-locality"
-              aria-label="label-locality"
-              >Lokal</label
-            >
-          </th>
-          <th>
-            <label
-              id="label-location"
-              name="label-location"
-              aria-label="label-location"
-              >Ort</label
-            >
-          </th>
-          <th>
-            <label
-              id="label-street"
-              name="label-street"
-              aria-label="label-street"
-              >Straße</label
-            >
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <input
-              id="input-locality"
-              name="input-locality"
-              aria-label="input-locality"
-              type="text"
-              placeholder="Lokal"
-              [(ngModel)]="locality"
-            />
-          </td>
-          <td>
-            <input
-              id="input-location"
-              name="input-location"
-              aria-label="input-location"
-              type="text"
-              placeholder="Ort"
-              [(ngModel)]="location"
-            />
-          </td>
-          <td>
-            <input
-              id="input-street"
-              name="input-street"
-              aria-label="input-street"
-              type="text"
-              placeholder="Straße"
-              [(ngModel)]="street"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label
               id="label-firstName"
               name="label-firstName"
               aria-label="label-firstName"
@@ -125,6 +67,64 @@
         </tr>
         <tr>
           <th>
+            <label
+              id="label-locality"
+              name="label-locality"
+              aria-label="label-locality"
+              >Lokal</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-location"
+              name="label-location"
+              aria-label="label-location"
+              >Ort</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-street"
+              name="label-street"
+              aria-label="label-street"
+              >Straße</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-locality"
+              name="input-locality"
+              aria-label="input-locality"
+              type="text"
+              placeholder="Lokal"
+              [(ngModel)]="locality"
+            />
+          </td>
+          <td>
+            <input
+              id="input-location"
+              name="input-location"
+              aria-label="input-location"
+              type="text"
+              placeholder="Ort"
+              [(ngModel)]="location"
+            />
+          </td>
+          <td>
+            <input
+              id="input-street"
+              name="input-street"
+              aria-label="input-street"
+              type="text"
+              placeholder="Straße"
+              [(ngModel)]="street"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
             <label id="label-time" name="label-time" aria-label="label-time"
               >Uhrzeit</label
             >
@@ -166,13 +166,6 @@
   <br />
   <div id="alerts" aria-label="alerts">
     <div aria-label="alert-message-null-values">{{ alertNull }}</div>
-    <div aria-label="alert-message-invalid-input-locality">
-      {{ alertLocality }}
-    </div>
-    <div aria-label="alert-message-invalid-input-location">
-      {{ alertLocation }}
-    </div>
-    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
     <div aria-label="alert-message-invalid-input-firstName">
       {{ alertFirstName }}
     </div>
@@ -182,6 +175,13 @@
     <div aria-label="alert-message-invalid-input-abbreviation">
       {{ alertAbbreviation }}
     </div>
+    <div aria-label="alert-message-invalid-input-locality">
+      {{ alertLocality }}
+    </div>
+    <div aria-label="alert-message-invalid-input-location">
+      {{ alertLocation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
     <div aria-label="alert-message-invalid-input-time">{{ alertTime }}</div>
     <div aria-label="alert-message-invalid-input-date">{{ alertDate }}</div>
     <div aria-label="alert-message-invalid-input-miti-already-exists">

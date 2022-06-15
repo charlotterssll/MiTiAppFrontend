@@ -4,11 +4,6 @@
   <div aria-label="lunch-table-list">
     <table class="tableStyle" aria-label="table-lunch-table-list">
       <tr>
-        <th class="tableDataStyle" aria-label="table-header-locality">
-          Restaurant
-        </th>
-        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
-        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
         <th class="tableDataStyle" aria-label="table-header-firstName">
           Vorname
         </th>
@@ -18,19 +13,15 @@
         <th class="tableDataStyle" aria-label="table-header-abbreviation">
           Kürzel
         </th>
+        <th class="tableDataStyle" aria-label="table-header-locality">
+          Restaurant
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
+        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
         <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
         <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
       <tr *ngFor="let miti of mitis">
-        <td class="tableDataStyle" aria-label="table-item-locality">
-          {{ miti.place.locality.value }}
-        </td>
-        <td class="tableDataStyle" aria-label="table-item-location">
-          {{ miti.place.location.value }}
-        </td>
-        <td class="tableDataStyle" aria-label="table-item-street">
-          {{ miti.place.street.value }}
-        </td>
         <td class="tableDataStyle" aria-label="table-item-firstName">
           {{ miti.employee.firstName.value }}
         </td>
@@ -39,6 +30,15 @@
         </td>
         <td class="tableDataStyle" aria-label="table-item-abbreviation">
           {{ miti.employee.abbreviation.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-locality">
+          {{ miti.place.locality.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-location">
+          {{ miti.place.location.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-street">
+          {{ miti.place.street.value }}
         </td>
         <td class="tableDataStyle" aria-label="table-item-time">
           {{ miti.time.value }}

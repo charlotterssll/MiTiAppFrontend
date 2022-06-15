@@ -12,64 +12,6 @@
         <tr>
           <th>
             <label
-              id="label-locality"
-              name="label-locality"
-              aria-label="label-locality"
-              >Lokal</label
-            >
-          </th>
-          <th>
-            <label
-              id="label-location"
-              name="label-location"
-              aria-label="label-location"
-              >Ort</label
-            >
-          </th>
-          <th>
-            <label
-              id="label-street"
-              name="label-street"
-              aria-label="label-street"
-              >Straße</label
-            >
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <input
-              id="input-locality"
-              name="input-locality"
-              aria-label="input-locality"
-              type="text"
-              placeholder="Lokal"
-              [(ngModel)]="mitis.place.locality.value"
-            />
-          </td>
-          <td>
-            <input
-              id="input-location"
-              name="input-location"
-              aria-label="input-location"
-              type="text"
-              placeholder="Ort"
-              [(ngModel)]="mitis.place.location.value"
-            />
-          </td>
-          <td>
-            <input
-              id="input-street"
-              name="input-street"
-              aria-label="input-street"
-              type="text"
-              placeholder="Straße"
-              [(ngModel)]="mitis.place.street.value"
-            />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label
               id="label-firstName"
               name="label-firstName"
               aria-label="label-firstName"
@@ -127,6 +69,64 @@
         </tr>
         <tr>
           <th>
+            <label
+              id="label-locality"
+              name="label-locality"
+              aria-label="label-locality"
+              >Lokal</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-location"
+              name="label-location"
+              aria-label="label-location"
+              >Ort</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-street"
+              name="label-street"
+              aria-label="label-street"
+              >Straße</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-locality"
+              name="input-locality"
+              aria-label="input-locality"
+              type="text"
+              placeholder="Lokal"
+              [(ngModel)]="mitis.place.locality.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-location"
+              name="input-location"
+              aria-label="input-location"
+              type="text"
+              placeholder="Ort"
+              [(ngModel)]="mitis.place.location.value"
+            />
+          </td>
+          <td>
+            <input
+              id="input-street"
+              name="input-street"
+              aria-label="input-street"
+              type="text"
+              placeholder="Straße"
+              [(ngModel)]="mitis.place.street.value"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>
             <label id="label-time" name="label-time" aria-label="label-time"
               >Uhrzeit</label
             >
@@ -168,13 +168,6 @@
   <br />
   <div id="alerts" aria-label="alerts">
     <div aria-label="alert-message-null-values">{{ alertNull }}</div>
-    <div aria-label="alert-message-invalid-input-locality">
-      {{ alertLocality }}
-    </div>
-    <div aria-label="alert-message-invalid-input-location">
-      {{ alertLocation }}
-    </div>
-    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
     <div aria-label="alert-message-invalid-input-firstName">
       {{ alertFirstName }}
     </div>
@@ -184,6 +177,13 @@
     <div aria-label="alert-message-invalid-input-abbreviation">
       {{ alertAbbreviation }}
     </div>
+    <div aria-label="alert-message-invalid-input-locality">
+      {{ alertLocality }}
+    </div>
+    <div aria-label="alert-message-invalid-input-location">
+      {{ alertLocation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
     <div aria-label="alert-message-invalid-input-time">{{ alertTime }}</div>
     <div aria-label="alert-message-invalid-input-date">{{ alertDate }}</div>
     <div aria-label="alert-message-invalid-input-miti-already-exists">
@@ -194,11 +194,6 @@
   <div aria-label="lunch-table-list">
     <table class="tableStyle">
       <tr>
-        <th class="tableDataStyle" aria-label="table-header-locality">
-          Restaurant
-        </th>
-        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
-        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
         <th class="tableDataStyle" aria-label="table-header-firstName">
           Vorname
         </th>
@@ -208,19 +203,15 @@
         <th class="tableDataStyle" aria-label="table-header-abbreviation">
           Kürzel
         </th>
+        <th class="tableDataStyle" aria-label="table-header-locality">
+          Restaurant
+        </th>
+        <th class="tableDataStyle" aria-label="table-header-location">Ort</th>
+        <th class="tableDataStyle" aria-label="table-header-street">Straße</th>
         <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
         <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
       <tr>
-        <td class="tableDataStyle" aria-label="table-item-locality">
-          {{ mitis.place.locality.value }}
-        </td>
-        <td class="tableDataStyle" aria-label="table-item-location">
-          {{ mitis.place.location.value }}
-        </td>
-        <td class="tableDataStyle" aria-label="table-item-street">
-          {{ mitis.place.street.value }}
-        </td>
         <td class="tableDataStyle" aria-label="table-item-firstName">
           {{ mitis.employee.firstName.value }}
         </td>
@@ -229,6 +220,15 @@
         </td>
         <td class="tableDataStyle" aria-label="table-item-abbreviation">
           {{ mitis.employee.abbreviation.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-locality">
+          {{ mitis.place.locality.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-location">
+          {{ mitis.place.location.value }}
+        </td>
+        <td class="tableDataStyle" aria-label="table-item-street">
+          {{ mitis.place.street.value }}
         </td>
         <td class="tableDataStyle" aria-label="table-item-time">
           {{ mitis.time.value }}
