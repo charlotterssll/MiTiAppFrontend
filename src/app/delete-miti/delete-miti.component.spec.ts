@@ -143,9 +143,9 @@ describe('An employee wants to delete...', () => {
   afterAll(() => server.close());
 
   test('...an existing lunch table meeting', async () => {
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
-      screen.queryByText('Mittagstisch bearbeiten')
+      screen.queryByText('Lunch-Verabredung bearbeiten')
     ).not.toBeInTheDocument();
 
     await rendered.fixture.detectChanges();

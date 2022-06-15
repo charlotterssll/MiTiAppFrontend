@@ -210,8 +210,12 @@ describe('An employee wants to update a...', () => {
     const alertNull = screen.getByLabelText('alert-message-null-values');
     const alertNullMessage = 'Null values in any input fields are disallowed';
 
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Lunch-Verabredung bearbeiten')
+    ).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText('button-update'));
 

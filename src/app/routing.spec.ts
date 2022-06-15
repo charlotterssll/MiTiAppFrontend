@@ -139,9 +139,9 @@ describe('An employee wants to route...', () => {
 
   //TODO: find the issue why the "testUtilityFunction" does not work here
   test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting', async () => {
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
-      screen.queryByText('Mittagstisch bearbeiten')
+      screen.queryByText('Lunch-Verabredung bearbeiten')
     ).not.toBeInTheDocument();
 
     await rendered.fixture.detectChanges();
@@ -155,8 +155,12 @@ describe('An employee wants to route...', () => {
     await testUtilityFunction;
     await rendered.fixture.detectChanges();
 
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Lunch-Verabredung bearbeiten')
+    ).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText('button-cancel'));
 
@@ -167,9 +171,9 @@ describe('An employee wants to route...', () => {
     });
     await rendered.fixture.detectChanges();
 
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
-      screen.queryByText('Mittagstisch bearbeiten')
+      screen.queryByText('Lunch-Verabredung bearbeiten')
     ).not.toBeInTheDocument();
   });
 
