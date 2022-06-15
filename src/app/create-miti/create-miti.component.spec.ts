@@ -220,7 +220,8 @@ describe('An employee wants to create...', () => {
     const alertRegexMessageLocation =
       'Ort darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
     const alertRegexMessageStreet =
-      'Straßename darf nur Buchstaben beinhalten und/oder Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen getrennt darf eine Hausnummer angegeben werden';
+      'Straßename darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen' +
+      ' getrennt darf eine Hausnummer angegeben werden';
     const alertRegexMessageFirstName =
       'Vorname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
     const alertRegexMessageLastName =

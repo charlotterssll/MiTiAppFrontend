@@ -147,9 +147,10 @@ export class UpdateMitiComponent implements OnInit {
     }
     if (!regexPatternStreetAndNumber.test(<string>this.street)) {
       this.alertStreet =
-        'Straßename darf nur Buchstaben beinhalten und/oder Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen getrennt darf eine Hausnummer angegeben werden';
+        'Straßename darf nur Buchstaben und/oder beinhalten Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem' +
+        ' Leerzeichen getrennt darf eine Hausnummer angegeben werden';
       console.log(
-        'Street must only contain letters and/or dashes and begin with upper case, it may also number'
+        'Street must only contain letters and/or dashes and begin with upper case, it may also contain a house number'
       );
     } else {
       flagStreet = true;
