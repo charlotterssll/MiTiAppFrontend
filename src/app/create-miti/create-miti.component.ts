@@ -52,9 +52,9 @@ export class CreateMitiComponent {
   }
 
   youShallMeetRegexPattern() {
-    const regexPatternLocality = new RegExp('^(?!\\s*$).+');
+    const regexPatternLocality = new RegExp('^[^\\s](?!\\s*$).+');
     const regexPatternLocationFirstAndLastName = new RegExp(
-      '[A-ZÄÖÜ][a-zäöüß-]+(\\s[A-ZÄÖÜ][a-zäöüß-]+)*'
+      '[A-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ][a-zäöüßáàâéèêíìîóòôúùûß-]+(\\s[A-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ][a-zäöüßáàâéèêíìîóòôúùûß-]+)*'
     );
     const regexPatternStreetAndNumber = new RegExp(
       '^([A-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ][a-zäöüßáàâéèêíìîóòôúùû\\s-]*)+?(\\s[1-9]\\d*(?:[ -]?(?:[a-zäöüßáàâéèêíìîóòôúùûA-ZÄÖÜÁÀÂÉÈÊÍÌÎÓÒÔÚÙÛ]+|[1-9]\\d*))?)?$'
