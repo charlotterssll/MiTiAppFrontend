@@ -16,9 +16,10 @@ import { UpdateMitiComponent } from '../update-miti/update-miti.component';
 import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { AppComponent } from '../app.component';
 
 describe('An employee wants to create...', () => {
-  let rendered: RenderResult<ReadMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -87,7 +88,7 @@ describe('An employee wants to create...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(500), ctx.json(dummyMiti));
+      return res(ctx.status(200), ctx.json(dummyMiti));
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -138,19 +139,9 @@ describe('An employee wants to create...', () => {
     server.events.on('request:end', listener);
   });
 
-  const testUtilityFunctionWithId = new Promise<void>(async (resolve) => {
-    const listener = async (request: MockedRequest) => {
-      if (request.url.href === 'http://localhost:8080/miti/1') {
-        setTimeout(resolve, 0);
-        server.events.removeListener('request:end', listener);
-      }
-    };
-    server.events.on('request:end', listener);
-  });
-
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(ReadMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
         CreateMitiComponent,
         ReadMitiComponent,
@@ -171,9 +162,14 @@ describe('An employee wants to create...', () => {
   afterAll(() => server.close());
 
   test('...a lunch table meeting', async () => {
-    await rendered.fixture.detectChanges(); // ensure ngOnInit is executed
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung bearbeiten')
+    ).not.toBeInTheDocument();
+
+    await rendered.fixture.detectChanges();
     await testUtilityFunction;
-    await rendered.fixture.detectChanges(); // ensure template is rendered after request
+    await rendered.fixture.detectChanges();
 
     expect(screen.getByText('Immergrün')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
@@ -186,16 +182,38 @@ describe('An employee wants to create...', () => {
   });
 
   test('...a lunch table meeting but not without all values filled in', async () => {
-    const buttonCreate = screen.getByLabelText('button-create');
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung bearbeiten')
+    ).not.toBeInTheDocument();
+
     const alertNull = screen.getByLabelText('alert-message-null-values');
     const alertNullMessage = 'Bitte keine Felder leer lassen';
 
-    await fireEvent.click(buttonCreate);
+    expect(screen.getByLabelText('input-locality')).toHaveValue('');
+    expect(screen.getByLabelText('input-location')).toHaveValue('');
+    expect(screen.getByLabelText('input-street')).toHaveValue('');
+    expect(screen.getByLabelText('input-firstName')).toHaveValue('');
+    expect(screen.getByLabelText('input-lastName')).toHaveValue('');
+    expect(screen.getByLabelText('input-abbreviation')).toHaveValue('');
+    expect(screen.getByLabelText('input-time')).toHaveValue('');
+    expect(screen.getByLabelText('input-date')).toHaveValue('');
+
+    fireEvent.click(screen.getByLabelText('button-create'));
 
     expect(alertNull.textContent).toContain(alertNullMessage);
   });
 
   test('...a lunch table meeting but not without proper capitalization of the first letter', async () => {
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung bearbeiten')
+    ).not.toBeInTheDocument();
+
+    await rendered.fixture.detectChanges();
+    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+
     const alertLocality = screen.getByLabelText(
       'alert-message-invalid-input-locality'
     );
@@ -229,6 +247,15 @@ describe('An employee wants to create...', () => {
     const alertRegexMessageAbbreviation =
       'Kürzel muss aus genau drei Großbuchstaben bestehen';
 
+    expect(screen.getByLabelText('input-locality')).toHaveValue('');
+    expect(screen.getByLabelText('input-location')).toHaveValue('');
+    expect(screen.getByLabelText('input-street')).toHaveValue('');
+    expect(screen.getByLabelText('input-firstName')).toHaveValue('');
+    expect(screen.getByLabelText('input-lastName')).toHaveValue('');
+    expect(screen.getByLabelText('input-abbreviation')).toHaveValue('');
+    expect(screen.getByLabelText('input-time')).toHaveValue('');
+    expect(screen.getByLabelText('input-date')).toHaveValue('');
+
     await userEvent.type(screen.getByLabelText('input-locality'), ' ');
     await userEvent.type(screen.getByLabelText('input-location'), 'oldenburg');
     await userEvent.type(screen.getByLabelText('input-street'), 'poststraße');
@@ -259,27 +286,28 @@ describe('An employee wants to create...', () => {
     );
   });
 
-  /*test('...a lunch table meeting, but not twice the same', async () => {
-    await rendered.fixture.detectChanges(); // ensure ngOnInit is executed
+  /*
+  test('...a lunch table meeting, but not twice the same', async () => {
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(screen.queryByText('Lunch-Verabredung bearbeiten')).not.toBeInTheDocument();
+
+    const alertMitiAlreadyExists = screen.getByLabelText('alert-message-invalid-input-miti-already-exists');
+    const alertMessageMitiAlreadyExists = 'This employee already has a lunch table meeting on this day!';
+
+    await rendered.fixture.detectChanges();
     await testUtilityFunction;
-    await rendered.fixture.detectChanges(); // ensure template is rendered after request
+    await rendered.fixture.detectChanges();
 
     expect(screen.getByText('Immergrün')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
     expect(screen.getByText('Hannelore')).toBeInTheDocument();
     expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
-    const alertMitiAlreadyExists = screen.getByLabelText('alert-miti-already-exists');
-    const alertMessageMitiAlreadyExists = 'Employee already has a lunch table meeting on this day!';
-
-    await rendered.fixture.detectChanges(); // ensure ngOnInit is executed
-    await testUtilityFunction;
-    await rendered.fixture.detectChanges(); // ensure template is rendered after request
-
-    await waitFor(() => alertMitiAlreadyExists)
-
     expect(alertMitiAlreadyExists.textContent).toContain(alertMessageMitiAlreadyExists);
-  });*/
+  });
+  */
 });

@@ -10,9 +10,10 @@ import { UpdateMitiComponent } from '../update-miti/update-miti.component';
 import { DeleteMitiComponent } from '../delete-miti/delete-miti.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { AppComponent } from '../app.component';
 
 describe('An employee wants to read...', () => {
-  let rendered: RenderResult<ReadMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -163,19 +164,9 @@ describe('An employee wants to read...', () => {
     server.events.on('request:end', listener);
   });
 
-  const testUtilityFunctionWithId = new Promise<void>(async (resolve) => {
-    const listener = async (request: MockedRequest) => {
-      if (request.url.href === 'http://localhost:8080/miti/1') {
-        setTimeout(resolve, 0);
-        server.events.removeListener('request:end', listener);
-      }
-    };
-    server.events.on('request:end', listener);
-  });
-
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(ReadMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
         CreateMitiComponent,
         ReadMitiComponent,
@@ -196,6 +187,11 @@ describe('An employee wants to read...', () => {
   afterAll(() => server.close());
 
   test('...multiple lunch table meetings', async () => {
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung bearbeiten')
+    ).not.toBeInTheDocument();
+
     await rendered.fixture.detectChanges();
     await testUtilityFunction;
     await rendered.fixture.detectChanges();

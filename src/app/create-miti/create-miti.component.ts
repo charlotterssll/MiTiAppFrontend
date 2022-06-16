@@ -64,14 +64,14 @@ export class CreateMitiComponent {
     const regexPatternDate = new RegExp(
       '^\\s*((?:19|20)\\d{2})\\-(1[012]|0?[1-9])\\-(3[01]|[12][0-9]|0?[1-9])\\s*$'
     );
-    let flagLocality!: boolean;
-    let flagLocation!: boolean;
-    let flagStreet!: boolean;
-    let flagFirstName!: boolean;
-    let flagLastName!: boolean;
-    let flagAbbreviation!: boolean;
-    let flagTime!: boolean;
-    let flagDate!: boolean;
+    let flagLocality: boolean = false;
+    let flagLocation: boolean = false;
+    let flagStreet: boolean = false;
+    let flagFirstName: boolean = false;
+    let flagLastName: boolean = false;
+    let flagAbbreviation: boolean = false;
+    let flagTime: boolean = false;
+    let flagDate: boolean = false;
 
     if (!regexPatternLocality.test(<string>this.locality)) {
       this.alertLocality =

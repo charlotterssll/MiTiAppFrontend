@@ -100,7 +100,7 @@ export class UpdateMitiComponent implements OnInit {
       !this.mitis.time.value ||
       !this.mitis.date.value
     ) {
-      this.alertNull = 'Null values in any input fields are disallowed';
+      this.alertNull = 'Bitte keine Felder leer lassen';
       console.log('Null values in any input fields are disallowed');
     } else {
       this.youShallMeetRegexPattern();
@@ -120,23 +120,29 @@ export class UpdateMitiComponent implements OnInit {
     const regexPatternDate = new RegExp(
       '^\\s*((?:19|20)\\d{2})\\-(1[012]|0?[1-9])\\-(3[01]|[12][0-9]|0?[1-9])\\s*$'
     );
-    let flagLocality!: boolean;
-    let flagLocation!: boolean;
-    let flagStreet!: boolean;
-    let flagFirstName!: boolean;
-    let flagLastName!: boolean;
-    let flagAbbreviation!: boolean;
-    let flagTime!: boolean;
-    let flagDate!: boolean;
+    let flagLocality: boolean = false;
+    let flagLocation: boolean = false;
+    let flagStreet: boolean = false;
+    let flagFirstName: boolean = false;
+    let flagLastName: boolean = false;
+    let flagAbbreviation: boolean = false;
+    let flagTime: boolean = false;
+    let flagDate: boolean = false;
 
-    if (!regexPatternLocality.test(<string>this.locality)) {
+    if (!regexPatternLocality.test(<string>this.mitis.place.locality.value)) {
       this.alertLocality =
         'Lokal darf verschiedene Zeichen haben, sowie Groß- und Kleinschreibung beinhalten';
-      console.log('Locality can contain different characters and cases');
+      console.log(
+        'Locality can contain different characters, upper cases and lower cases'
+      );
     } else {
       flagLocality = true;
     }
-    if (!regexPatternLocationFirstAndLastName.test(<string>this.location)) {
+    if (
+      !regexPatternLocationFirstAndLastName.test(
+        <string>this.mitis.place.location.value
+      )
+    ) {
       this.alertLocation =
         'Ort darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
       console.log(
@@ -145,17 +151,23 @@ export class UpdateMitiComponent implements OnInit {
     } else {
       flagLocation = true;
     }
-    if (!regexPatternStreetAndNumber.test(<string>this.street)) {
+    if (
+      !regexPatternStreetAndNumber.test(<string>this.mitis.place.street.value)
+    ) {
       this.alertStreet =
-        'Straßename darf nur Buchstaben und/oder beinhalten Bindestriche und muss mit einem Großbuchstaben beginnen, mit einem' +
-        ' Leerzeichen getrennt darf eine Hausnummer angegeben werden';
+        'Straßename darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen, mit einem Leerzeichen' +
+        ' getrennt darf eine Hausnummer angegeben werden';
       console.log(
         'Street must only contain letters and/or dashes and begin with upper case, it may also contain a house number'
       );
     } else {
       flagStreet = true;
     }
-    if (!regexPatternLocationFirstAndLastName.test(<string>this.firstName)) {
+    if (
+      !regexPatternLocationFirstAndLastName.test(
+        <string>this.mitis.employee.firstName.value
+      )
+    ) {
       this.alertFirstName =
         'Vorname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
       console.log(
@@ -164,7 +176,11 @@ export class UpdateMitiComponent implements OnInit {
     } else {
       flagFirstName = true;
     }
-    if (!regexPatternLocationFirstAndLastName.test(<string>this.lastName)) {
+    if (
+      !regexPatternLocationFirstAndLastName.test(
+        <string>this.mitis.employee.lastName.value
+      )
+    ) {
       this.alertLastName =
         'Nachname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
       console.log(
@@ -173,7 +189,11 @@ export class UpdateMitiComponent implements OnInit {
     } else {
       flagLastName = true;
     }
-    if (!regexPatternAbbreviation.test(<string>this.abbreviation)) {
+    if (
+      !regexPatternAbbreviation.test(
+        <string>this.mitis.employee.abbreviation.value
+      )
+    ) {
       this.alertAbbreviation =
         'Kürzel muss aus genau drei Großbuchstaben bestehen';
       console.log(
@@ -182,7 +202,7 @@ export class UpdateMitiComponent implements OnInit {
     } else {
       flagAbbreviation = true;
     }
-    if (!regexPatternTime.test(<string>this.time)) {
+    if (!regexPatternTime.test(<string>this.mitis.time.value)) {
       this.alertTime =
         'Uhrzeit darf nur Zahlen im 24 Stunden Format enthalten. Bei einer einstelligen Zahl bitte eine führende Null angeben, Minuten 00-59, Stunden 00-23';
       console.log(
@@ -191,7 +211,7 @@ export class UpdateMitiComponent implements OnInit {
     } else {
       flagTime = true;
     }
-    if (!regexPatternDate.test(<string>this.date)) {
+    if (!regexPatternDate.test(<string>this.mitis.date.value)) {
       this.alertDate = 'Datum darf nur Zahlen im JJJJ-MM-TT Format enthalten';
       console.log('Date must only contain numbers YYYY-MM-DD format');
     } else {

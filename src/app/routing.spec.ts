@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 describe('An employee wants to route...', () => {
-  let rendered: RenderResult<AppComponent, AppComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -91,6 +91,78 @@ describe('An employee wants to route...', () => {
           },
         ])
       );
+    }),
+    rest.get('http://localhost:8080/miti/1', (req, res, ctx) => {
+      return res(
+        ctx.json({
+          place: {
+            locality: {
+              value: 'Immergrün',
+            },
+            location: {
+              value: 'Oldenburg',
+            },
+            street: {
+              value: 'Poststraße',
+            },
+          },
+          employee: {
+            firstName: {
+              value: 'Hannelore',
+            },
+            lastName: {
+              value: 'Kranz',
+            },
+            abbreviation: {
+              value: 'HKR',
+            },
+          },
+          time: {
+            value: '12:00',
+          },
+          date: {
+            value: '2022-04-01',
+          },
+          mitiId: '1',
+        })
+      );
+    }),
+    rest.get('http://localhost:8080/miti', (req, res, ctx) => {
+      return res(
+        ctx.json([
+          {
+            place: {
+              locality: {
+                value: 'Immergrün',
+              },
+              location: {
+                value: 'Oldenburg',
+              },
+              street: {
+                value: 'Poststraße',
+              },
+            },
+            employee: {
+              firstName: {
+                value: 'Hannelore',
+              },
+              lastName: {
+                value: 'Kranz',
+              },
+              abbreviation: {
+                value: 'HKR',
+              },
+            },
+            time: {
+              value: '12:00',
+            },
+            date: {
+              value: '2022-04-01',
+            },
+            mitiId: '1',
+          },
+        ])
+      );
     })
   );
 
@@ -107,7 +179,7 @@ describe('An employee wants to route...', () => {
   const testUtilityFunctionWithId = new Promise<void>(async (resolve) => {
     const listener = async (request: MockedRequest) => {
       if (request.url.href === 'http://localhost:8080/miti/1') {
-        setTimeout(resolve, 2000);
+        setTimeout(resolve, 0);
         server.events.removeListener('request:end', listener);
       }
     };
@@ -118,7 +190,6 @@ describe('An employee wants to route...', () => {
   beforeEach(async () => {
     rendered = await render(AppComponent, {
       declarations: [
-        AppComponent,
         CreateMitiComponent,
         ReadMitiComponent,
         UpdateMitiComponent,
@@ -137,8 +208,7 @@ describe('An employee wants to route...', () => {
   });
   afterAll(() => server.close());
 
-  //TODO: find the issue why the "testUtilityFunction" does not work here
-  test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting', async () => {
+  test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting (with content validation)', async () => {
     expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
       screen.queryByText('Lunch-Verabredung bearbeiten')
@@ -148,11 +218,20 @@ describe('An employee wants to route...', () => {
     await testUtilityFunction;
     await rendered.fixture.detectChanges();
 
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
+
     fireEvent.click(screen.getByLabelText('button-edit'));
 
-    // should be with Id
     await rendered.fixture.detectChanges();
-    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+    await testUtilityFunctionWithId;
     await rendered.fixture.detectChanges();
 
     expect(
@@ -162,10 +241,18 @@ describe('An employee wants to route...', () => {
       screen.getByText('Lunch-Verabredung bearbeiten')
     ).toBeInTheDocument();
 
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
+
     fireEvent.click(screen.getByLabelText('button-cancel'));
 
     await rendered.fixture.detectChanges();
-    //TODO
     await new Promise((resolve) => {
       setTimeout(resolve, 10);
     });
@@ -175,57 +262,20 @@ describe('An employee wants to route...', () => {
     expect(
       screen.queryByText('Lunch-Verabredung bearbeiten')
     ).not.toBeInTheDocument();
-  });
-
-  /*test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting', async () => {
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
-    expect(
-      screen.queryByText('Mittagstisch bearbeiten')
-    ).not.toBeInTheDocument();
 
     await rendered.fixture.detectChanges();
-    await testUtilityFunction;
-    await rendered.fixture.detectChanges();
-
-    expect(screen.getByText('Immergrün')).toBeInTheDocument();
-    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
-    expect(screen.getByText('Poststraße')).toBeInTheDocument();
-    expect(screen.getByText('Hannelore')).toBeInTheDocument();
-    expect(screen.getByText('Kranz')).toBeInTheDocument();
-    expect(screen.getByText('HKR')).toBeInTheDocument();
-    expect(screen.getByText('12:00')).toBeInTheDocument();
-    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByLabelText('button-edit'));
-
-    await rendered.fixture.detectChanges();
-    await testUtilityFunctionWithId;
-    await rendered.fixture.detectChanges();
-
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
-
-    expect(screen.getByText('Immergrün')).toBeInTheDocument();
-    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
-    expect(screen.getByText('Poststraße')).toBeInTheDocument();
-    expect(screen.getByText('Hannelore')).toBeInTheDocument();
-    expect(screen.getByText('Kranz')).toBeInTheDocument();
-    expect(screen.getByText('HKR')).toBeInTheDocument();
-    expect(screen.getByText('12:00')).toBeInTheDocument();
-    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByLabelText('button-cancel'));
-
-    await rendered.fixture.detectChanges();
-    //TODO
     await new Promise((resolve) => {
       setTimeout(resolve, 10);
     });
     await rendered.fixture.detectChanges();
 
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
-    expect(
-      screen.queryByText('Mittagstisch bearbeiten')
-    ).not.toBeInTheDocument();
-  });*/
+    expect(screen.getByText('Immergrün')).toBeInTheDocument();
+    expect(screen.getByText('Oldenburg')).toBeInTheDocument();
+    expect(screen.getByText('Poststraße')).toBeInTheDocument();
+    expect(screen.getByText('Hannelore')).toBeInTheDocument();
+    expect(screen.getByText('Kranz')).toBeInTheDocument();
+    expect(screen.getByText('HKR')).toBeInTheDocument();
+    expect(screen.getByText('12:00')).toBeInTheDocument();
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
+  });
 });

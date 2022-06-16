@@ -92,6 +92,41 @@ describe('An employee wants to delete...', () => {
         ])
       );
     }),
+    rest.get('http://localhost:8080/miti/1', (req, res, ctx) => {
+      return res(
+        ctx.json({
+          place: {
+            locality: {
+              value: 'Immergrün',
+            },
+            location: {
+              value: 'Oldenburg',
+            },
+            street: {
+              value: 'Poststraße',
+            },
+          },
+          employee: {
+            firstName: {
+              value: 'Hannelore',
+            },
+            lastName: {
+              value: 'Kranz',
+            },
+            abbreviation: {
+              value: 'HKR',
+            },
+          },
+          time: {
+            value: '12:00',
+          },
+          date: {
+            value: '2022-04-01',
+          },
+          mitiId: '1',
+        })
+      );
+    }),
     rest.delete('http://localhost:8080/miti/1', (req, res, ctx) => {
       return res(ctx.status(200));
     }),
@@ -162,13 +197,18 @@ describe('An employee wants to delete...', () => {
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText('button-edit'));
-    /*
+
+    await rendered.fixture.detectChanges();
     await rendered.fixture.detectChanges();
     await testUtilityFunctionWithId;
     await rendered.fixture.detectChanges();
 
-    expect(screen.queryByText('Mittagstisch anlegen')).not.toBeInTheDocument();
-    expect(screen.getByText('Mittagstisch bearbeiten')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Lunch-Verabredung bearbeiten')
+    ).toBeInTheDocument();
 
     expect(screen.getByText('Immergrün')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
@@ -178,25 +218,27 @@ describe('An employee wants to delete...', () => {
     expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
-/*
+
     fireEvent.click(screen.getByLabelText('button-delete'));
 
     await rendered.fixture.detectChanges();
-    await testUtilityFunctionWithId;
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
     await rendered.fixture.detectChanges();
 
-    expect(screen.getByText('Mittagstisch anlegen')).toBeInTheDocument();
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
-      screen.queryByText('Mittagstisch bearbeiten')
+      screen.queryByText('Lunch-Verabredung bearbeiten')
     ).not.toBeInTheDocument();
 
     expect(screen.queryByText('Immergrün')).not.toBeInTheDocument();
     expect(screen.queryByText('Oldenburg')).not.toBeInTheDocument();
-    expect(screen.queryByText('Poststraße')).toBeInTheDocument();
+    expect(screen.queryByText('Poststraße')).not.toBeInTheDocument();
     expect(screen.queryByText('Hannelore')).not.toBeInTheDocument();
     expect(screen.queryByText('Kranz')).not.toBeInTheDocument();
-    expect(screen.queryByText('HKR')).toBeInTheDocument();
+    expect(screen.queryByText('HKR')).not.toBeInTheDocument();
     expect(screen.queryByText('12:00')).not.toBeInTheDocument();
-    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();*/
+    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();
   });
 });
