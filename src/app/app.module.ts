@@ -11,6 +11,8 @@ import { UpdateMitiComponent } from './update-miti/update-miti.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { RouterModule } from '@angular/router';
     ReadMitiComponent,
     DeleteMitiComponent,
     UpdateMitiComponent,
+    LoginComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
