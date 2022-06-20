@@ -1,10 +1,9 @@
 <div aria-label="login-component">
-  <h2 aria-label="title-login-component">Willkommen bei der MitiApp!</h2>
-  <p class="descriptionStyle">
+  <p aria-label="text-login" class="descriptionStyle">
     Bitte gebe dein Kürzel und Passwort ein, um dich anzumelden.
   </p>
   <form aria-label="form-login">
-    <table class="tableStyle">
+    <table aria-label="table-login" class="tableStyle">
       <tr>
         <th>
           <label
@@ -43,7 +42,7 @@
             id="input-login-password"
             name="input-login-password"
             aria-label="input-login-password"
-            type="text"
+            type="password"
             placeholder="Passwort"
             [(ngModel)]="password"
           />
@@ -52,7 +51,25 @@
       <br />
       <tr>
         <td>
-          <button aria-label="button-login" type="submit">Anmelden</button>
+          <button
+            aria-label="button-login"
+            type="submit"
+            (click)="loginEmployee()"
+          >
+            Anmelden
+          </button>
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td>
+          <a
+            aria-label="button-not-yet-registered"
+            type="submit"
+            routerLink="/register"
+            >Noch nicht registriert? Dann klicke hier, um dich zu
+            registrieren.</a
+          >
         </td>
       </tr>
     </table>

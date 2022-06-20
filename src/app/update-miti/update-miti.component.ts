@@ -250,7 +250,7 @@ export class UpdateMitiComponent implements OnInit {
       () => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['']);
+        this.router.navigate(['/mitiapp']);
         console.log('UPDATE Miti: ', this.mitiId);
       },
       (error) => {
@@ -269,7 +269,7 @@ export class UpdateMitiComponent implements OnInit {
 
   returnToView() {
     this.router.navigateByUrl('update/:id').then(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/mitiapp']);
     });
   }
 

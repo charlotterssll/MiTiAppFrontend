@@ -21,7 +21,7 @@
         <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
         <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
-      <tr *ngFor="let miti of mitis" style="vertical-align: top">
+      <tr *ngFor="let miti of mitis" class="tableDataRowStyle">
         <td class="tableDataStyle" aria-label="table-item-firstName">
           {{ miti.employee.firstName.value }} <br />
           <button aria-label="button-participate" type="submit">

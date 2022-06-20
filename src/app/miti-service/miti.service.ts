@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Miti } from '../domain/miti/Miti';
 
 @Injectable({
@@ -9,24 +9,47 @@ export class MitiService {
   constructor(private httpClient: HttpClient) {}
 
   urlFetchMiti = 'http://localhost:8080/miti';
+  abbreviation = 'HKR';
+  password = 'pwd';
 
   readMiti() {
-    return this.httpClient.get<Miti[]>(this.urlFetchMiti);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(this.abbreviation + ':' + this.password),
+    });
+    return this.httpClient.get<Miti[]>(this.urlFetchMiti, { headers });
   }
 
   readMitiByMitiId(mitiId: string) {
-    return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(this.abbreviation + ':' + this.password),
+    });
+    return this.httpClient.get<Miti>(this.urlFetchMiti + '/' + mitiId, {
+      headers,
+    });
   }
 
   createMiti(mitiJson: Object) {
-    return this.httpClient.post(this.urlFetchMiti, mitiJson);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(this.abbreviation + ':' + this.password),
+    });
+    return this.httpClient.post(this.urlFetchMiti, mitiJson, { headers });
   }
 
   updateMiti(mitiId: string, mitiJson: Object) {
-    return this.httpClient.put(this.urlFetchMiti + '/' + mitiId, mitiJson);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(this.abbreviation + ':' + this.password),
+    });
+    return this.httpClient.put(this.urlFetchMiti + '/' + mitiId, mitiJson, {
+      headers,
+    });
   }
 
   deleteMiti(mitiId: string) {
-    return this.httpClient.delete(this.urlFetchMiti + '/' + mitiId);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa(this.abbreviation + ':' + this.password),
+    });
+    return this.httpClient.delete(this.urlFetchMiti + '/' + mitiId, {
+      headers,
+    });
   }
 }

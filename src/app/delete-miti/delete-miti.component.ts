@@ -20,7 +20,7 @@ export class DeleteMitiComponent implements OnInit {
     return this.mitiService.deleteMiti(mitiId).subscribe(() => {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(['']);
+      this.router.navigate(['/mitiapp']);
       console.log('DELETE Miti:', mitiId);
     });
   }

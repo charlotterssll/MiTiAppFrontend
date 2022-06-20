@@ -1,1 +1,93 @@
-<p>registration works!</p>
+<div aria-label="register-component">
+  <h2 aria-label="title-register-component">Willkommen bei der MitiApp!</h2>
+  <p aria-label="text-register" class="descriptionStyle">
+    Bitte gebe deinen Vornamen, Nachnamen und Kürzel ein, um dich zu
+    registrieren.
+  </p>
+  <form aria-label="form-register">
+    <table aria-label="table-register" class="tableStyle">
+      <tr>
+        <th>
+          <label
+            id="label-register-firstName"
+            name="label-register-firstName"
+            aria-label="label-register-firstName"
+            >Vorname</label
+          >
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            id="input-register-firstName"
+            name="input-register-firstName"
+            aria-label="input-register-firstName"
+            type="text"
+            placeholder="Vorname"
+            [(ngModel)]="firstName"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label
+            id="label-register-lastName"
+            name="label-register-lastName"
+            aria-label="label-register-lastName"
+            >Nachname</label
+          >
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            id="input-register-lastName"
+            name="input-register-lastName"
+            aria-label="input-register-lastName"
+            type="text"
+            placeholder="Nachname"
+            [(ngModel)]="lastName"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label
+            id="label-register-abbreviation"
+            name="label-register-abbreviation"
+            aria-label="label-register-abbreviation"
+            >Kürzel</label
+          >
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            id="input-register-abbreviation"
+            name="input-register-abbreviation"
+            aria-label="input-register-abbreviation"
+            type="text"
+            placeholder="Kürzel"
+            [(ngModel)]="abbreviation"
+          />
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td>
+          <button aria-label="button-register" type="submit">
+            Registrieren
+          </button>
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td>
+          <a aria-label="button-already-registered" type="submit" routerLink=""
+            >Bereits registriert? Dann klicke hier, um dich anzumelden.</a
+          >
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
