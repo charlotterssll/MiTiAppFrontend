@@ -17,9 +17,12 @@ import { AppRoutingModule } from '../app-routing.module';
 import { CreateMitiComponent } from '../create-miti/create-miti.component';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
+import { AppComponent } from '../app.component';
+import userEvent from '@testing-library/user-event';
+import { BrowserModule } from '@angular/platform-browser';
 
 describe('An employee wants to delete...', () => {
-  let rendered: RenderResult<ReadMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -54,7 +57,12 @@ describe('An employee wants to delete...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(200), ctx.json(dummyMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -90,7 +98,14 @@ describe('An employee wants to delete...', () => {
             },
             mitiId: '1',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.get('http://localhost:8080/miti/1', (req, res, ctx) => {
@@ -125,14 +140,27 @@ describe('An employee wants to delete...', () => {
             value: '2022-04-01',
           },
           mitiId: '1',
-        })
+        }),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.delete('http://localhost:8080/miti/1', (req, res, ctx) => {
-      return res(ctx.status(200));
+      return res(ctx.status(200), (res) => {
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
-      return res(ctx.json([]));
+      return res(ctx.json([]), (res) => {
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     })
   );
 
@@ -158,14 +186,23 @@ describe('An employee wants to delete...', () => {
 
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(ReadMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
+        AppComponent,
         CreateMitiComponent,
         ReadMitiComponent,
-        UpdateMitiComponent,
         DeleteMitiComponent,
+        UpdateMitiComponent,
+        LoginComponent,
+        RegistrationComponent,
       ],
-      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+      ],
       routes: [
         { path: '', component: LoginComponent, pathMatch: 'full' },
         { path: 'register', component: RegistrationComponent },
@@ -181,6 +218,34 @@ describe('An employee wants to delete...', () => {
   afterAll(() => server.close());
 
   test('...an existing lunch table meeting', async () => {
+    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+
+    await userEvent.clear(screen.getByLabelText('input-login-abbreviation'));
+    await userEvent.clear(screen.getByLabelText('input-login-password'));
+
+    userEvent.type(screen.getByLabelText('input-login-abbreviation'), 'HKR');
+    userEvent.type(screen.getByLabelText('input-login-password'), 'pwd');
+
+    expect(screen.getByLabelText('input-login-abbreviation')).toHaveValue(
+      'HKR'
+    );
+    expect(screen.getByLabelText('input-login-password')).toHaveValue('pwd');
+
+    fireEvent.click(screen.getByLabelText('button-login'));
+
+    await rendered.fixture.detectChanges();
+    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+
+    await rendered.fixture.detectChanges();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
+    await rendered.fixture.detectChanges();
+
     expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
       screen.queryByText('Lunch-Verabredung bearbeiten')
@@ -199,7 +264,7 @@ describe('An employee wants to delete...', () => {
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
-    /*fireEvent.click(screen.getByLabelText('button-edit'));
+    fireEvent.click(screen.getByLabelText('button-edit'));
 
     await rendered.fixture.detectChanges();
     await rendered.fixture.detectChanges();
@@ -242,6 +307,6 @@ describe('An employee wants to delete...', () => {
     expect(screen.queryByText('Kranz')).not.toBeInTheDocument();
     expect(screen.queryByText('HKR')).not.toBeInTheDocument();
     expect(screen.queryByText('12:00')).not.toBeInTheDocument();
-    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();*/
+    expect(screen.queryByText('2022-04-01')).not.toBeInTheDocument();
   });
 });

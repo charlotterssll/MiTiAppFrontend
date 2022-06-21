@@ -17,9 +17,12 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import userEvent from '@testing-library/user-event';
 
 describe('An employee wants to route...', () => {
-  let rendered: RenderResult<ReadMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -54,7 +57,12 @@ describe('An employee wants to route...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(200), ctx.json(dummyMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -90,7 +98,14 @@ describe('An employee wants to route...', () => {
             },
             mitiId: '1',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.get('http://localhost:8080/miti/1', (req, res, ctx) => {
@@ -125,7 +140,14 @@ describe('An employee wants to route...', () => {
             value: '2022-04-01',
           },
           mitiId: '1',
-        })
+        }),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
@@ -162,7 +184,14 @@ describe('An employee wants to route...', () => {
             },
             mitiId: '1',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     })
   );
@@ -189,17 +218,24 @@ describe('An employee wants to route...', () => {
 
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(ReadMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
+        AppComponent,
         CreateMitiComponent,
         ReadMitiComponent,
-        UpdateMitiComponent,
         DeleteMitiComponent,
+        UpdateMitiComponent,
+        LoginComponent,
+        RegistrationComponent,
       ],
-      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+      ],
       routes: [
-        { path: '', component: ReadMitiComponent, pathMatch: 'full' },
-        { path: 'update/:id', component: UpdateMitiComponent },
         { path: '', component: LoginComponent, pathMatch: 'full' },
         { path: 'register', component: RegistrationComponent },
         { path: 'mitiapp', component: ReadMitiComponent },
@@ -214,6 +250,34 @@ describe('An employee wants to route...', () => {
   afterAll(() => server.close());
 
   test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting (with content validation)', async () => {
+    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+
+    await userEvent.clear(screen.getByLabelText('input-login-abbreviation'));
+    await userEvent.clear(screen.getByLabelText('input-login-password'));
+
+    userEvent.type(screen.getByLabelText('input-login-abbreviation'), 'HKR');
+    userEvent.type(screen.getByLabelText('input-login-password'), 'pwd');
+
+    expect(screen.getByLabelText('input-login-abbreviation')).toHaveValue(
+      'HKR'
+    );
+    expect(screen.getByLabelText('input-login-password')).toHaveValue('pwd');
+
+    fireEvent.click(screen.getByLabelText('button-login'));
+
+    await rendered.fixture.detectChanges();
+    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+
+    await rendered.fixture.detectChanges();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
+    await rendered.fixture.detectChanges();
+
     expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
       screen.queryByText('Lunch-Verabredung bearbeiten')
@@ -232,7 +296,7 @@ describe('An employee wants to route...', () => {
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
-    /*fireEvent.click(screen.getByLabelText('button-edit'));
+    fireEvent.click(screen.getByLabelText('button-edit'));
 
     await rendered.fixture.detectChanges();
     await rendered.fixture.detectChanges();
@@ -281,6 +345,6 @@ describe('An employee wants to route...', () => {
     expect(screen.getByText('Kranz')).toBeInTheDocument();
     expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
-    expect(screen.getByText('2022-04-01')).toBeInTheDocument();*/
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
   });
 });

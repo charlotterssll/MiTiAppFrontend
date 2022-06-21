@@ -43,7 +43,12 @@ describe('An employee wants to read...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(200), ctx.json(dummyMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
       let dummyMiti: Miti = {
@@ -77,7 +82,12 @@ describe('An employee wants to read...', () => {
         },
         mitiId: '2',
       };
-      return res(ctx.status(200), ctx.json(dummyMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -144,7 +154,14 @@ describe('An employee wants to read...', () => {
             },
             mitiId: '2',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     })
   );

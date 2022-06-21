@@ -18,6 +18,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import userEvent from '@testing-library/user-event';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
+import { AppComponent } from '../app.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 /*
 describe('An employee does not want to fill in null values when...', () => {
@@ -686,7 +688,7 @@ describe('An employee wants to meet the regular expression requirements when...'
 */
 
 describe('An employee wants to update...', () => {
-  let rendered: RenderResult<ReadMitiComponent>;
+  let rendered: RenderResult<AppComponent>;
 
   const server = setupServer(
     rest.post('http://localhost:8080/miti', (req, res, ctx) => {
@@ -721,7 +723,12 @@ describe('An employee wants to update...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(200), ctx.json(dummyMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -757,7 +764,14 @@ describe('An employee wants to update...', () => {
             },
             mitiId: '1',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.get('http://localhost:8080/miti/1', (req, res, ctx) => {
@@ -792,7 +806,14 @@ describe('An employee wants to update...', () => {
             value: '2022-04-01',
           },
           mitiId: '1',
-        })
+        }),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     }),
     rest.put('http://localhost:8080/miti/1', (req, res, ctx) => {
@@ -827,7 +848,12 @@ describe('An employee wants to update...', () => {
         },
         mitiId: '1',
       };
-      return res(ctx.status(200), ctx.json(dummyEditedMiti));
+      return res((res) => {
+        ctx.status(200);
+        ctx.json(dummyEditedMiti);
+        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
+        return res;
+      });
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -863,7 +889,14 @@ describe('An employee wants to update...', () => {
             },
             mitiId: '1',
           },
-        ])
+        ]),
+        (res) => {
+          res.headers.set(
+            'Authorization',
+            'Basic ' + btoa('HKR' + ':' + 'pwd')
+          );
+          return res;
+        }
       );
     })
   );
@@ -871,6 +904,50 @@ describe('An employee wants to update...', () => {
   const testUtilityFunction = new Promise<void>(async (resolve) => {
     const listener = async (request: MockedRequest) => {
       if (request.url.href === 'http://localhost:8080/miti') {
+        setTimeout(resolve, 0);
+        server.events.removeListener('request:end', listener);
+      }
+    };
+    server.events.on('request:end', listener);
+  });
+
+  const testUtilityFunctionUpdate = new Promise<void>(async (resolve) => {
+    let dummyEditedMiti: Miti = {
+      place: {
+        locality: {
+          value: 'Sultan',
+        },
+        location: {
+          value: 'Oldenburg',
+        },
+        street: {
+          value: 'Ritterstraße',
+        },
+      },
+      employee: {
+        firstName: {
+          value: 'Hannelore',
+        },
+        lastName: {
+          value: 'Kranz',
+        },
+        abbreviation: {
+          value: 'HKR',
+        },
+      },
+      time: {
+        value: '12:00',
+      },
+      date: {
+        value: '2022-04-01',
+      },
+      mitiId: '1',
+    };
+    const listener = async (request: MockedRequest) => {
+      if (
+        request.body === dummyEditedMiti &&
+        request.url.href === 'http://localhost:8080/miti'
+      ) {
         setTimeout(resolve, 0);
         server.events.removeListener('request:end', listener);
       }
@@ -890,14 +967,23 @@ describe('An employee wants to update...', () => {
 
   beforeAll(() => server.listen());
   beforeEach(async () => {
-    rendered = await render(ReadMitiComponent, {
+    rendered = await render(AppComponent, {
       declarations: [
+        AppComponent,
         CreateMitiComponent,
         ReadMitiComponent,
-        UpdateMitiComponent,
         DeleteMitiComponent,
+        UpdateMitiComponent,
+        LoginComponent,
+        RegistrationComponent,
       ],
-      imports: [FormsModule, HttpClientModule, RouterModule, AppRoutingModule],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+      ],
       routes: [
         { path: '', component: LoginComponent, pathMatch: 'full' },
         { path: 'register', component: RegistrationComponent },
@@ -913,6 +999,34 @@ describe('An employee wants to update...', () => {
   afterAll(() => server.close());
 
   test('...all the items on an existing lunch table meeting', async () => {
+    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+
+    await userEvent.clear(screen.getByLabelText('input-login-abbreviation'));
+    await userEvent.clear(screen.getByLabelText('input-login-password'));
+
+    userEvent.type(screen.getByLabelText('input-login-abbreviation'), 'HKR');
+    userEvent.type(screen.getByLabelText('input-login-password'), 'pwd');
+
+    expect(screen.getByLabelText('input-login-abbreviation')).toHaveValue(
+      'HKR'
+    );
+    expect(screen.getByLabelText('input-login-password')).toHaveValue('pwd');
+
+    fireEvent.click(screen.getByLabelText('button-login'));
+
+    await rendered.fixture.detectChanges();
+    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+
+    await rendered.fixture.detectChanges();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 10);
+    });
+    await rendered.fixture.detectChanges();
+
     expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
     expect(
       screen.queryByText('Lunch-Verabredung bearbeiten')
@@ -931,7 +1045,7 @@ describe('An employee wants to update...', () => {
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
 
-    /*fireEvent.click(screen.getByLabelText('button-edit'));
+    fireEvent.click(screen.getByLabelText('button-edit'));
 
     await rendered.fixture.detectChanges();
     await rendered.fixture.detectChanges();
@@ -991,7 +1105,7 @@ describe('An employee wants to update...', () => {
     expect(screen.getByLabelText('input-time')).toHaveValue('12:00');
     expect(screen.getByLabelText('input-date')).toHaveValue('2022-04-01');
 
-    fireEvent.click(screen.getByLabelText('button-update'));
+    /*fireEvent.click(screen.getByLabelText('button-update'));
 
     await rendered.fixture.detectChanges();
     await rendered.fixture.detectChanges();
@@ -1013,8 +1127,8 @@ describe('An employee wants to update...', () => {
     await new Promise((resolve) => {
       setTimeout(resolve, 10);
     });
-    await rendered.fixture.detectChanges();*/
-    /*
+    await rendered.fixture.detectChanges();
+
     expect(screen.getByText('Sultan')).toBeInTheDocument();
     expect(screen.getByText('Oldenburg')).toBeInTheDocument();
     expect(screen.getByText('Ritterstraße')).toBeInTheDocument();
@@ -1022,7 +1136,6 @@ describe('An employee wants to update...', () => {
     expect(screen.getByText('Kranz')).toBeInTheDocument();
     expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
-    expect(screen.getByText('2022-04-01')).toBeInTheDocument();
-*/
+    expect(screen.getByText('2022-04-01')).toBeInTheDocument();*/
   });
 });
