@@ -7,7 +7,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
-  registerEmployee() {}
+  registerEmployee(username?: string, email?: string, password?: string) {
+    return this.httpClient.post('http://localhost:8080/api/auth/signup', {
+      username,
+      email,
+      password,
+    });
+  }
+
+  signInEmployee(username?: string, password?: string) {
+    return this.httpClient.post('http://localhost:8080/api/auth/signin', {
+      username,
+      password,
+    });
+  }
 
   loginEmployee(user?: string, password?: string) {
     const headers = new HttpHeaders({

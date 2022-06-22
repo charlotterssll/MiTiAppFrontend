@@ -4,7 +4,7 @@
     Bitte gebe deinen Vornamen, Nachnamen und Kürzel ein, um dich zu
     registrieren.
   </p>
-  <form aria-label="form-register">
+  <form aria-label="form-register" *ngIf="!isSuccessful">
     <table aria-label="table-register" class="tableStyle">
       <tr>
         <th>
@@ -75,7 +75,11 @@
       <br />
       <tr>
         <td>
-          <button aria-label="button-register" type="submit">
+          <button
+            aria-label="button-register"
+            type="submit"
+            (click)="registerEmployee()"
+          >
             Registrieren
           </button>
         </td>
