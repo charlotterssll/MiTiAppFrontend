@@ -998,6 +998,14 @@ describe('An employee wants to update...', () => {
   });
   afterAll(() => server.close());
 
+  test('...all the items on an existing lunch table meeting -- dummytest', async () => {
+    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Lunch-Verabredung anlegen')
+    ).not.toBeInTheDocument();
+  });
+
+  /*
   test('...all the items on an existing lunch table meeting', async () => {
     expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
     expect(
@@ -1137,5 +1145,4 @@ describe('An employee wants to update...', () => {
     expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();*/
-  });
 });
