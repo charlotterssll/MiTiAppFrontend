@@ -1,15 +1,15 @@
 <div aria-label="login-component">
-  <h2 aria-label="title-login-component">Login MitiApp</h2>
-  <p aria-label="text-login" class="descriptionStyle">
-    Bitte gebe dein Kürzel und Passwort ein, um dich anzumelden.
-  </p>
   <form
-    *ngIf="isLoggedIn"
+    *ngIf="!isLoggedIn"
     aria-label="form-login"
     (ngSubmit)="f.form.valid && signInEmployee()"
     #f="ngForm"
     novalidate
   >
+    <h2 aria-label="title-login-component">Login MitiApp</h2>
+    <p aria-label="text-login" class="descriptionStyle">
+      Bitte gebe dein Kürzel und Passwort ein, um dich anzumelden.
+    </p>
     <table aria-label="table-login" class="tableStyle">
       <tr>
         <th>
@@ -17,7 +17,7 @@
             id="label-login-abbreviation"
             name="label-login-abbreviation"
             aria-label="label-login-abbreviation"
-            >Kürzel</label
+            >Kürzel (Benutzername)</label
           >
         </th>
       </tr>
@@ -58,6 +58,9 @@
       <br />
       <tr>
         <td>
+          <button aria-label="button-cancel" type="submit" routerLink="/home">
+            Abbrechen
+          </button>
           <button aria-label="button-login" type="submit">Anmelden</button>
         </td>
       </tr>
@@ -73,6 +76,7 @@
           >
         </td>
       </tr>
+      <br />
       <tr>
         <div class="form-group">
           <div
@@ -81,6 +85,9 @@
             *ngIf="f.submitted && isLoginFailed"
           >
             Login fehlgeschlagen
+            <br />
+            <br />
+            {{ errorMessage }}
           </div>
         </div>
       </tr>

@@ -1,4 +1,7 @@
-<div aria-label="update-lunch-table-component">
+<div
+  aria-label="update-lunch-table-component"
+  *ngIf="isLoggedIn; else loggedOut"
+>
   <h2 aria-label="title-update-lunch-table-component">
     Lunch-Verabredung bearbeiten
   </h2>
@@ -263,3 +266,4 @@
   <br />
   <app-deletemiti></app-deletemiti>
 </div>
+<ng-template #loggedOut> Bitte einloggen. </ng-template>

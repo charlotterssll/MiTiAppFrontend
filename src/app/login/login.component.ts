@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
           this.users = this.tokenStorage.getUser().users;
-          this.router.navigate(['/mitiapp']);
+          this.reloadPage();
+          //this.router.navigate(['/mitiapp']);
         },
         error: (err) => {
           this.errorMessage = err.error.message;
@@ -44,12 +45,11 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  /*
   reloadPage(): void {
     window.location.reload();
   }
 
-  loginEmployee() {
+  /*loginEmployee() {
     return this.authService
       .loginEmployee(this.abbreviation, this.password)
       .subscribe(() => {

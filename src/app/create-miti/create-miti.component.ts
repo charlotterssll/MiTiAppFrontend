@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MitiService } from '../_services/miti.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenstorageService } from '../_services/tokenstorage.service';
 
 @Component({
   selector: 'app-createmiti',
   templateUrl: './create-miti.component.html',
   styleUrls: ['./create-miti.component.css'],
 })
-export class CreateMitiComponent {
+export class CreateMitiComponent implements OnInit {
   locality?: string;
   location?: string;
   street?: string;
@@ -26,11 +27,14 @@ export class CreateMitiComponent {
   alertTime?: string;
   alertDate?: string;
   alertMitiAlreadyExists?: string;
+  currentUser: any;
+  isLoggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mitiService: MitiService
+    private mitiService: MitiService,
+    private token: TokenstorageService
   ) {}
 
   youShallNotPassNullValues() {
@@ -191,5 +195,15 @@ export class CreateMitiComponent {
         }
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.token.getUser();
+
+      this.currentUser = user.username;
+    }
   }
 }

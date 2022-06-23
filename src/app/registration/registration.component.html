@@ -1,14 +1,16 @@
 <div aria-label="register-component">
-  <h2 aria-label="title-register-component">Registrierung MitiApp</h2>
-  <p aria-label="text-register" class="descriptionStyle">
-    Bitte gebe deinen Vornamen, Nachnamen und Kürzel ein, um dich zu
-    registrieren.
-  </p>
   <form
-    (ngSubmit)="registerEmployee()"
+    (ngSubmit)="f.form.valid && registerEmployee()"
     aria-label="form-register"
     *ngIf="!isSuccessful"
+    #f="ngForm"
+    novalidate
   >
+    <h2 aria-label="title-register-component">Registrierung MitiApp</h2>
+    <p aria-label="text-register" class="descriptionStyle">
+      Bitte gebe deinen Vornamen, Nachnamen und Kürzel ein, um dich zu
+      registrieren.
+    </p>
     <table aria-label="table-register" class="tableStyle">
       <tr>
         <th>
@@ -16,7 +18,7 @@
             id="label-register-firstName"
             name="label-register-firstName"
             aria-label="label-register-firstName"
-            >Vorname</label
+            >Vorname (Benutzername)</label
           >
         </th>
       </tr>
@@ -38,7 +40,7 @@
             id="label-register-lastName"
             name="label-register-lastName"
             aria-label="label-register-lastName"
-            >Nachname</label
+            >Nachname (E-Mail)</label
           >
         </th>
       </tr>
@@ -60,7 +62,7 @@
             id="label-register-abbreviation"
             name="label-register-abbreviation"
             aria-label="label-register-abbreviation"
-            >Kürzel</label
+            >Kürzel (Passwort)</label
           >
         </th>
       </tr>
@@ -70,7 +72,7 @@
             id="input-register-abbreviation"
             name="input-register-abbreviation"
             aria-label="input-register-abbreviation"
-            type="text"
+            type="password"
             placeholder="Kürzel"
             [(ngModel)]="abbreviation"
           />
@@ -79,27 +81,37 @@
       <br />
       <tr>
         <td>
-          <button aria-label="button-register">Registrieren</button>
+          <button aria-label="button-cancel" type="submit" routerLink="/home">
+            Abbrechen
+          </button>
+          <button aria-label="button-register" type="submit">
+            Registrieren
+          </button>
         </td>
       </tr>
       <br />
       <tr>
         <td>
-          <a aria-label="button-already-registered" type="submit" routerLink=""
+          <a
+            aria-label="button-already-registered"
+            type="submit"
+            routerLink="/login"
             >Bereits registriert? Dann klicke hier, um dich anzumelden.</a
           >
         </td>
       </tr>
-      <tr class="alert alert-warning" *ngIf="isSignUpFailed">
+      <br />
+      <tr class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
         Registrierung war nicht erfolgreich
+        <br />
         <br />
         {{
           errorMessage
         }}
       </tr>
-      <tr class="alert alert-success" *ngIf="isSuccessful">
-        Erfolgreich registriert
-      </tr>
     </table>
   </form>
+  <div class="alert alert-success" *ngIf="isSuccessful">
+    Erfolgreich registriert
+  </div>
 </div>

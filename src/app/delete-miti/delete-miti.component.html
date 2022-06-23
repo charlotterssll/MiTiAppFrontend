@@ -1,5 +1,9 @@
-<div aria-label="delete-lunch-table-component">
+<div
+  aria-label="delete-lunch-table-component"
+  *ngIf="isLoggedIn; else loggedOut"
+>
   <button aria-label="button-delete" type="submit" (click)="deleteMiti(mitiId)">
     Löschen
   </button>
 </div>
+<ng-template #loggedOut> Bitte einloggen. </ng-template>

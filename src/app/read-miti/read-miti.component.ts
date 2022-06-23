@@ -10,6 +10,7 @@ import { TokenstorageService } from '../_services/tokenstorage.service';
 })
 export class ReadMitiComponent implements OnInit {
   currentUser: any;
+  isLoggedIn = false;
   mitis?: Miti[];
 
   constructor(
@@ -25,7 +26,13 @@ export class ReadMitiComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.token.getUser();
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.token.getUser();
+
+      this.currentUser = user.username;
+    }
     this.readMiti();
   }
 }

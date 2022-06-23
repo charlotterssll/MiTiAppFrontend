@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Miti } from '../domain/miti/Miti';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MitiService } from '../_services/miti.service';
+import { TokenstorageService } from '../_services/tokenstorage.service';
 
 @Component({
   selector: 'app-updatemiti',
@@ -59,11 +60,14 @@ export class UpdateMitiComponent implements OnInit {
   alertTime?: string;
   alertDate?: string;
   alertMitiAlreadyExists?: string;
+  currentUser: any;
+  isLoggedIn = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mitiService: MitiService
+    private mitiService: MitiService,
+    private token: TokenstorageService
   ) {}
 
   readMitiByMitiId(mitiId: string) {
@@ -274,6 +278,13 @@ export class UpdateMitiComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.token.getUser();
+
+      this.currentUser = user.username;
+    }
     this.mitiId = this.route.snapshot.params['id'];
     this.readMitiByMitiId(this.mitiId);
   }
