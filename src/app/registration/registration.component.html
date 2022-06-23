@@ -4,7 +4,11 @@
     Bitte gebe deinen Vornamen, Nachnamen und Kürzel ein, um dich zu
     registrieren.
   </p>
-  <form aria-label="form-register" *ngIf="!isSuccessful">
+  <form
+    (ngSubmit)="registerEmployee()"
+    aria-label="form-register"
+    *ngIf="!isSuccessful"
+  >
     <table aria-label="table-register" class="tableStyle">
       <tr>
         <th>
@@ -75,13 +79,7 @@
       <br />
       <tr>
         <td>
-          <button
-            aria-label="button-register"
-            type="submit"
-            (click)="registerEmployee()"
-          >
-            Registrieren
-          </button>
+          <button aria-label="button-register">Registrieren</button>
         </td>
       </tr>
       <br />
@@ -91,6 +89,16 @@
             >Bereits registriert? Dann klicke hier, um dich anzumelden.</a
           >
         </td>
+      </tr>
+      <tr class="alert alert-warning" *ngIf="isSignUpFailed">
+        Registrierung war nicht erfolgreich
+        <br />
+        {{
+          errorMessage
+        }}
+      </tr>
+      <tr class="alert alert-success" *ngIf="isSuccessful">
+        Erfolgreich registriert
       </tr>
     </table>
   </form>

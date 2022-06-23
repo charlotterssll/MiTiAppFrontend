@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MitiService } from '../miti-service/miti.service';
+import { MitiService } from '../_services/miti.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

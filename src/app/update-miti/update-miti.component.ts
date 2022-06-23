@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Miti } from '../domain/miti/Miti';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MitiService } from '../miti-service/miti.service';
+import { MitiService } from '../_services/miti.service';
 
 @Component({
   selector: 'app-updatemiti',

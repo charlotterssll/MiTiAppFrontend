@@ -3,7 +3,13 @@
   <p aria-label="text-login" class="descriptionStyle">
     Bitte gebe dein Kürzel und Passwort ein, um dich anzumelden.
   </p>
-  <form aria-label="form-login" (ngSubmit)="signInEmployee()">
+  <form
+    *ngIf="isLoggedIn"
+    aria-label="form-login"
+    (ngSubmit)="f.form.valid && signInEmployee()"
+    #f="ngForm"
+    novalidate
+  >
     <table aria-label="table-login" class="tableStyle">
       <tr>
         <th>
@@ -69,14 +75,18 @@
       </tr>
       <tr>
         <div class="form-group">
-          <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
-            Login failed
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed"
+          >
+            Login fehlgeschlagen
           </div>
         </div>
       </tr>
       <tr>
         <div class="alert alert-success" *ngIf="isLoggedIn">
-          Logged in as {{ roles }}.
+          Eingeloggt als {{ users }} und hat die Rolle {{ roles }}.
         </div>
       </tr>
     </table>

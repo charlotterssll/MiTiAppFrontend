@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
-  registerEmployee(username?: string, email?: string, password?: string) {
+  registerEmployee(
+    username?: string,
+    email?: string,
+    password?: string
+  ): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/auth/signup', {
       username,
       email,
@@ -15,13 +20,14 @@ export class AuthService {
     });
   }
 
-  signInEmployee(username?: string, password?: string) {
+  signInEmployee(username?: string, password?: string): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/auth/signin', {
       username,
       password,
     });
   }
 
+  /*
   loginEmployee(user?: string, password?: string) {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(user + ':' + password),
@@ -31,4 +37,5 @@ export class AuthService {
       responseType: 'text' as 'json',
     });
   }
+   */
 }

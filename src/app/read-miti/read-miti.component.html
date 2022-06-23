@@ -1,4 +1,7 @@
-<div aria-label="read-lunch-table-component">
+<div
+  aria-label="read-lunch-table-component"
+  *ngIf="currentUser; else loggedOut"
+>
   <app-createmiti></app-createmiti>
   <br />
   <div aria-label="lunch-table-list">
@@ -62,3 +65,4 @@
     </table>
   </div>
 </div>
+<ng-template #loggedOut> Bitte einloggen. </ng-template>
