@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
           this.users = this.tokenStorage.getUser().users;
-          this.reloadPage();
-          //this.router.navigate(['/mitiapp']);
+          this.router.navigate(['/mitiapp']);
         },
         error: (err) => {
           this.errorMessage = err.error.message;

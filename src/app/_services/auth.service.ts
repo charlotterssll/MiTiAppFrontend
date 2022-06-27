@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,18 +17,26 @@ export class AuthService {
     email?: string,
     password?: string
   ): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/api/auth/signup', {
-      username,
-      email,
-      password,
-    });
+    return this.httpClient.post(
+      'http://localhost:8080/api/auth/signup',
+      {
+        username,
+        email,
+        password,
+      },
+      httpOptions
+    );
   }
 
   signInEmployee(username?: string, password?: string): Observable<any> {
-    return this.httpClient.post('http://localhost:8080/api/auth/signin', {
-      username,
-      password,
-    });
+    return this.httpClient.post(
+      'http://localhost:8080/api/auth/signin',
+      {
+        username,
+        password,
+      },
+      httpOptions
+    );
   }
 
   /*

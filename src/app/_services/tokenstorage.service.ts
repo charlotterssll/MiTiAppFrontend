@@ -28,11 +28,7 @@ export class TokenstorageService {
   }
 
   public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
+    // @ts-ignore
+    return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
 }
