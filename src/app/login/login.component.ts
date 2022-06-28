@@ -9,11 +9,13 @@ import { TokenstorageService } from '../_services/tokenstorage.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  abbreviation?: string;
+  userName?: string;
   password?: string;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  alertNull?: string;
+  alertUserName?: string;
   roles: string[] = [];
   users: string[] = [];
 
@@ -23,25 +25,50 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  signInEmployee() {
-    this.authService
-      .signInEmployee(this.abbreviation, this.password)
-      .subscribe({
-        next: (data) => {
-          this.tokenStorage.saveToken(data.accessToken);
-          this.tokenStorage.saveUser(data);
+  youShallNotPassNullValues() {
+    if (!this.userName) {
+      this.alertNull = 'Bitte keine Felder leer lassen';
+      console.log('Null values in any input fields are disallowed');
+    } else {
+      this.youShallMeetRegexPattern();
+    }
+  }
 
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          this.roles = this.tokenStorage.getUser().roles;
-          this.users = this.tokenStorage.getUser().users;
-          this.router.navigate(['/mitiapp']);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-        },
-      });
+  youShallMeetRegexPattern() {
+    const regexPatternAbbreviation = new RegExp('^[A-ZÄÖÜ]{3}$');
+
+    let flagAbbreviation: boolean = false;
+
+    if (!regexPatternAbbreviation.test(<string>this.userName)) {
+      this.alertUserName = 'Kürzel muss aus genau drei Großbuchstaben bestehen';
+      console.log(
+        'UserName must only contain capital letters and only three characters'
+      );
+    } else {
+      flagAbbreviation = true;
+    }
+    if (flagAbbreviation) {
+      this.signInEmployee();
+    }
+  }
+
+  signInEmployee() {
+    this.authService.signInEmployee(this.userName, this.password).subscribe({
+      next: (data) => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.users = this.tokenStorage.getUser().users;
+        this.router.navigate(['/mitiapp']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      },
+    });
   }
 
   reloadPage(): void {
@@ -50,7 +77,7 @@ export class LoginComponent implements OnInit {
 
   /*loginEmployee() {
     return this.authService
-      .loginEmployee(this.abbreviation, this.password)
+      .loginEmployee(this.userName, this.password)
       .subscribe(() => {
         this.router.navigate(['/mitiapp']);
       });

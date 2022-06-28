@@ -5,7 +5,7 @@ import {
   screen,
 } from '@testing-library/angular';
 import { setupServer } from 'msw/node';
-import {context, MockedRequest, rest} from 'msw';
+import { context, MockedRequest, rest } from 'msw';
 import { Miti } from './domain/miti/Miti';
 import { CreateMitiComponent } from './create-miti/create-miti.component';
 import { ReadMitiComponent } from './read-miti/read-miti.component';
@@ -270,7 +270,7 @@ describe('An employee wants to route...', () => {
     userEvent.type(screen.getByLabelText('input-login-password'), 'qwertz');
 
     fireEvent.click(screen.getByLabelText('button-login'));
-/*
+    /*
     await rendered.fixture.detectChanges();
     await testUtilityFunction;
     await rendered.fixture.detectChanges();
@@ -379,6 +379,6 @@ describe('An employee wants to route...', () => {
     expect(screen.getByText('HKR')).toBeInTheDocument();
     expect(screen.getByText('12:00')).toBeInTheDocument();
     expect(screen.getByText('2022-04-01')).toBeInTheDocument();
-  });
   */
+  });
 });

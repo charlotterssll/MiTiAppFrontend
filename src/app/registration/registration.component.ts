@@ -7,18 +7,47 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
-  firstName?: string;
-  lastName?: string;
-  abbreviation?: string;
+  userName?: string;
+  email?: string;
+  password?: string;
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  alertNull?: string;
+  alertUserName?: string;
 
   constructor(private authService: AuthService) {}
 
+  youShallNotPassNullValues() {
+    if (!this.userName) {
+      this.alertNull = 'Bitte keine Felder leer lassen';
+      console.log('Null values in any input fields are disallowed');
+    } else {
+      this.youShallMeetRegexPattern();
+    }
+  }
+
+  youShallMeetRegexPattern() {
+    const regexPatternAbbreviation = new RegExp('^[A-ZÄÖÜ]{3}$');
+
+    let flagAbbreviation: boolean = false;
+
+    if (!regexPatternAbbreviation.test(<string>this.userName)) {
+      this.alertUserName = 'Kürzel muss aus genau drei Großbuchstaben bestehen';
+      console.log(
+        'UserName must only contain capital letters and only three characters'
+      );
+    } else {
+      flagAbbreviation = true;
+    }
+    if (flagAbbreviation) {
+      this.registerEmployee();
+    }
+  }
+
   registerEmployee() {
     this.authService
-      .registerEmployee(this.firstName, this.lastName, this.abbreviation)
+      .registerEmployee(this.userName, this.email, this.password)
       .subscribe({
         next: (data) => {
           console.log(data);

@@ -2,7 +2,7 @@
   <form
     *ngIf="!isLoggedIn"
     aria-label="form-login"
-    (ngSubmit)="f.form.valid && signInEmployee()"
+    (ngSubmit)="f.form.valid && youShallNotPassNullValues()"
     #f="ngForm"
     novalidate
   >
@@ -14,22 +14,22 @@
       <tr>
         <th>
           <label
-            id="label-login-abbreviation"
-            name="label-login-abbreviation"
-            aria-label="label-login-abbreviation"
-            >Kürzel (Benutzername)</label
+            id="label-login-userName"
+            name="label-login-userName"
+            aria-label="label-login-userName"
+            >Kürzel</label
           >
         </th>
       </tr>
       <tr>
         <td>
           <input
-            id="input-login-abbreviation"
-            name="input-login-abbreviation"
-            aria-label="input-login-abbreviation"
+            id="input-login-userName"
+            name="input-login-userName"
+            aria-label="input-login-userName"
             type="text"
             placeholder="Kürzel"
-            [(ngModel)]="abbreviation"
+            [(ngModel)]="userName"
           />
         </td>
       </tr>
@@ -88,6 +88,10 @@
             <br />
             <br />
             {{ errorMessage }}
+          </div>
+          <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+          <div aria-label="alert-message-invalid-input-abbreviation">
+            {{ alertUserName }}
           </div>
         </div>
       </tr>

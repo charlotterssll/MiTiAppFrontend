@@ -1,6 +1,6 @@
 <div aria-label="register-component">
   <form
-    (ngSubmit)="f.form.valid && registerEmployee()"
+    (ngSubmit)="f.form.valid && youShallNotPassNullValues()"
     aria-label="form-register"
     *ngIf="!isSuccessful"
     #f="ngForm"
@@ -15,66 +15,66 @@
       <tr>
         <th>
           <label
-            id="label-register-firstName"
-            name="label-register-firstName"
-            aria-label="label-register-firstName"
-            >Vorname (Benutzername)</label
+            id="label-register-userName"
+            name="label-register-userName"
+            aria-label="label-register-userName"
+            >Kürzel</label
           >
         </th>
       </tr>
       <tr>
         <td>
           <input
-            id="input-register-firstName"
-            name="input-register-firstName"
-            aria-label="input-register-firstName"
+            id="input-register-userName"
+            name="input-register-userName"
+            aria-label="input-register-userName"
             type="text"
-            placeholder="Vorname"
-            [(ngModel)]="firstName"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label
-            id="label-register-lastName"
-            name="label-register-lastName"
-            aria-label="label-register-lastName"
-            >Nachname (E-Mail)</label
-          >
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <input
-            id="input-register-lastName"
-            name="input-register-lastName"
-            aria-label="input-register-lastName"
-            type="text"
-            placeholder="Nachname"
-            [(ngModel)]="lastName"
-          />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label
-            id="label-register-abbreviation"
-            name="label-register-abbreviation"
-            aria-label="label-register-abbreviation"
-            >Kürzel (Passwort)</label
-          >
-        </th>
-      </tr>
-      <tr>
-        <td>
-          <input
-            id="input-register-abbreviation"
-            name="input-register-abbreviation"
-            aria-label="input-register-abbreviation"
-            type="password"
             placeholder="Kürzel"
-            [(ngModel)]="abbreviation"
+            [(ngModel)]="userName"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label
+            id="label-register-email"
+            name="label-register-email"
+            aria-label="label-register-email"
+            >E-Mail</label
+          >
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            id="input-register-email"
+            name="input-register-email"
+            aria-label="input-register-email"
+            type="text"
+            placeholder="Email"
+            [(ngModel)]="email"
+          />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label
+            id="label-register-password"
+            name="label-register-password"
+            aria-label="label-register-password"
+            >Passwort</label
+          >
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            id="input-register-password"
+            name="input-register-password"
+            aria-label="input-register-password"
+            type="password"
+            placeholder="Passwort"
+            [(ngModel)]="password"
           />
         </td>
       </tr>
@@ -110,6 +110,10 @@
         }}
       </tr>
     </table>
+    <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+    <div aria-label="alert-message-invalid-input-abbreviation">
+      {{ alertUserName }}
+    </div>
   </form>
   <div class="alert alert-success" *ngIf="isSuccessful">
     Erfolgreich registriert
