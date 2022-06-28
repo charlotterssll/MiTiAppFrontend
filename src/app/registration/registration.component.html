@@ -40,7 +40,7 @@
             id="label-register-email"
             name="label-register-email"
             aria-label="label-register-email"
-            >E-Mail</label
+            >Email</label
           >
         </th>
       </tr>
@@ -110,12 +110,18 @@
         }}
       </tr>
     </table>
-    <div aria-label="alert-message-null-values">{{ alertNull }}</div>
-    <div aria-label="alert-message-invalid-input-abbreviation">
-      {{ alertUserName }}
-    </div>
   </form>
   <div class="alert alert-success" *ngIf="isSuccessful">
     Erfolgreich registriert
+  </div>
+  <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+  <div aria-label="alert-message-invalid-input-userName">
+    {{ alertUserName }}
+    <div aria-label="alert-message-invalid-input-email">
+      {{ alertEmail }}
+    </div>
+    <div aria-label="alert-message-invalid-input-password">
+      {{ alertPassword }}
+    </div>
   </div>
 </div>

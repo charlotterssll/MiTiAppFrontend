@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   youShallNotPassNullValues() {
-    if (!this.userName) {
+    if (!this.userName || !this.password) {
       this.alertNull = 'Bitte keine Felder leer lassen';
       console.log('Null values in any input fields are disallowed');
     } else {
@@ -35,19 +35,19 @@ export class LoginComponent implements OnInit {
   }
 
   youShallMeetRegexPattern() {
-    const regexPatternAbbreviation = new RegExp('^[A-ZÄÖÜ]{3}$');
+    const regexPatternUserName = new RegExp('^[A-ZÄÖÜ]{3}$');
 
-    let flagAbbreviation: boolean = false;
+    let flagUserName: boolean = false;
 
-    if (!regexPatternAbbreviation.test(<string>this.userName)) {
+    if (!regexPatternUserName.test(<string>this.userName)) {
       this.alertUserName = 'Kürzel muss aus genau drei Großbuchstaben bestehen';
       console.log(
         'UserName must only contain capital letters and only three characters'
       );
     } else {
-      flagAbbreviation = true;
+      flagUserName = true;
     }
-    if (flagAbbreviation) {
+    if (flagUserName) {
       this.signInEmployee();
     }
   }
