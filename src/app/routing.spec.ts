@@ -5,7 +5,7 @@ import {
   screen,
 } from '@testing-library/angular';
 import { setupServer } from 'msw/node';
-import { MockedRequest, rest } from 'msw';
+import {context, MockedRequest, rest} from 'msw';
 import { Miti } from './domain/miti/Miti';
 import { CreateMitiComponent } from './create-miti/create-miti.component';
 import { ReadMitiComponent } from './read-miti/read-miti.component';
@@ -20,6 +20,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import userEvent from '@testing-library/user-event';
+import { HomeComponent } from './home/home.component';
 
 describe('An employee wants to route...', () => {
   let rendered: RenderResult<AppComponent>;
@@ -57,12 +58,11 @@ describe('An employee wants to route...', () => {
         },
         mitiId: '1',
       };
-      return res((res) => {
-        ctx.status(200);
-        ctx.json(dummyMiti);
-        res.headers.set('Authorization', 'Basic ' + btoa('HKR' + ':' + 'pwd'));
-        return res;
-      });
+      return res(
+        ctx.status(200),
+        ctx.json(dummyMiti),
+        ctx.cookie('auth-token', 'abc-123')
+      );
     }),
     rest.get('http://localhost:8080/miti', (req, res, ctx) => {
       return res(
@@ -227,6 +227,7 @@ describe('An employee wants to route...', () => {
         UpdateMitiComponent,
         LoginComponent,
         RegistrationComponent,
+        HomeComponent,
       ],
       imports: [
         BrowserModule,
@@ -236,7 +237,9 @@ describe('An employee wants to route...', () => {
         AppRoutingModule,
       ],
       routes: [
-        { path: '', component: LoginComponent, pathMatch: 'full' },
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: 'home', component: HomeComponent },
+        { path: 'login', component: LoginComponent },
         { path: 'register', component: RegistrationComponent },
         { path: 'mitiapp', component: ReadMitiComponent },
         { path: 'update/:id', component: UpdateMitiComponent },
@@ -250,13 +253,35 @@ describe('An employee wants to route...', () => {
   afterAll(() => server.close());
 
   test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting (with content validation) -- dummytest', async () => {
-    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(screen.getByText('Willkommen bei der MitiApp')).toBeInTheDocument();
     expect(
       screen.queryByText('Lunch-Verabredung anlegen')
     ).not.toBeInTheDocument();
+
+    expect(screen.getByLabelText('nav-link-login')).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText('nav-link-login'));
+
+    expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Willkommen bei der MitiApp')
+    ).not.toBeInTheDocument();
+
+    userEvent.type(screen.getByLabelText('input-login-abbreviation'), 'HKR');
+    userEvent.type(screen.getByLabelText('input-login-password'), 'qwertz');
+
+    fireEvent.click(screen.getByLabelText('button-login'));
+/*
+    await rendered.fixture.detectChanges();
+    await testUtilityFunction;
+    await rendered.fixture.detectChanges();
+
+    expect(screen.getByText('Lunch-Verabredung anlegen')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Login MitiApp')
+    ).not.toBeInTheDocument();
   });
 
-  /*
+
   test('...from the Update Lunch Table View back to the Read Lunch Table View without editing a lunch table meeting (with content validation)', async () => {
     expect(screen.getByText('Login MitiApp')).toBeInTheDocument();
     expect(
