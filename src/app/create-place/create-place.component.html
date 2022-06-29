@@ -1,0 +1,98 @@
+<div>
+  <h2 aria-label="title-create-place-component">Lokal anlegen</h2>
+  <p class="descriptionStyle">
+    Hier kannst du dein Lieblingslokal mit der dazugehörogen Adresse anlegen.
+    <br />
+    Gib dafür bitte den Namen des Lokals, den Ort und die Straße mit Hausnummer
+    ein. <br />
+    Deine Eingaben kannst du mit dem Button "Anlegen" bestätigen.
+  </p>
+  <br />
+  <div aria-label="create-place-input-form">
+    <form
+      aria-label="form-create-place"
+      (ngSubmit)="youShallNotPassNullValues()"
+    >
+      <table class="tableStyle">
+        <tr>
+          <th>
+            <label
+              id="label-locality"
+              name="label-locality"
+              aria-label="label-locality"
+              >Lokal</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-location"
+              name="label-location"
+              aria-label="label-location"
+              >Ort</label
+            >
+          </th>
+          <th>
+            <label
+              id="label-street"
+              name="label-street"
+              aria-label="label-street"
+              >Straße</label
+            >
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-locality"
+              name="input-locality"
+              aria-label="input-locality"
+              type="text"
+              placeholder="Lokal"
+              [(ngModel)]="locality"
+            />
+          </td>
+          <td>
+            <input
+              id="input-location"
+              name="input-location"
+              aria-label="input-location"
+              type="text"
+              placeholder="Ort"
+              [(ngModel)]="location"
+            />
+          </td>
+          <td>
+            <input
+              id="input-street"
+              name="input-street"
+              aria-label="input-street"
+              type="text"
+              placeholder="Straße"
+              [(ngModel)]="street"
+            />
+          </td>
+        </tr>
+        <br />
+        <tr>
+          <td>
+            <button aria-label="button-create" type="submit">Anlegen</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <br />
+  <div id="alerts" aria-label="alerts">
+    <div aria-label="alert-message-null-values">{{ alertNull }}</div>
+    <div aria-label="alert-message-invalid-input-locality">
+      {{ alertLocality }}
+    </div>
+    <div aria-label="alert-message-invalid-input-location">
+      {{ alertLocation }}
+    </div>
+    <div aria-label="alert-message-invalid-input-street">{{ alertStreet }}</div>
+    <div aria-label="alert-message-invalid-input-place-already-exists">
+      {{ alertPlaceAlreadyExists }}
+    </div>
+  </div>
+</div>
