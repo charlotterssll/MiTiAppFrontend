@@ -27,21 +27,56 @@
       <tr *ngFor="let miti of mitis" class="tableDataRowStyle">
         <td class="tableDataStyle" aria-label="table-item-firstName">
           {{ miti.employee.firstName.value }} <br />
-          <button aria-label="button-participate" type="submit">
-            Teilnehmen
-          </button>
+          <input
+            id="input-firstName"
+            name="input-firstName"
+            aria-label="input-firstName"
+            type="text"
+            placeholder="Vorname"
+            [(ngModel)]="firstName"
+          />
         </td>
         <td class="tableDataStyle" aria-label="table-item-lastName">
-          {{ miti.employee.lastName.value }}
+          {{ miti.employee.lastName.value }} <br />
+          <input
+            id="input-lastName"
+            name="input-lastName"
+            aria-label="input-lastName"
+            type="text"
+            placeholder="Nachname"
+            [(ngModel)]="lastName"
+          />
         </td>
         <td class="tableDataStyle" aria-label="table-item-abbreviation">
-          {{ miti.employee.abbreviation.value }}
+          {{ miti.employee.abbreviation.value }} <br />
+          <input
+            id="input-abbreviation"
+            name="input-abbreviation"
+            aria-label="input-abbreviation"
+            type="text"
+            placeholder="Kürzel"
+            [(ngModel)]="abbreviation"
+          />
         </td>
         <td class="tableDataStyle" aria-label="table-item-locality">
-          {{ miti.place.locality.value }}
+          {{ miti.place.locality.value }} <br />
+          <select
+            id="select-box-locality"
+            name="select-box-locality"
+            aria-label="select-box-locality"
+            #selectedEmployee
+            (change)="selectEmployee(selectedEmployee.value)"
+          >
+            <option value="none" selected disabled hidden>Kolleg*innen</option>
+            <option *ngFor="let employee of employees">
+              {{ employee.firstName.value }}, {{ employee.lastName.value }},
+              {{ employee.abbreviation.value }}
+            </option>
+          </select>
         </td>
         <td class="tableDataStyle" aria-label="table-item-location">
-          {{ miti.place.location.value }}
+          {{ miti.place.location.value }} <br />
+          <button aria-label="button-invite" type="submit">Einladen</button>
         </td>
         <td class="tableDataStyle" aria-label="table-item-street">
           {{ miti.place.street.value }}

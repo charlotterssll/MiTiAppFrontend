@@ -6,9 +6,9 @@ import { Miti } from '../domain/miti/Miti';
   providedIn: 'root',
 })
 export class MitiService {
-  constructor(private httpClient: HttpClient) {}
-
   urlFetchMiti = 'http://localhost:8080/miti';
+
+  constructor(private httpClient: HttpClient) {}
 
   readMiti() {
     return this.httpClient.get<Miti[]>(this.urlFetchMiti);

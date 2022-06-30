@@ -6,9 +6,9 @@ import { Place } from '../domain/place/Place';
   providedIn: 'root',
 })
 export class PlaceService {
-  constructor(private httpClient: HttpClient) {}
-
   urlFetchPlace = 'http://localhost:8080/place';
+
+  constructor(private httpClient: HttpClient) {}
 
   readPlace() {
     return this.httpClient.get<Place[]>(this.urlFetchPlace);

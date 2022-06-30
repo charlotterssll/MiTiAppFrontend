@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenstorageService } from '../_services/tokenstorage.service';
 import { Place } from '../domain/place/Place';
 import { PlaceService } from '../_services/place.service';
-import { Miti } from '../domain/miti/Miti';
+import { EmployeeService } from '../_services/employee.service';
+import { Employee } from '../domain/employee/Employee';
 
 @Component({
   selector: 'app-createmiti',
@@ -44,12 +45,26 @@ export class CreateMitiComponent implements OnInit {
       value: '',
     },
   };
+  employeeObject: Employee = {
+    firstName: {
+      value: '',
+    },
+    lastName: {
+      value: '',
+    },
+    abbreviation: {
+      value: '',
+    },
+  };
+  employeeId: string = '1';
+  employees?: Employee[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private mitiService: MitiService,
     private placeService: PlaceService,
+    private employeeService: EmployeeService,
     private token: TokenstorageService
   ) {}
 
@@ -214,6 +229,28 @@ export class CreateMitiComponent implements OnInit {
     );
   }
 
+  readEmployee() {
+    return this.employeeService
+      .readEmployee()
+      .subscribe((response: Employee[]) => {
+        this.employees = response;
+        console.log('GET Employee:', this.employees);
+      });
+  }
+
+  readEmployeeById(employeeId: string) {
+    return this.employeeService
+      .readEmployeeById(employeeId)
+      .subscribe((response: Employee) => {
+        this.employeeObject = {
+          firstName: response.firstName,
+          lastName: response.lastName,
+          abbreviation: response.abbreviation,
+        };
+        console.log('GET Employee By EmployeeId:', this.employeeId);
+      });
+  }
+
   readPlace() {
     return this.placeService.readPlace().subscribe((response: Place[]) => {
       this.places = response;
@@ -231,6 +268,8 @@ export class CreateMitiComponent implements OnInit {
       this.abbreviation = user.username;
     }
     this.readPlace();
+    this.readEmployee();
+    this.readEmployeeById(this.employeeId);
   }
 
   selectPlace(value: Place) {
