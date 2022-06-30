@@ -146,6 +146,68 @@
               [(ngModel)]="street"
             />
           </td>
+          <td>
+            <!--<select
+              id="select-box-place"
+              name="select-box-place"
+              aria-label="select-box-place"
+              *ngFor="let place of places"
+              (change)="selectPlace(place)"
+            >
+              <option value="none" selected disabled hidden>Lokale</option>
+              <option *ngFor="let place of places">
+                {{ place.locality.value }}, {{ place.location.value }}, {{ place.street.value }}
+              </option>
+            </select>-->
+            <!--<select
+              id="select-box-place"
+              name="select-box-place"
+              aria-label="select-box-place"
+              (change)="selectPlaceAll(placeObject.locality.value, placeObject.locality.value, placeObject.street.value)"
+            >
+              <option value="none" selected disabled hidden>Lokale</option>
+              <option *ngFor="let place of places">
+                {{ place.locality.value }}, {{ place.location.value }}, {{ place.street.value }}
+              </option>
+            </select>-->
+            <select
+              id="select-box-locality"
+              name="select-box-locality"
+              aria-label="select-box-locality"
+              #placelocality
+              (change)="selectLocality(placelocality.value)"
+            >
+              <option value="none" selected disabled hidden>Lokal</option>
+              <option *ngFor="let place of places">
+                {{ place.locality.value }}
+              </option>
+            </select>
+            <select
+              id="select-box-location"
+              name="select-box-location"
+              aria-label="select-box-location"
+              #placelocation
+              (change)="selectLocation(placelocation.value)"
+            >
+              <option value="none" selected disabled hidden>Ort</option>
+              <option *ngFor="let place of places">
+                {{ place.location.value }}
+              </option>
+            </select>
+            <select
+              id="select-box-street"
+              name="select-box-street"
+              aria-label="select-box-street"
+              #placestreet
+              (change)="selectStreet(placestreet.value)"
+            >
+              <option value="none" selected disabled hidden>Straße</option>
+              <option *ngFor="let place of places">
+                {{ place.street.value }}
+              </option>
+            </select>
+          </td>
+          <td></td>
         </tr>
         <tr>
           <th>

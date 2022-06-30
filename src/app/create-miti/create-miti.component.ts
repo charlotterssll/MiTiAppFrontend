@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MitiService } from '../_services/miti.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenstorageService } from '../_services/tokenstorage.service';
+import { Place } from '../domain/place/Place';
+import { PlaceService } from '../_services/place.service';
+import { Miti } from '../domain/miti/Miti';
 
 @Component({
   selector: 'app-createmiti',
@@ -9,9 +12,9 @@ import { TokenstorageService } from '../_services/tokenstorage.service';
   styleUrls: ['./create-miti.component.css'],
 })
 export class CreateMitiComponent implements OnInit {
-  locality?: string;
-  location?: string;
-  street?: string;
+  locality: any;
+  location: any;
+  street: any;
   firstName?: string;
   lastName?: string;
   abbreviation?: string;
@@ -29,11 +32,24 @@ export class CreateMitiComponent implements OnInit {
   alertMitiAlreadyExists?: string;
   currentUser: any;
   isLoggedIn = false;
+  places?: Place[];
+  placeObject: Place = {
+    locality: {
+      value: '',
+    },
+    location: {
+      value: '',
+    },
+    street: {
+      value: '',
+    },
+  };
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private mitiService: MitiService,
+    private placeService: PlaceService,
     private token: TokenstorageService
   ) {}
 
@@ -188,13 +204,21 @@ export class CreateMitiComponent implements OnInit {
           error.error.message ===
           'This employee already has a lunch table meeting on this day!'
         ) {
-          this.alertMitiAlreadyExists = error.error.message;
+          this.alertMitiAlreadyExists =
+            'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
           console.log(error.error.message);
         } else {
           console.log(error.error.message);
         }
       }
     );
+  }
+
+  readPlace() {
+    return this.placeService.readPlace().subscribe((response: Place[]) => {
+      this.places = response;
+      console.log('GET Place:', this.places);
+    });
   }
 
   ngOnInit(): void {
@@ -204,6 +228,45 @@ export class CreateMitiComponent implements OnInit {
       const user = this.token.getUser();
 
       this.currentUser = user.username;
+      this.abbreviation = user.username;
     }
+    this.readPlace();
+  }
+
+  selectPlace(value: Place) {
+    this.locality = value.locality.value;
+    this.location = value.location.value;
+    this.street = value.street.value;
+  }
+
+  selectPlaceAll(
+    placeValue1: string,
+    placeValue2: string,
+    placeValue3: string
+  ) {
+    this.placeObject = {
+      locality: {
+        value: placeValue1,
+      },
+      location: {
+        value: placeValue2,
+      },
+      street: {
+        value: placeValue3,
+      },
+    };
+    console.log(this.placeObject);
+  }
+
+  selectLocality(value: string) {
+    this.locality = value;
+  }
+
+  selectLocation(value: string) {
+    this.location = value;
+  }
+
+  selectStreet(value: string) {
+    this.street = value;
   }
 }

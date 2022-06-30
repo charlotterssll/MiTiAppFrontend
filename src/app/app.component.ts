@@ -29,10 +29,6 @@ export class AppComponent {
 
       this.username = user.username;
     }
-
-    /*if(this.router.url === 'register' && this.isLoggedIn) {
-      this.isOnRegistration = true;
-    }*/
   }
 
   logout(): void {

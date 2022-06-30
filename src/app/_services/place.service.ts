@@ -10,11 +10,11 @@ export class PlaceService {
 
   urlFetchPlace = 'http://localhost:8080/place';
 
-  readMiti() {
+  readPlace() {
     return this.httpClient.get<Place[]>(this.urlFetchPlace);
   }
 
-  createMiti(placeJson: Object) {
+  createPlace(placeJson: Object) {
     return this.httpClient.post(this.urlFetchPlace, placeJson);
   }
 }

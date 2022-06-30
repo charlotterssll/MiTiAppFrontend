@@ -79,7 +79,7 @@ export class CreatePlaceComponent {
       location: this.location,
       street: this.street,
     };
-    return this.placeService.createMiti(placeJson).subscribe(
+    return this.placeService.createPlace(placeJson).subscribe(
       () => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
