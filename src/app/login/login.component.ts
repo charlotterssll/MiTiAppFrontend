@@ -71,19 +71,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
-
-  /*loginEmployee() {
-    return this.authService
-      .loginEmployee(this.userName, this.password)
-      .subscribe(() => {
-        this.router.navigate(['/mitiapp']);
-      });
-  }
-  */
-
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;

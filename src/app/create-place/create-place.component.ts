@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PlaceService } from '../_services/place.service';
 import { Router } from '@angular/router';
 

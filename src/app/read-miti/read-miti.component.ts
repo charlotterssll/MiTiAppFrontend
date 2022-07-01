@@ -3,7 +3,6 @@ import { Miti } from '../domain/miti/Miti';
 import { MitiService } from '../_services/miti.service';
 import { TokenstorageService } from '../_services/tokenstorage.service';
 import { Employee } from '../domain/employee/Employee';
-import { Place } from '../domain/place/Place';
 import { EmployeeService } from '../_services/employee.service';
 
 @Component({
@@ -45,6 +44,18 @@ export class ReadMitiComponent implements OnInit {
   selectEmployee(value: string) {
     this.firstName = value;
     this.lastName = value;
+    this.abbreviation = value;
+  }
+
+  selectFirstName(value: string) {
+    this.firstName = value;
+  }
+
+  selectLastName(value: string) {
+    this.lastName = value;
+  }
+
+  selectAbbreviation(value: string) {
     this.abbreviation = value;
   }
 

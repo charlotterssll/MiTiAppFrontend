@@ -33,6 +33,7 @@
             aria-label="input-firstName"
             type="text"
             placeholder="Vorname"
+            class="inputStyle"
             [(ngModel)]="firstName"
           />
         </td>
@@ -44,6 +45,7 @@
             aria-label="input-lastName"
             type="text"
             placeholder="Nachname"
+            class="inputStyle"
             [(ngModel)]="lastName"
           />
         </td>
@@ -55,21 +57,61 @@
             aria-label="input-abbreviation"
             type="text"
             placeholder="Kürzel"
+            class="inputStyle"
             [(ngModel)]="abbreviation"
           />
         </td>
         <td class="tableDataStyle" aria-label="table-item-locality">
           {{ miti.place.locality.value }} <br />
           <select
-            id="select-box-locality"
-            name="select-box-locality"
-            aria-label="select-box-locality"
-            #selectedEmployee
-            (change)="selectEmployee(selectedEmployee.value)"
+            id="select-box-employee"
+            name="select-box-employee"
+            aria-label="select-box-employee"
+            #employee
+            (change)="selectEmployee(employee.value)"
           >
             <option value="none" selected disabled hidden>Kolleg*innen</option>
             <option *ngFor="let employee of employees">
               {{ employee.firstName.value }}, {{ employee.lastName.value }},
+              {{ employee.abbreviation.value }}
+            </option>
+          </select>
+          <br />
+          <select
+            id="select-box-firstName"
+            name="select-box-firstName"
+            aria-label="select-box-firstName"
+            #employeeFirstName
+            (change)="selectFirstName(employeeFirstName.value)"
+          >
+            <option value="none" selected disabled hidden>Vorname</option>
+            <option *ngFor="let employee of employees">
+              {{ employee.firstName.value }}
+            </option>
+          </select>
+          <br />
+          <select
+            id="select-box-lastName"
+            name="select-box-lastName"
+            aria-label="select-box-lastName"
+            #employeeLastName
+            (change)="selectLastName(employeeLastName.value)"
+          >
+            <option value="none" selected disabled hidden>Nachname</option>
+            <option *ngFor="let employee of employees">
+              {{ employee.lastName.value }}
+            </option>
+          </select>
+          <br />
+          <select
+            id="select-box-abbreviation"
+            name="select-box-abbreviation"
+            aria-label="select-box-abbreviation"
+            #employeeAbbreviation
+            (change)="selectAbbreviation(employeeAbbreviation.value)"
+          >
+            <option value="none" selected disabled hidden>Kürzel</option>
+            <option *ngFor="let employee of employees">
               {{ employee.abbreviation.value }}
             </option>
           </select>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TokenstorageService } from './_services/tokenstorage.service';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +10,10 @@ export class AppComponent {
   title = 'MitiAppFrontend';
   private roles: string[] = [];
   isLoggedIn = false;
-  isOnRegistration = false;
   currentRoute?: string;
   username?: string;
 
-  constructor(
-    private tokenStorageService: TokenstorageService,
-    private router: Router
-  ) {}
+  constructor(private tokenStorageService: TokenstorageService) {}
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

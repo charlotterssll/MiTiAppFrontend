@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Place } from '../domain/place/Place';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from '../domain/employee/Employee';
 
@@ -13,11 +12,5 @@ export class EmployeeService {
 
   readEmployee() {
     return this.httpClient.get<Employee[]>(this.urlFetchEmployee);
-  }
-
-  readEmployeeById(employeeId: string) {
-    return this.httpClient.get<Employee>(
-      this.urlFetchEmployee + '/' + employeeId
-    );
   }
 }

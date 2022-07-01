@@ -56,7 +56,7 @@ export class CreateMitiComponent implements OnInit {
       value: '',
     },
   };
-  employeeId: string = '1';
+  employeeId: string = '18';
   employees?: Employee[];
 
   constructor(
@@ -238,19 +238,6 @@ export class CreateMitiComponent implements OnInit {
       });
   }
 
-  readEmployeeById(employeeId: string) {
-    return this.employeeService
-      .readEmployeeById(employeeId)
-      .subscribe((response: Employee) => {
-        this.employeeObject = {
-          firstName: response.firstName,
-          lastName: response.lastName,
-          abbreviation: response.abbreviation,
-        };
-        console.log('GET Employee By EmployeeId:', this.employeeId);
-      });
-  }
-
   readPlace() {
     return this.placeService.readPlace().subscribe((response: Place[]) => {
       this.places = response;
@@ -258,25 +245,17 @@ export class CreateMitiComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.isLoggedIn = !!this.token.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.token.getUser();
-
-      this.currentUser = user.username;
-      this.abbreviation = user.username;
-    }
-    this.readPlace();
-    this.readEmployee();
-    this.readEmployeeById(this.employeeId);
+  selectPlace(value: string) {
+    this.locality = value;
+    this.location = value;
+    this.street = value;
   }
 
-  selectPlace(value: Place) {
+  /*selectPlace(value: Place) {
     this.locality = value.locality.value;
     this.location = value.location.value;
     this.street = value.street.value;
-  }
+  }*/
 
   selectPlaceAll(
     placeValue1: string,
@@ -307,5 +286,18 @@ export class CreateMitiComponent implements OnInit {
 
   selectStreet(value: string) {
     this.street = value;
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.token.getUser();
+
+      this.currentUser = user.username;
+      this.abbreviation = user.username;
+    }
+    this.readPlace();
+    this.readEmployee();
   }
 }

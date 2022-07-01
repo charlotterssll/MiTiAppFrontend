@@ -38,16 +38,4 @@ export class AuthService {
       httpOptions
     );
   }
-
-  /*
-  loginEmployee(user?: string, password?: string) {
-    const headers = new HttpHeaders({
-      Authorization: 'Basic ' + btoa(user + ':' + password),
-    });
-    return this.httpClient.get('http://localhost:8080/miti', {
-      headers,
-      responseType: 'text' as 'json',
-    });
-  }
-   */
 }

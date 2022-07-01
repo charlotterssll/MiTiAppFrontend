@@ -65,7 +65,7 @@
               aria-label="input-firstName"
               type="text"
               placeholder="Vorname"
-              [(ngModel)]="employeeObject.firstName.value"
+              [(ngModel)]="firstName"
             />
           </td>
           <td>
@@ -75,7 +75,7 @@
               aria-label="input-lastName"
               type="text"
               placeholder="Nachname"
-              [(ngModel)]="employeeObject.lastName.value"
+              [(ngModel)]="lastName"
             />
           </td>
           <td>
@@ -171,11 +171,24 @@
               </option>
             </select>-->
             <select
+              id="select-box-place"
+              name="select-box-place"
+              aria-label="select-box-place"
+              #place
+              (change)="selectPlace(place.value)"
+            >
+              <option value="none" selected disabled hidden>Lokale</option>
+              <option *ngFor="let place of places">
+                {{ place.locality.value }}, {{ place.location.value }},
+                {{ place.street.value }},
+              </option>
+            </select>
+            <select
               id="select-box-locality"
               name="select-box-locality"
               aria-label="select-box-locality"
-              #placelocality
-              (change)="selectLocality(placelocality.value)"
+              #placeLocality
+              (change)="selectLocality(placeLocality.value)"
             >
               <option value="none" selected disabled hidden>Lokal</option>
               <option *ngFor="let place of places">
@@ -186,8 +199,8 @@
               id="select-box-location"
               name="select-box-location"
               aria-label="select-box-location"
-              #placelocation
-              (change)="selectLocation(placelocation.value)"
+              #placeLocation
+              (change)="selectLocation(placeLocation.value)"
             >
               <option value="none" selected disabled hidden>Ort</option>
               <option *ngFor="let place of places">
@@ -198,8 +211,8 @@
               id="select-box-street"
               name="select-box-street"
               aria-label="select-box-street"
-              #placestreet
-              (change)="selectStreet(placestreet.value)"
+              #placeStreet
+              (change)="selectStreet(placeStreet.value)"
             >
               <option value="none" selected disabled hidden>Straße</option>
               <option *ngFor="let place of places">

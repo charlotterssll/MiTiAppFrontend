@@ -2,6 +2,10 @@
   text-align: left;
 }
 
+.inputStyle {
+  width: 150px;
+}
+
 .tableDataStyle {
   padding-right: 20px;
 }
