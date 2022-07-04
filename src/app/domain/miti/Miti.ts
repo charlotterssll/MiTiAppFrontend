@@ -5,7 +5,7 @@ import { Value } from '../abstractsimplevalueobject/Value';
 export interface Miti {
   mitiId: string;
   place: Place;
-  employee: Employee;
+  employee: Employee[];
   time: Value;
   date: Value;
 }

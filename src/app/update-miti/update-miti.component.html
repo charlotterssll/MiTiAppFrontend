@@ -174,15 +174,15 @@
         <th class="tableDataStyle" aria-label="table-header-time">Uhrzeit</th>
         <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
-      <tr>
+      <tr *ngFor="let employee of mitis.employee">
         <td class="tableDataStyle" aria-label="table-item-firstName">
-          {{ mitis.employee.firstName.value }}
+          {{ employee.firstName.value }}
         </td>
         <td class="tableDataStyle" aria-label="table-item-lastName">
-          {{ mitis.employee.lastName.value }}
+          {{ employee.lastName.value }}
         </td>
         <td class="tableDataStyle" aria-label="table-item-abbreviation">
-          {{ mitis.employee.abbreviation.value }}
+          {{ employee.abbreviation.value }}
         </td>
         <td>
           <button aria-label="button-remove" type="submit">Entfernen</button>

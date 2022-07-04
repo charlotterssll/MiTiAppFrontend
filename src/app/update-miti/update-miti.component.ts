@@ -3,6 +3,7 @@ import { Miti } from '../domain/miti/Miti';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MitiService } from '../_services/miti.service';
 import { TokenstorageService } from '../_services/tokenstorage.service';
+import { Employee } from '../domain/employee/Employee';
 
 @Component({
   selector: 'app-updatemiti',
@@ -22,17 +23,20 @@ export class UpdateMitiComponent implements OnInit {
         value: '',
       },
     },
-    employee: {
-      firstName: {
-        value: '',
+    employee: [
+      {
+        firstName: {
+          value: '',
+        },
+        lastName: {
+          value: '',
+        },
+        abbreviation: {
+          value: '',
+        },
+        employeeId: '',
       },
-      lastName: {
-        value: '',
-      },
-      abbreviation: {
-        value: '',
-      },
-    },
+    ],
     time: {
       value: '',
     },
@@ -40,6 +44,18 @@ export class UpdateMitiComponent implements OnInit {
       value: '',
     },
     mitiId: '',
+  };
+  employees: Employee = {
+    firstName: {
+      value: '',
+    },
+    lastName: {
+      value: '',
+    },
+    abbreviation: {
+      value: '',
+    },
+    employeeId: '',
   };
   locality?: string;
   location?: string;
@@ -80,11 +96,14 @@ export class UpdateMitiComponent implements OnInit {
             location: response.place.location,
             street: response.place.street,
           },
-          employee: {
-            firstName: response.employee.firstName,
-            lastName: response.employee.lastName,
-            abbreviation: response.employee.abbreviation,
-          },
+          employee: [
+            {
+              firstName: response.employee[0].firstName,
+              lastName: response.employee[0].lastName,
+              abbreviation: response.employee[0].abbreviation,
+              employeeId: response.employee[0].employeeId,
+            },
+          ],
           time: response.time,
           date: response.date,
           mitiId: response.mitiId,
@@ -98,9 +117,9 @@ export class UpdateMitiComponent implements OnInit {
       !this.mitis.place.locality.value ||
       !this.mitis.place.location.value ||
       !this.mitis.place.street.value ||
-      !this.mitis.employee.firstName.value ||
-      !this.mitis.employee.lastName.value ||
-      !this.mitis.employee.abbreviation.value ||
+      !this.mitis.employee[0].firstName.value ||
+      !this.mitis.employee[0].firstName.value ||
+      !this.mitis.employee[0].abbreviation.value ||
       !this.mitis.time.value ||
       !this.mitis.date.value
     ) {
@@ -169,7 +188,7 @@ export class UpdateMitiComponent implements OnInit {
     }
     if (
       !regexPatternLocationFirstAndLastName.test(
-        <string>this.mitis.employee.firstName.value
+        <string>this.mitis.employee[0].firstName.value
       )
     ) {
       this.alertFirstName =
@@ -182,7 +201,7 @@ export class UpdateMitiComponent implements OnInit {
     }
     if (
       !regexPatternLocationFirstAndLastName.test(
-        <string>this.mitis.employee.lastName.value
+        <string>this.mitis.employee[0].lastName.value
       )
     ) {
       this.alertLastName =
@@ -195,7 +214,7 @@ export class UpdateMitiComponent implements OnInit {
     }
     if (
       !regexPatternAbbreviation.test(
-        <string>this.mitis.employee.abbreviation.value
+        <string>this.mitis.employee[0].abbreviation.value
       )
     ) {
       this.alertAbbreviation =
@@ -242,11 +261,13 @@ export class UpdateMitiComponent implements OnInit {
         location: this.mitis.place.location.value,
         street: this.mitis.place.street.value,
       },
-      employee: {
-        firstName: this.mitis.employee.firstName.value,
-        lastName: this.mitis.employee.lastName.value,
-        abbreviation: this.mitis.employee.abbreviation.value,
-      },
+      employee: [
+        {
+          firstName: this.mitis.employee[0].firstName.value,
+          lastName: this.mitis.employee[0].lastName.value,
+          abbreviation: this.mitis.employee[0].abbreviation.value,
+        },
+      ],
       time: this.mitis.time.value,
       date: this.mitis.date.value,
     };
@@ -263,7 +284,8 @@ export class UpdateMitiComponent implements OnInit {
           'This employee already has a lunch table meeting on this day!'
         ) {
           console.log(error.error.message);
-          this.alertMitiAlreadyExists = error.error.message;
+          this.alertMitiAlreadyExists =
+            'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
         } else {
           console.log(error.error.message);
         }

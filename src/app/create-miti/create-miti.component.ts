@@ -34,30 +34,9 @@ export class CreateMitiComponent implements OnInit {
   currentUser: any;
   isLoggedIn = false;
   places?: Place[];
-  placeObject: Place = {
-    locality: {
-      value: '',
-    },
-    location: {
-      value: '',
-    },
-    street: {
-      value: '',
-    },
-  };
-  employeeObject: Employee = {
-    firstName: {
-      value: '',
-    },
-    lastName: {
-      value: '',
-    },
-    abbreviation: {
-      value: '',
-    },
-  };
-  employeeId: string = '18';
   employees?: Employee[];
+  employeeArray: Array<any> = [];
+  newEmployee: any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -73,9 +52,9 @@ export class CreateMitiComponent implements OnInit {
       !this.locality ||
       !this.location ||
       !this.street ||
-      !this.firstName ||
-      !this.lastName ||
-      !this.abbreviation ||
+      !this.newEmployee.firstName ||
+      !this.newEmployee.lastName ||
+      !this.newEmployee.abbreviation ||
       !this.time ||
       !this.date
     ) {
@@ -136,7 +115,11 @@ export class CreateMitiComponent implements OnInit {
     } else {
       flagStreet = true;
     }
-    if (!regexPatternLocationFirstAndLastName.test(<string>this.firstName)) {
+    if (
+      !regexPatternLocationFirstAndLastName.test(
+        <string>this.newEmployee.firstName
+      )
+    ) {
       this.alertFirstName =
         'Vorname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
       console.log(
@@ -145,7 +128,11 @@ export class CreateMitiComponent implements OnInit {
     } else {
       flagFirstName = true;
     }
-    if (!regexPatternLocationFirstAndLastName.test(<string>this.lastName)) {
+    if (
+      !regexPatternLocationFirstAndLastName.test(
+        <string>this.newEmployee.lastName
+      )
+    ) {
       this.alertLastName =
         'Nachname darf nur Buchstaben und/oder Bindestriche beinhalten und muss mit einem Großbuchstaben beginnen';
       console.log(
@@ -154,7 +141,7 @@ export class CreateMitiComponent implements OnInit {
     } else {
       flagLastName = true;
     }
-    if (!regexPatternAbbreviation.test(<string>this.abbreviation)) {
+    if (!regexPatternAbbreviation.test(<string>this.newEmployee.abbreviation)) {
       this.alertAbbreviation =
         'Kürzel muss aus genau drei Großbuchstaben bestehen';
       console.log(
@@ -199,11 +186,18 @@ export class CreateMitiComponent implements OnInit {
         location: this.location,
         street: this.street,
       },
-      employee: {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        abbreviation: this.abbreviation,
-      },
+      employee: [
+        {
+          firstName: this.employeeArray[0].firstName,
+          lastName: this.employeeArray[0].lastName,
+          abbreviation: this.employeeArray[0].abbreviation,
+        },
+        {
+          firstName: this.newEmployee.firstName,
+          lastName: this.newEmployee.lastName,
+          abbreviation: this.newEmployee.abbreviation,
+        },
+      ],
       time: this.time,
       date: this.date,
     };
@@ -238,6 +232,33 @@ export class CreateMitiComponent implements OnInit {
       });
   }
 
+  selectEmployee(value: string) {
+    this.newEmployee.firstName = value;
+    this.newEmployee.lastName = value;
+    this.newEmployee.abbreviation = value;
+  }
+
+  selectFirstName(value: string) {
+    this.newEmployee.firstName = value;
+  }
+
+  selectLastName(value: string) {
+    this.newEmployee.lastName = value;
+  }
+
+  selectAbbreviation(value: string) {
+    this.newEmployee.abbreviation = value;
+  }
+
+  addEmployee() {
+    this.employeeArray.push(this.newEmployee);
+    this.newEmployee = {};
+  }
+
+  removeEmployee(index: number) {
+    this.employeeArray.splice(index, 1);
+  }
+
   readPlace() {
     return this.placeService.readPlace().subscribe((response: Place[]) => {
       this.places = response;
@@ -255,7 +276,7 @@ export class CreateMitiComponent implements OnInit {
     this.locality = value.locality.value;
     this.location = value.location.value;
     this.street = value.street.value;
-  }*/
+  }
 
   selectPlaceAll(
     placeValue1: string,
@@ -274,7 +295,7 @@ export class CreateMitiComponent implements OnInit {
       },
     };
     console.log(this.placeObject);
-  }
+  }*/
 
   selectLocality(value: string) {
     this.locality = value;
@@ -295,7 +316,7 @@ export class CreateMitiComponent implements OnInit {
       const user = this.token.getUser();
 
       this.currentUser = user.username;
-      this.abbreviation = user.username;
+      this.newEmployee.abbreviation = user.username;
     }
     this.readPlace();
     this.readEmployee();

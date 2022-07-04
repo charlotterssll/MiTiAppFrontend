@@ -57,7 +57,7 @@
             >
           </th>
         </tr>
-        <tr>
+        <tr *ngFor="let employee of employeeArray; let i = index">
           <td>
             <input
               id="input-firstName"
@@ -65,7 +65,7 @@
               aria-label="input-firstName"
               type="text"
               placeholder="Vorname"
-              [(ngModel)]="firstName"
+              [(ngModel)]="employee.firstName"
             />
           </td>
           <td>
@@ -75,7 +75,7 @@
               aria-label="input-lastName"
               type="text"
               placeholder="Nachname"
-              [(ngModel)]="lastName"
+              [(ngModel)]="employee.lastName"
             />
           </td>
           <td>
@@ -85,8 +85,109 @@
               aria-label="input-abbreviation"
               type="text"
               placeholder="Kürzel"
-              [(ngModel)]="abbreviation"
+              [(ngModel)]="employee.abbreviation"
             />
+          </td>
+          <td>
+            <button
+              aria-label="button-remove"
+              type="submit"
+              (click)="removeEmployee(i)"
+            >
+              Entfernen
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input
+              id="input-new-firstName"
+              name="input-new-firstName"
+              aria-label="input-new-firstName"
+              type="text"
+              placeholder="Vorname"
+              [(ngModel)]="newEmployee.firstName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-new-lastName"
+              name="input-new-lastName"
+              aria-label="input-new-lastName"
+              type="text"
+              placeholder="Nachname"
+              [(ngModel)]="newEmployee.lastName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-new-abbreviation"
+              name="input-new-abbreviation"
+              aria-label="input-new-abbreviation"
+              type="text"
+              placeholder="Kürzel"
+              [(ngModel)]="newEmployee.abbreviation"
+            />
+          </td>
+          <td>
+            <select
+              id="select-box-employee"
+              name="select-box-employee"
+              aria-label="select-box-employee"
+              #employee
+              (change)="selectEmployee(employee.value)"
+            >
+              <option value="none" selected disabled hidden>
+                Kolleg*innen
+              </option>
+              <option *ngFor="let employee of employees">
+                {{ employee.firstName.value }}, {{ employee.lastName.value }},
+                {{ employee.abbreviation.value }}
+              </option>
+            </select>
+            <select
+              id="select-box-firstName"
+              name="select-box-firstName"
+              aria-label="select-box-firstName"
+              #employeeFirstName
+              (change)="selectFirstName(employeeFirstName.value)"
+            >
+              <option value="none" selected disabled hidden>Vorname</option>
+              <option *ngFor="let employee of employees">
+                {{ employee.firstName.value }}
+              </option>
+            </select>
+            <select
+              id="select-box-lastName"
+              name="select-box-lastName"
+              aria-label="select-box-lastName"
+              #employeeLastName
+              (change)="selectLastName(employeeLastName.value)"
+            >
+              <option value="none" selected disabled hidden>Nachname</option>
+              <option *ngFor="let employee of employees">
+                {{ employee.lastName.value }}
+              </option>
+            </select>
+            <select
+              id="select-box-abbreviation"
+              name="select-box-abbreviation"
+              aria-label="select-box-abbreviation"
+              #employeeAbbreviation
+              (change)="selectAbbreviation(employeeAbbreviation.value)"
+            >
+              <option value="none" selected disabled hidden>Kürzel</option>
+              <option *ngFor="let employee of employees">
+                {{ employee.abbreviation.value }}
+              </option>
+            </select>
+            <button
+              aria-label="button-add"
+              type="submit"
+              (click)="addEmployee()"
+            >
+              Hinzufügen
+            </button>
           </td>
         </tr>
         <tr>
@@ -220,7 +321,6 @@
               </option>
             </select>
           </td>
-          <td></td>
         </tr>
         <tr>
           <th>
