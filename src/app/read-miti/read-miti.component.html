@@ -7,6 +7,7 @@
   <div aria-label="lunch-table-list">
     <table class="tableStyle" aria-label="table-lunch-table-list">
       <tr>
+        <th class="tableDataStyle" aria-label="table-header-role">Rolle</th>
         <th class="tableDataStyle" aria-label="table-header-firstName">
           Vorname
         </th>
@@ -25,6 +26,9 @@
         <th class="tableDataStyle" aria-label="table-header-date">Datum</th>
       </tr>
       <tr *ngFor="let miti of mitis" class="tableDataRowStyle">
+        <td class="tableDataStyle" aria-label="table-item-role">
+          {{ employeeRole }}
+        </td>
         <td class="tableDataStyle" aria-label="table-item-firstName">
           <div *ngFor="let employee of miti.employee">
             {{ employee.firstName.value }}

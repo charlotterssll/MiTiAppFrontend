@@ -57,47 +57,6 @@
             >
           </th>
         </tr>
-        <tr *ngFor="let employee of employeeArray; let i = index">
-          <td>
-            <input
-              id="input-firstName"
-              name="input-firstName"
-              aria-label="input-firstName"
-              type="text"
-              placeholder="Vorname"
-              [(ngModel)]="employee.firstName"
-            />
-          </td>
-          <td>
-            <input
-              id="input-lastName"
-              name="input-lastName"
-              aria-label="input-lastName"
-              type="text"
-              placeholder="Nachname"
-              [(ngModel)]="employee.lastName"
-            />
-          </td>
-          <td>
-            <input
-              id="input-abbreviation"
-              name="input-abbreviation"
-              aria-label="input-abbreviation"
-              type="text"
-              placeholder="Kürzel"
-              [(ngModel)]="employee.abbreviation"
-            />
-          </td>
-          <td>
-            <button
-              aria-label="button-remove"
-              type="submit"
-              (click)="removeEmployee(i)"
-            >
-              Entfernen
-            </button>
-          </td>
-        </tr>
         <tr>
           <td>
             <input
@@ -141,8 +100,11 @@
                 Kolleg*innen
               </option>
               <option *ngFor="let employee of employees">
-                {{ employee.firstName.value }}, {{ employee.lastName.value }},
-                {{ employee.abbreviation.value }}
+                <div id="div-employee-firstName">
+                  {{ employee.firstName.value }},
+                </div>
+                <div>{{ employee.lastName.value }},</div>
+                <div>{{ employee.abbreviation.value }}</div>
               </option>
             </select>
             <select
@@ -177,8 +139,8 @@
               (change)="selectAbbreviation(employeeAbbreviation.value)"
             >
               <option value="none" selected disabled hidden>Kürzel</option>
-              <option *ngFor="let employee of employees">
-                {{ employee.abbreviation.value }}
+              <option *ngFor="let user of users">
+                {{ user.username }}
               </option>
             </select>
             <button
@@ -187,6 +149,47 @@
               (click)="addEmployee()"
             >
               Hinzufügen
+            </button>
+          </td>
+        </tr>
+        <tr *ngFor="let employee of employeeArray; let i = index">
+          <td>
+            <input
+              id="input-firstName"
+              name="input-firstName"
+              aria-label="input-firstName"
+              type="text"
+              placeholder="Vorname"
+              [(ngModel)]="employee.firstName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-lastName"
+              name="input-lastName"
+              aria-label="input-lastName"
+              type="text"
+              placeholder="Nachname"
+              [(ngModel)]="employee.lastName"
+            />
+          </td>
+          <td>
+            <input
+              id="input-abbreviation"
+              name="input-abbreviation"
+              aria-label="input-abbreviation"
+              type="text"
+              placeholder="Kürzel"
+              [(ngModel)]="employee.abbreviation"
+            />
+          </td>
+          <td>
+            <button
+              aria-label="button-remove"
+              type="submit"
+              (click)="removeEmployee(i)"
+            >
+              Entfernen
             </button>
           </td>
         </tr>

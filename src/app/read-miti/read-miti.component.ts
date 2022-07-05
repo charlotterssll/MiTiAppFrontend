@@ -15,6 +15,7 @@ export class ReadMitiComponent implements OnInit {
   firstName?: string;
   lastName?: string;
   abbreviation?: string;
+  employeeRole?: string;
 
   constructor(
     private token: TokenstorageService,
@@ -33,7 +34,11 @@ export class ReadMitiComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.token.getUser();
-
+      if (this.token.getUser().roles == 'ROLE_ADMIN') {
+        this.employeeRole = 'Admin';
+      } else {
+        this.employeeRole = 'User';
+      }
       this.currentUser = user.username;
     }
     this.readMiti();

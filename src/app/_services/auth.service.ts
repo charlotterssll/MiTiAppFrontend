@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../domain/user/User';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -37,5 +38,9 @@ export class AuthService {
       },
       httpOptions
     );
+  }
+
+  readUser() {
+    return this.httpClient.get<User[]>('http://localhost:8080/api/auth/user');
   }
 }

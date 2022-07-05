@@ -30,17 +30,20 @@ describe('An employee wants to create...', () => {
             value: 'Poststraße',
           },
         },
-        employee: {
-          firstName: {
-            value: 'Hannelore',
+        employee: [
+          {
+            firstName: {
+              value: 'Hannelore',
+            },
+            lastName: {
+              value: 'Kranz',
+            },
+            abbreviation: {
+              value: 'HKR',
+            },
+            employeeId: '1',
           },
-          lastName: {
-            value: 'Kranz',
-          },
-          abbreviation: {
-            value: 'HKR',
-          },
-        },
+        ],
         time: {
           value: '12:00',
         },
@@ -69,17 +72,20 @@ describe('An employee wants to create...', () => {
             value: 'Poststraße',
           },
         },
-        employee: {
-          firstName: {
-            value: 'Hannelore',
+        employee: [
+          {
+            firstName: {
+              value: 'Hannelore',
+            },
+            lastName: {
+              value: 'Kranz',
+            },
+            abbreviation: {
+              value: 'HKR',
+            },
+            employeeId: '1',
           },
-          lastName: {
-            value: 'Kranz',
-          },
-          abbreviation: {
-            value: 'HKR',
-          },
-        },
+        ],
         time: {
           value: '12:00',
         },

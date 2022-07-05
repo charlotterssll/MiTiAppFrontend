@@ -8,7 +8,7 @@ import { TokenstorageService } from './_services/tokenstorage.service';
 })
 export class AppComponent {
   title = 'MitiAppFrontend';
-  private roles: string[] = [];
+  employeeRole?: string;
   isLoggedIn = false;
   currentRoute?: string;
   username?: string;
@@ -20,7 +20,12 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
+
+      if (this.tokenStorageService.getUser().roles == 'ROLE_ADMIN') {
+        this.employeeRole = 'Admin';
+      } else {
+        this.employeeRole = 'User';
+      }
 
       this.username = user.username;
     }

@@ -6,6 +6,8 @@ import { Place } from '../domain/place/Place';
 import { PlaceService } from '../_services/place.service';
 import { EmployeeService } from '../_services/employee.service';
 import { Employee } from '../domain/employee/Employee';
+import { User } from '../domain/user/User';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-createmiti',
@@ -37,6 +39,7 @@ export class CreateMitiComponent implements OnInit {
   employees?: Employee[];
   employeeArray: Array<any> = [];
   newEmployee: any = {};
+  users?: User[];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +47,8 @@ export class CreateMitiComponent implements OnInit {
     private mitiService: MitiService,
     private placeService: PlaceService,
     private employeeService: EmployeeService,
-    private token: TokenstorageService
+    private token: TokenstorageService,
+    private authService: AuthService
   ) {}
 
   youShallNotPassNullValues() {
@@ -223,6 +227,13 @@ export class CreateMitiComponent implements OnInit {
     );
   }
 
+  readUser() {
+    return this.authService.readUser().subscribe((response: User[]) => {
+      this.users = response;
+      console.log('GET USER:', this.users);
+    });
+  }
+
   readEmployee() {
     return this.employeeService
       .readEmployee()
@@ -233,6 +244,8 @@ export class CreateMitiComponent implements OnInit {
   }
 
   selectEmployee(value: string) {
+    //let firstNameValue = document.getElementById("div-employee-firstName").innerHTML;
+    //firstNameValue = value;
     this.newEmployee.firstName = value;
     this.newEmployee.lastName = value;
     this.newEmployee.abbreviation = value;
@@ -320,5 +333,6 @@ export class CreateMitiComponent implements OnInit {
     }
     this.readPlace();
     this.readEmployee();
+    this.readUser();
   }
 }
