@@ -146,6 +146,7 @@
             <button
               aria-label="button-add"
               type="submit"
+              [disabled]="isDisabled"
               (click)="addEmployee()"
             >
               Hinzufügen
@@ -373,6 +374,9 @@
   </div>
   <br />
   <div id="alerts" aria-label="alerts">
+    <div aria-label="alert-message-no-more-employees">
+      {{ alertNoMoreEmployees }}
+    </div>
     <div aria-label="alert-message-null-values">{{ alertNull }}</div>
     <div aria-label="alert-message-invalid-input-firstName">
       {{ alertFirstName }}

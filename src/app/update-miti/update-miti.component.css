@@ -2,6 +2,10 @@
   text-align: left;
 }
 
+.tableDataRowStyle {
+  vertical-align: top;
+}
+
 .tableDataStyle {
   padding-right: 20px;
 }

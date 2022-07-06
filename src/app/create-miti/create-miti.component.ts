@@ -33,8 +33,10 @@ export class CreateMitiComponent implements OnInit {
   alertTime?: string;
   alertDate?: string;
   alertMitiAlreadyExists?: string;
+  alertNoMoreEmployees?: string;
   currentUser: any;
   isLoggedIn = false;
+  isDisabled = false;
   places?: Place[];
   employees?: Employee[];
   employeeArray: Array<any> = [];
@@ -184,53 +186,249 @@ export class CreateMitiComponent implements OnInit {
   }
 
   createMiti() {
-    const mitiJson = {
-      place: {
-        locality: this.locality,
-        location: this.location,
-        street: this.street,
-      },
-      employee: [
-        {
-          firstName: this.employeeArray[0].firstName,
-          lastName: this.employeeArray[0].lastName,
-          abbreviation: this.employeeArray[0].abbreviation,
+    let mitiJson: Object;
+    if (this.employeeArray.length == 0) {
+      mitiJson = {
+        place: {
+          locality: this.locality,
+          location: this.location,
+          street: this.street,
         },
-        {
-          firstName: this.newEmployee.firstName,
-          lastName: this.newEmployee.lastName,
-          abbreviation: this.newEmployee.abbreviation,
+        employee: [
+          {
+            firstName: this.newEmployee.firstName,
+            lastName: this.newEmployee.lastName,
+            abbreviation: this.newEmployee.abbreviation,
+          },
+        ],
+        time: this.time,
+        date: this.date,
+      };
+      return this.mitiService.createMiti(mitiJson).subscribe(
+        () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url]);
+          console.log('POST Miti: ', mitiJson);
         },
-      ],
-      time: this.time,
-      date: this.date,
-    };
-    return this.mitiService.createMiti(mitiJson).subscribe(
-      () => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate([this.router.url]);
-        console.log('POST Miti: ', mitiJson);
-      },
-      (error) => {
-        if (
-          error.error.message ===
-          'This employee already has a lunch table meeting on this day!'
-        ) {
-          this.alertMitiAlreadyExists =
-            'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
-          console.log(error.error.message);
-        } else {
-          console.log(error.error.message);
+        (error) => {
+          if (
+            error.error.message ===
+            'This employee already has a lunch table meeting on this day!'
+          ) {
+            this.alertMitiAlreadyExists =
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+            console.log(error.error.message);
+          } else {
+            console.log(error.error.message);
+          }
         }
-      }
-    );
+      );
+    } else if (this.employeeArray.length == 1) {
+      mitiJson = {
+        place: {
+          locality: this.locality,
+          location: this.location,
+          street: this.street,
+        },
+        employee: [
+          {
+            firstName: this.employeeArray[0].firstName,
+            lastName: this.employeeArray[0].lastName,
+            abbreviation: this.employeeArray[0].abbreviation,
+          },
+          {
+            firstName: this.newEmployee.firstName,
+            lastName: this.newEmployee.lastName,
+            abbreviation: this.newEmployee.abbreviation,
+          },
+        ],
+        time: this.time,
+        date: this.date,
+      };
+      return this.mitiService.createMiti(mitiJson).subscribe(
+        () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url]);
+          console.log('POST Miti: ', mitiJson);
+        },
+        (error) => {
+          if (
+            error.error.message ===
+            'This employee already has a lunch table meeting on this day!'
+          ) {
+            this.alertMitiAlreadyExists =
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+            console.log(error.error.message);
+          } else {
+            console.log(error.error.message);
+          }
+        }
+      );
+    } else if (this.employeeArray.length == 2) {
+      mitiJson = {
+        place: {
+          locality: this.locality,
+          location: this.location,
+          street: this.street,
+        },
+        employee: [
+          {
+            firstName: this.employeeArray[0].firstName,
+            lastName: this.employeeArray[0].lastName,
+            abbreviation: this.employeeArray[0].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[1].firstName,
+            lastName: this.employeeArray[1].lastName,
+            abbreviation: this.employeeArray[1].abbreviation,
+          },
+          {
+            firstName: this.newEmployee.firstName,
+            lastName: this.newEmployee.lastName,
+            abbreviation: this.newEmployee.abbreviation,
+          },
+        ],
+        time: this.time,
+        date: this.date,
+      };
+      return this.mitiService.createMiti(mitiJson).subscribe(
+        () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url]);
+          console.log('POST Miti: ', mitiJson);
+        },
+        (error) => {
+          if (
+            error.error.message ===
+            'This employee already has a lunch table meeting on this day!'
+          ) {
+            this.alertMitiAlreadyExists =
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+            console.log(error.error.message);
+          } else {
+            console.log(error.error.message);
+          }
+        }
+      );
+    } else if (this.employeeArray.length == 3) {
+      mitiJson = {
+        place: {
+          locality: this.locality,
+          location: this.location,
+          street: this.street,
+        },
+        employee: [
+          {
+            firstName: this.employeeArray[0].firstName,
+            lastName: this.employeeArray[0].lastName,
+            abbreviation: this.employeeArray[0].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[1].firstName,
+            lastName: this.employeeArray[1].lastName,
+            abbreviation: this.employeeArray[1].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[2].firstName,
+            lastName: this.employeeArray[2].lastName,
+            abbreviation: this.employeeArray[2].abbreviation,
+          },
+          {
+            firstName: this.newEmployee.firstName,
+            lastName: this.newEmployee.lastName,
+            abbreviation: this.newEmployee.abbreviation,
+          },
+        ],
+        time: this.time,
+        date: this.date,
+      };
+      return this.mitiService.createMiti(mitiJson).subscribe(
+        () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url]);
+          console.log('POST Miti: ', mitiJson);
+        },
+        (error) => {
+          if (
+            error.error.message ===
+            'This employee already has a lunch table meeting on this day!'
+          ) {
+            this.alertMitiAlreadyExists =
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+            console.log(error.error.message);
+          } else {
+            console.log(error.error.message);
+          }
+        }
+      );
+    } else {
+      mitiJson = {
+        place: {
+          locality: this.locality,
+          location: this.location,
+          street: this.street,
+        },
+        employee: [
+          {
+            firstName: this.employeeArray[0].firstName,
+            lastName: this.employeeArray[0].lastName,
+            abbreviation: this.employeeArray[0].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[1].firstName,
+            lastName: this.employeeArray[1].lastName,
+            abbreviation: this.employeeArray[1].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[2].firstName,
+            lastName: this.employeeArray[2].lastName,
+            abbreviation: this.employeeArray[2].abbreviation,
+          },
+          {
+            firstName: this.employeeArray[3].firstName,
+            lastName: this.employeeArray[3].lastName,
+            abbreviation: this.employeeArray[3].abbreviation,
+          },
+          {
+            firstName: this.newEmployee.firstName,
+            lastName: this.newEmployee.lastName,
+            abbreviation: this.newEmployee.abbreviation,
+          },
+        ],
+        time: this.time,
+        date: this.date,
+      };
+      return this.mitiService.createMiti(mitiJson).subscribe(
+        () => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([this.router.url]);
+          console.log('POST Miti: ', mitiJson);
+        },
+        (error) => {
+          if (
+            error.error.message ===
+            'This employee already has a lunch table meeting on this day!'
+          ) {
+            this.alertMitiAlreadyExists =
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+            console.log(error.error.message);
+          } else {
+            console.log(error.error.message);
+          }
+        }
+      );
+    }
   }
 
   readUser() {
     return this.authService.readUser().subscribe((response: User[]) => {
       this.users = response;
-      console.log('GET USER:', this.users);
+      console.log('GET User:', this.users);
     });
   }
 
@@ -264,6 +462,11 @@ export class CreateMitiComponent implements OnInit {
   }
 
   addEmployee() {
+    if (this.employeeArray.length == 3) {
+      this.isDisabled = true;
+      this.alertNoMoreEmployees =
+        'Du kannst nicht mehr als fünf Kolleg*innen zu deiner Lunch-Verabredung einladen!';
+    }
     this.employeeArray.push(this.newEmployee);
     this.newEmployee = {};
   }

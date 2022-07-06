@@ -3,7 +3,6 @@ import { Miti } from '../domain/miti/Miti';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MitiService } from '../_services/miti.service';
 import { TokenstorageService } from '../_services/tokenstorage.service';
-import { Employee } from '../domain/employee/Employee';
 
 @Component({
   selector: 'app-updatemiti',
@@ -45,18 +44,6 @@ export class UpdateMitiComponent implements OnInit {
     },
     mitiId: '',
   };
-  employees: Employee = {
-    firstName: {
-      value: '',
-    },
-    lastName: {
-      value: '',
-    },
-    abbreviation: {
-      value: '',
-    },
-    employeeId: '',
-  };
   locality?: string;
   location?: string;
   street?: string;
@@ -78,6 +65,7 @@ export class UpdateMitiComponent implements OnInit {
   alertMitiAlreadyExists?: string;
   currentUser: any;
   isLoggedIn = false;
+  employeeRole?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -90,25 +78,167 @@ export class UpdateMitiComponent implements OnInit {
     return this.mitiService
       .readMitiByMitiId(mitiId)
       .subscribe((response: Miti) => {
-        this.mitis = {
-          place: {
-            locality: response.place.locality,
-            location: response.place.location,
-            street: response.place.street,
-          },
-          employee: [
-            {
-              firstName: response.employee[0].firstName,
-              lastName: response.employee[0].lastName,
-              abbreviation: response.employee[0].abbreviation,
-              employeeId: response.employee[0].employeeId,
+        if (response.employee.length == 1) {
+          this.mitis = {
+            place: {
+              locality: response.place.locality,
+              location: response.place.location,
+              street: response.place.street,
             },
-          ],
-          time: response.time,
-          date: response.date,
-          mitiId: response.mitiId,
-        };
-        console.log('GET Miti By MitiId:', this.mitiId);
+            employee: [
+              {
+                firstName: response.employee[0].firstName,
+                lastName: response.employee[0].lastName,
+                abbreviation: response.employee[0].abbreviation,
+                employeeId: response.employee[0].employeeId,
+              },
+            ],
+            time: response.time,
+            date: response.date,
+            mitiId: response.mitiId,
+          };
+          console.log('GET Miti By MitiId:', this.mitiId);
+        } else if (response.employee.length == 2) {
+          this.mitis = {
+            place: {
+              locality: response.place.locality,
+              location: response.place.location,
+              street: response.place.street,
+            },
+            employee: [
+              {
+                firstName: response.employee[0].firstName,
+                lastName: response.employee[0].lastName,
+                abbreviation: response.employee[0].abbreviation,
+                employeeId: response.employee[0].employeeId,
+              },
+              {
+                firstName: response.employee[1].firstName,
+                lastName: response.employee[1].lastName,
+                abbreviation: response.employee[1].abbreviation,
+                employeeId: response.employee[1].employeeId,
+              },
+            ],
+            time: response.time,
+            date: response.date,
+            mitiId: response.mitiId,
+          };
+          console.log('GET Miti By MitiId:', this.mitiId);
+        } else if (response.employee.length == 3) {
+          this.mitis = {
+            place: {
+              locality: response.place.locality,
+              location: response.place.location,
+              street: response.place.street,
+            },
+            employee: [
+              {
+                firstName: response.employee[0].firstName,
+                lastName: response.employee[0].lastName,
+                abbreviation: response.employee[0].abbreviation,
+                employeeId: response.employee[0].employeeId,
+              },
+              {
+                firstName: response.employee[1].firstName,
+                lastName: response.employee[1].lastName,
+                abbreviation: response.employee[1].abbreviation,
+                employeeId: response.employee[1].employeeId,
+              },
+              {
+                firstName: response.employee[2].firstName,
+                lastName: response.employee[2].lastName,
+                abbreviation: response.employee[2].abbreviation,
+                employeeId: response.employee[2].employeeId,
+              },
+            ],
+            time: response.time,
+            date: response.date,
+            mitiId: response.mitiId,
+          };
+          console.log('GET Miti By MitiId:', this.mitiId);
+        } else if (response.employee.length == 4) {
+          this.mitis = {
+            place: {
+              locality: response.place.locality,
+              location: response.place.location,
+              street: response.place.street,
+            },
+            employee: [
+              {
+                firstName: response.employee[0].firstName,
+                lastName: response.employee[0].lastName,
+                abbreviation: response.employee[0].abbreviation,
+                employeeId: response.employee[0].employeeId,
+              },
+              {
+                firstName: response.employee[1].firstName,
+                lastName: response.employee[1].lastName,
+                abbreviation: response.employee[1].abbreviation,
+                employeeId: response.employee[1].employeeId,
+              },
+              {
+                firstName: response.employee[2].firstName,
+                lastName: response.employee[2].lastName,
+                abbreviation: response.employee[2].abbreviation,
+                employeeId: response.employee[2].employeeId,
+              },
+              {
+                firstName: response.employee[3].firstName,
+                lastName: response.employee[3].lastName,
+                abbreviation: response.employee[3].abbreviation,
+                employeeId: response.employee[3].employeeId,
+              },
+            ],
+            time: response.time,
+            date: response.date,
+            mitiId: response.mitiId,
+          };
+          console.log('GET Miti By MitiId:', this.mitiId);
+        } else {
+          this.mitis = {
+            place: {
+              locality: response.place.locality,
+              location: response.place.location,
+              street: response.place.street,
+            },
+            employee: [
+              {
+                firstName: response.employee[0].firstName,
+                lastName: response.employee[0].lastName,
+                abbreviation: response.employee[0].abbreviation,
+                employeeId: response.employee[0].employeeId,
+              },
+              {
+                firstName: response.employee[1].firstName,
+                lastName: response.employee[1].lastName,
+                abbreviation: response.employee[1].abbreviation,
+                employeeId: response.employee[1].employeeId,
+              },
+              {
+                firstName: response.employee[2].firstName,
+                lastName: response.employee[2].lastName,
+                abbreviation: response.employee[2].abbreviation,
+                employeeId: response.employee[2].employeeId,
+              },
+              {
+                firstName: response.employee[3].firstName,
+                lastName: response.employee[3].lastName,
+                abbreviation: response.employee[3].abbreviation,
+                employeeId: response.employee[3].employeeId,
+              },
+              {
+                firstName: response.employee[4].firstName,
+                lastName: response.employee[4].lastName,
+                abbreviation: response.employee[4].abbreviation,
+                employeeId: response.employee[4].employeeId,
+              },
+            ],
+            time: response.time,
+            date: response.date,
+            mitiId: response.mitiId,
+          };
+          console.log('GET Miti By MitiId:', this.mitiId);
+        }
       });
   }
 
@@ -304,7 +434,11 @@ export class UpdateMitiComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.token.getUser();
-
+      if (this.token.getUser().roles == 'ROLE_ADMIN') {
+        this.employeeRole = 'Admin';
+      } else {
+        this.employeeRole = 'User';
+      }
       this.currentUser = user.username;
     }
     this.mitiId = this.route.snapshot.params['id'];
