@@ -34,6 +34,7 @@ export class CreateMitiComponent implements OnInit {
   alertDate?: string;
   alertMitiAlreadyExists?: string;
   alertNoMoreEmployees?: string;
+  alertEmployeeNotRegistered?: string;
   currentUser: any;
   isLoggedIn = false;
   isDisabled = false;
@@ -214,11 +215,17 @@ export class CreateMitiComponent implements OnInit {
         (error) => {
           if (
             error.error.message ===
-            'This employee already has a lunch table meeting on this day!'
+            'This employee already has a lunch table meeting on this day'
           ) {
             this.alertMitiAlreadyExists =
-              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung';
             console.log(error.error.message);
+          } else if (
+            error.error.message ===
+            'Employee could not get added to the lunch table meeting because this employee is not registered'
+          ) {
+            this.alertEmployeeNotRegistered =
+              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
@@ -256,11 +263,17 @@ export class CreateMitiComponent implements OnInit {
         (error) => {
           if (
             error.error.message ===
-            'This employee already has a lunch table meeting on this day!'
+            'This employee already has a lunch table meeting on this day'
           ) {
             this.alertMitiAlreadyExists =
-              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung';
             console.log(error.error.message);
+          } else if (
+            error.error.message ===
+            'Employee could not get added to the lunch table meeting because this employee is not registered'
+          ) {
+            this.alertEmployeeNotRegistered =
+              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
@@ -303,11 +316,17 @@ export class CreateMitiComponent implements OnInit {
         (error) => {
           if (
             error.error.message ===
-            'This employee already has a lunch table meeting on this day!'
+            'This employee already has a lunch table meeting on this day'
           ) {
             this.alertMitiAlreadyExists =
-              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung';
             console.log(error.error.message);
+          } else if (
+            error.error.message ===
+            'Employee could not get added to the lunch table meeting because this employee is not registered'
+          ) {
+            this.alertEmployeeNotRegistered =
+              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
@@ -355,11 +374,17 @@ export class CreateMitiComponent implements OnInit {
         (error) => {
           if (
             error.error.message ===
-            'This employee already has a lunch table meeting on this day!'
+            'This employee already has a lunch table meeting on this day'
           ) {
             this.alertMitiAlreadyExists =
-              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung';
             console.log(error.error.message);
+          } else if (
+            error.error.message ===
+            'Employee could not get added to the lunch table meeting because this employee is not registered'
+          ) {
+            this.alertEmployeeNotRegistered =
+              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
@@ -412,11 +437,17 @@ export class CreateMitiComponent implements OnInit {
         (error) => {
           if (
             error.error.message ===
-            'This employee already has a lunch table meeting on this day!'
+            'This employee already has a lunch table meeting on this day'
           ) {
             this.alertMitiAlreadyExists =
-              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung!';
+              'Diese Kolleg*in hat heute bereits eine Lunch-Verabredung';
             console.log(error.error.message);
+          } else if (
+            error.error.message ===
+            'Employee could not get added to the lunch table meeting because this employee is not registered'
+          ) {
+            this.alertEmployeeNotRegistered =
+              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
