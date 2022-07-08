@@ -225,7 +225,7 @@ export class CreateMitiComponent implements OnInit {
             'Employee could not get added to the lunch table meeting because this employee is not registered'
           ) {
             this.alertEmployeeNotRegistered =
-              'Diese Kolleg*in mit dem Kürzel kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
+              'Diese Kolleg*in kann nicht zu der Lunch-Verabredung hinzugefügt werden, da diese nicht registriert ist';
           } else {
             console.log(error.error.message);
           }
